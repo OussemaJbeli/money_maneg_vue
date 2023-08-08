@@ -1,0 +1,42 @@
+
+//override on olde style
+.bg-white{
+    background-color: #2a3347;
+}
+.text-gray-900{
+    color: #ffffff;
+}
+.text-gray-700 {
+    color: #dbdbdb;
+}
+.text-gray-600 {
+    color: #c2c2c2;
+}
+.text-gray-500{
+    color: #ffffff;
+}
+.bg-gray-800{
+    background-color: #ffc502;
+}
+.hover\:text-gray-700:hover {
+    color: #ffc502;
+}
+.hover\:bg-gray-100:hover {
+    color: #ededed;
+    background-color: #f3f4f617;
+}
+.focus\:ring-offset-2:focus {
+    --tw-ring-offset-width: none;
+}
+///////pages style
+//***************login
+@import "login/login.scss";
+// @import "login/create_new.scss";
+// @import "login/forget.scss";
+//**************main frame
+@import "main_frame/main_fram.scss";
+//**************pages
+@import "pages/dashboard.scss";
+
+//////component style
+@import 'component/component.scss'

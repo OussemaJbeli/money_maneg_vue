@@ -1,0 +1,49 @@
+/*******buttons*****/
+.primary_button{
+    width: 120px;
+    height: 45px;
+    border-radius: 20px;
+    border: 2px solid #ffc502;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s ease;
+}
+.primary_button::before{
+    content: "";
+    position: relative;
+    top: 50%;
+    left: -7%;
+    width: 20px;
+    height: 5px;
+    background-color: #ffc502;
+    transition: 0.4s ease;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: transparent;
+}
+.primary_button::after{
+    content: "";
+    position: relative;
+    top: -50%;
+    left: 7%;
+    width: 20px;
+    height: 5px;
+    background-color: #ffc502;
+    transition: 0.4s ease;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: transparent;
+}
+.primary_button:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ffc502;
+}
+.primary_button:hover::before{
+    left: 50%;
+}
+.primary_button:hover::after{
+    left: -50%;
+}

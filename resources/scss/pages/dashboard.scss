@@ -1,0 +1,30 @@
+.cards_panel{
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .first_card{
+        background-color: #5017a1;
+    }
+    .second_card{
+        background-color: #0ee7d1;
+    }
+    .theerd_card{
+        background-color: #002fff;
+    }
+    .forth_card{
+        background-color: #26dd4b;
+    }
+}
+.charts_frame{
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

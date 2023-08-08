@@ -1,0 +1,38 @@
+.forget_paragraph{
+    text-align: center;
+    font-size: 16px;
+}
+.form_forget{
+    width: 100%;
+    div{
+        width: 90%;
+    }
+    .forget_button{
+        width: 250px;
+        height: 50px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $main_color;
+        border: 0 solid transparent;
+        border-color: $black_coler;
+        border-radius: 25px;
+        .forget_button::before, .forget_button::after{
+            background-color: $black_coler;
+            border-color: $black_coler;
+        }
+        .primary_button::before{
+            left: 7%;
+        }
+        .primary_button::after{
+            left: -7%;
+        }
+        .primary_button:hover::before{
+            left: 70%;
+        }
+        .primary_button:hover::after{
+            left: -70%;
+        }
+    }
+}

@@ -1,0 +1,110 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Cerebri Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";;
+}
+$black_coler: #090b3b;
+$light_coler: #fff;
+.bg_login{
+    background-image: url(../../public/icon/bgc.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .text-gray-600 {
+        color: $black_coler;
+        text-decoration: none;
+        font-size: 18px;
+        outline: none;
+    }
+    .text-gray-700 {
+        color: #4e344f;
+        font-size: 15px;
+    }
+    .form_login{
+        position: relative;
+        backface-visibility: hidden;
+        width: 450px;
+        height: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 10px;
+        border-color: transparent;
+        border-style: solid;
+        background-color: #ffffff27;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(10px);
+        form{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .title{
+                height: 25%;
+                font-size: 40px;
+                font-weight: 600;
+                color: $black_coler;
+            }
+            .inputs{
+                height: 100px;
+                width: 100%;
+                padding: 0 5%;
+            }
+            .input{
+                height: 50px;
+                width: 100%;
+                background-color: transparent;
+                border:2px solid transparent;
+                border-color:  transparent transparent $black_coler;
+                border-radius: 0;
+                font-size: 20px;
+                color: $black_coler;
+                outline: none;
+            }
+            .input:focus{
+                --tw-ring-color :transparent;
+            }
+            .forget_pass{
+                width: 90%;
+                text-align: end;
+                padding-bottom: 20px;
+                Link{
+                    color: $black_coler;
+                }
+            }
+            .login_button{
+                width: 150px;
+                height: 50px;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: transparent;
+                border-color: $black_coler;
+            }
+            .forget_button{
+                width: 250px;
+            }
+            .login_button:hover, .forget_button:hover{
+                box-shadow: 0 0 20px $black_coler;
+            }
+            .login_button::before, .login_button::after{
+                background-color: $black_coler;
+                border-color: $black_coler;
+            }
+            .register{
+                text-align: center;
+                color: black;
+                span{
+                    Link{
+                        color: $black_coler;
+                        font-weight: 700;
+                        font-size: 25px;
+                    }
+                }
+            }
+        }
+    }
+}
