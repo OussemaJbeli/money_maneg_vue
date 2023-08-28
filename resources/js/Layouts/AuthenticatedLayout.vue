@@ -17,7 +17,7 @@ const showingNavigationDropdown = ref(false);
             <nav class="bg-white border-b border-gray-100 side_barre">
                 <div class="back_block_transparent"></div>
                 <div class="side_color_picture" id="side_color_picture">
-                    <img src="../../../public/icon/img_1.jpg" alt="">
+                    <img src="../../../public/icon/sid_bar/wallpapers/img_1.jpg" alt="">
                 </div>
                     <div class="flex justify-between h-16 nave_liste">
                         <!-- **************nave option*************** -->
@@ -160,7 +160,7 @@ const showingNavigationDropdown = ref(false);
                                         </template>
                                     </Dropdown>
                                 </div>
-                            </div>
+                    </div>
                 </header>
 
                 <!-- Page Content -->
