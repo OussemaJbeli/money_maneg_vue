@@ -1,7 +1,11 @@
-
+:root {
+    --action_color: #ffc502;
+    --bg1 : #1a2035;
+    --bg2 : #2a3347;
+}
 //override on olde style
 .bg-white{
-    background-color: #2a3347;
+    background-color: var(--bg2);
 }
 .text-gray-900{
     color: #ffffff;
@@ -16,10 +20,10 @@
     color: #ffffff;
 }
 .bg-gray-800{
-    background-color: #ffc502;
+    background-color: var(--action_color);
 }
 .hover\:text-gray-700:hover {
-    color: #ffc502;
+    color: var(--action_color);
 }
 .hover\:bg-gray-100:hover {
     color: #ededed;
@@ -31,8 +35,6 @@
 ///////pages style
 //***************login
 @import "login/login.scss";
-// @import "login/create_new.scss";
-// @import "login/forget.scss";
 //**************main frame
 @import "main_frame/main_fram.scss";
 //**************pages

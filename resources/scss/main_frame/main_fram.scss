@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #1a2035;
+    background-color: var(--bg1);
     //
     @import "main_content.scss";
     @import "side_bar.scss";

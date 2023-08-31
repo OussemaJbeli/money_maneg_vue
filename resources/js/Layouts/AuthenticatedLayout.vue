@@ -1,15 +1,3 @@
-<script setup>
-import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
-
-const showingNavigationDropdown = ref(false);
-</script>
-
 <template>
     <div>
         <div class="min-h-screen bg-gray-100 main_frame">
@@ -17,14 +5,14 @@ const showingNavigationDropdown = ref(false);
             <nav class="bg-white border-b border-gray-100 side_barre">
                 <div class="back_block_transparent"></div>
                 <div class="side_color_picture" id="side_color_picture">
-                    <img src="../../../public/icon/sid_bar/wallpapers/img_1.jpg" alt="">
+                    <img src="../../../public/icon/sid_bar/wallpapers/img_1.jpg">
                 </div>
                     <div class="flex justify-between h-16 nave_liste">
                         <!-- **************nave option*************** -->
                         <div class="flex nave_options">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center Logo_user">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('profile.edit')">
                                     <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-gray-800 Logo_user_under"
                                     />
@@ -165,9 +153,70 @@ const showingNavigationDropdown = ref(false);
 
                 <!-- Page Content -->
                 <main>
+                    <div class="theme_edite_button" @click="openEdite">
+                        <i class="fa-solid fa-gear" style="color: #ffffff;"></i>
+                    </div>
+                    <div class="theme_edite_frame" v-if="openEdite_frame">
+                        <div class="sid_img">
+                            <p>images</p>
+                            <div class="img_list list">
+                                <img_option id="sid_img_1"></img_option>  
+                                <img_option id="sid_img_2"></img_option>  
+                                <img_option id="sid_img_3"></img_option>  
+                                <img_option id="sid_img_4"></img_option>  
+                                <img_option id="sid_img_5"></img_option>  
+                                <img_option id="sid_img_6"></img_option>  
+                                <img_option id="sid_img_7"></img_option>  
+                                <img_option id="sid_img_8"></img_option>    
+                                <img_option id="sid_img_9"></img_option>                          
+                            </div>
+                        </div>
+                        <div class="filters">
+                            <p>filters</p>
+                            <div class="filter_list list">
+                                <filter_option id="sid_filter_1"></filter_option>  
+                                <filter_option id="sid_filter_2"></filter_option>  
+                                <filter_option id="sid_filter_3"></filter_option>  
+                                <filter_option id="sid_filter_4"></filter_option>  
+                                <filter_option id="sid_filter_5"></filter_option>  
+                                <filter_option id="sid_filter_6"></filter_option>  
+                                <filter_option id="sid_filter_7"></filter_option>  
+                            </div>
+                        </div>
+                    </div>
                     <slot />
                 </main>
             </div>
         </div>
     </div>
 </template>
+<script setup>
+import { ref } from 'vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import img_option from '@/Components/sid_bar/img_option.vue';
+import filter_option from '@/Components/sid_bar/filter_option.vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
+import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import { Link } from '@inertiajs/vue3';
+
+const showingNavigationDropdown = ref(false);
+</script>
+<script>
+
+export default {
+    data() {
+        return {
+            openEdite_frame : false,
+        }
+    },
+    methods: {
+        openEdite() {
+            this.openEdite_frame ? 
+                this.openEdite_frame=false : 
+                this.openEdite_frame=true;
+        }
+    },
+}
+</script>
