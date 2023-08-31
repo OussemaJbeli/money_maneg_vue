@@ -1,0 +1,54 @@
+.add_tikets_frame{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000085;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .fram_tikets{
+        width: 50%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: var(--action_color);
+        background-color: var(--bg1);
+        transform-style: preserve-3d;
+        transform: translate3d(0, 0 ,-500px);
+        animation: open_popup .4s ease forwards;
+        overflow: hidden;
+        .header{
+            position: relative;
+            width: 100%;
+            height: 10%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--action_color);
+            padding: 10px;
+            .logo{
+                font-size: 35px;
+                color: #fff;
+            }
+            .exite{
+                font-size: 35px;
+                color: #fff;
+                transition: .4s ease;
+            }
+            .exite:hover{
+                transform: scale(1.1);
+            }
+        }
+    }
+    @keyframes open_popup {
+        100%{
+            transform: translate3d(0, 0 ,0px);
+        }
+    }
+}

@@ -43,12 +43,18 @@
                                 </NavLink>
                             </div>
                             <!-- add items -->
-                            <div class="add_tikets_button">
+                            <div class="add_tikets_button" @click="openTickets" >
                                 <i class="fa-solid fa-cart-plus"></i>
                             </div>
-                            <div class="add_tikets_frame">
+                            <div class="add_tikets_frame" v-if="openTickets_frame" >
                                 <div class="fram_tikets">
-
+                                    <div class="header">
+                                        <div class="logo"><i class="fa-solid fa-cart-plus"></i></div>
+                                        <div class="exite" id="exit_popup" @click="openTickets"><i class="fa-sharp fa-solid fa-circle-xmark"></i></div>
+                                    </div>
+                                    <div>
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -218,6 +224,7 @@ export default {
     data() {
         return {
             openEdite_frame : false,
+            openTickets_frame : false,
         }
     },
     methods: {
@@ -225,6 +232,11 @@ export default {
             this.openEdite_frame ? 
                 this.openEdite_frame=false : 
                 this.openEdite_frame=true;
+        },
+        openTickets() {
+            this.openTickets_frame ? 
+                this.openTickets_frame=false : 
+                this.openTickets_frame=true;
         }
     },
 }
