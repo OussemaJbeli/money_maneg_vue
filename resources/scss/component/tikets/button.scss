@@ -1,0 +1,16 @@
+.add_tikets_button{
+    width: 100px;
+    height: 100px;
+    border: 0px solid transparent;
+    border-radius: 50%;
+    background-color: var(--action_butt);
+    margin-top: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i{
+        font-size: 60px;
+        color: #fff;
+
+    }
+}

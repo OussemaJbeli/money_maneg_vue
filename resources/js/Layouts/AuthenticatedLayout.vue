@@ -54,6 +54,15 @@ const showingNavigationDropdown = ref(false);
                                     Region
                                 </NavLink>
                             </div>
+                            <!-- add items -->
+                            <div class="add_tikets_button">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </div>
+                            <div class="add_tikets_frame">
+                                <div class="fram_tikets">
+
+                                </div>
+                            </div>
                         </div>
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
