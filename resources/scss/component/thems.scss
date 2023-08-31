@@ -1,0 +1,118 @@
+.theme_edite_button{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    background-color: var(--action_color);
+    border: 0px solid transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    i{
+        font-size: 50px;
+        animation: rotate 2s linear infinite;
+    }
+    @keyframes rotate {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}
+.theme_edite_frame{
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+    width: 350px;
+    height: 500px;
+    background-color: var(--bg1);
+    border: 3px solid var(--action_color);
+    border-radius: 5px;
+    p{
+        top: 0;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        background-color: var(--bg2);
+    }
+    .list{
+        width: 100%;
+        height: calc(100% - 50px);
+        overflow: hidden auto;
+    }
+    .sid_img{
+        width: 100%;
+        height: 60%;
+        .img_list{
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            #sid_img_1{
+                background-image: url("../../public/icon/sid_bar/wallpapers/img_1.jpg");
+            }
+            #sid_img_2{
+                background-image: url("../../public/icon/sid_bar/wallpapers/img_2.jpg");
+            }
+            #sid_img_3{
+                background-image: url("../../public/icon/sid_bar/wallpapers/img_3.jpg");
+            }
+            #sid_img_4{
+                background-image: url("../../public/icon/sid_bar/wallpapers/img_4.jpg");
+            }
+            #sid_img_5{
+                background-image: url("../../public/icon/sid_bar/wallpapers/img_5.jpg");
+            }
+            #sid_img_6{
+                background-image: url("../../public/icon/sid_bar/wallpapers/img_6.jpg");
+            }
+            #sid_img_7{
+                background-image: url("../../public/icon/sid_bar/wallpapers/img_7.jpg");
+            }
+            #sid_img_8{
+                background-image: url("../../public/icon/sid_bar/wallpapers/img_8.jpg");
+            }
+            #sid_img_9{
+                background-image: url("../../public/icon/sid_bar/wallpapers/img_9.png");
+            }
+        }
+    }
+    .filters{
+        width: 100%;
+        height: 40%;
+        .filter_list{
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+            #sid_filter_1{
+                background-color: #ffc502;
+            }
+            #sid_filter_2{
+                background-color: #ff5602;
+            }
+            #sid_filter_3{
+                background-color: #8b1bd2;
+            }
+            #sid_filter_4{
+                background-color: #02bf09;
+            }
+            #sid_filter_5{
+                background-color: #02ff1b;
+            }
+            #sid_filter_6{
+                background-color: #02e1ff;
+            }
+            #sid_filter_7{
+                background-color: #020aff;
+            }
+        }
+    }
+}

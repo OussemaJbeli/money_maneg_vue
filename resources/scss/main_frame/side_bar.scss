@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #2a3347;
+    background-color: var(--bg2);
     .side_color_picture{
         position: absolute;
         top: 0;
@@ -80,7 +80,7 @@
                 background-color: #f3f4f617;
             }
             .link_active{
-                background-color: #ffc502;
+                background-color: var(--action_color);
                 color: #fff;
             }
             

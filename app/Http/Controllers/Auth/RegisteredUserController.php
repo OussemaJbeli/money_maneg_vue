@@ -36,16 +36,21 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        
+        $User = new User();
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $User->name = $request->name;
+        $User->email = $request->email;
+        $User->password = Hash::make($request->password);
+        $User->avatar = '../../public/icon/sid_bar/avatar/avatar1.png';
+        $User->sid_img = '../../public/icon/sid_bar/wallpapers/img_1.jpg';
+        $User->filter = '#ffc502';
 
-        event(new Registered($user));
+        $User->save();
 
-        Auth::login($user);
+        event(new Registered($User));
+
+        Auth::login($User);
 
         return redirect(RouteServiceProvider::HOME);
     }
