@@ -156,6 +156,9 @@ return [
     */
 
     'providers' => ServiceProvider::defaultProviders()->merge([
+        
+        Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -183,6 +186,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Auth' => Illuminate\Support\Facades\Auth::class,
     ])->toArray(),
 
 ];
