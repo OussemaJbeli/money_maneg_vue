@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,9 +14,7 @@ use Inertia\Response;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
+
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
@@ -24,9 +23,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
@@ -59,5 +55,30 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    //theme
+    public function updateTheme(User $user , $theme_id)
+    {
+        $user->filter = "#".$theme_id;
+        $user->save();
+        return Redirect::route('dashboard');
+
+    }
+
+    //sid_img
+    public function updateSideImg(User $user , $sid_img_id): RedirectResponse
+    {
+        $user->sid_img = 'icon/sid_bar/wallpapers/'.$sid_img_id;
+        $user->save();
+        return Redirect::route('dashboard');
+    }
+
+    //avatar
+    public function updateAvatar(User $user , $avatar): RedirectResponse
+    {
+        $user->avatar = 'icon/sid_bar/avatar/'.$avatar;
+        $user->save();
+        return Redirect::route('profile.edit');
     }
 }

@@ -39,7 +39,7 @@
                                 </NavLink>
                                 <NavLink :href="route('Region')" :active="route().current('Region')" class="NavLink">
                                     <i class="fa-solid fa-globe"></i>
-                                    Region
+                                    Region {{ test }}
                                 </NavLink>
                             </div>
                             <!-- add items -->
@@ -175,27 +175,30 @@
                         <div class="sid_img">
                             <p>images</p>
                             <div class="img_list list">
-                                <img_option id="sid_img_1"></img_option>  
-                                <img_option id="sid_img_2"></img_option>  
-                                <img_option id="sid_img_3"></img_option>  
-                                <img_option id="sid_img_4"></img_option>  
-                                <img_option id="sid_img_5"></img_option>  
-                                <img_option id="sid_img_6"></img_option>  
-                                <img_option id="sid_img_7"></img_option>  
-                                <img_option id="sid_img_8"></img_option>    
-                                <img_option id="sid_img_9"></img_option>                          
+                                <Link class="img_option" id="sid_img_1" :href="`/profile/${$page.props.auth.user.id}/${img1}/sid_img`" tabindex="-1"></Link>  
+                                <Link class="img_option" id="sid_img_2" :href="`/profile/${$page.props.auth.user.id}/${img2}/sid_img`" tabindex="-1"></Link>  
+                                <Link class="img_option" id="sid_img_3" :href="`/profile/${$page.props.auth.user.id}/${img3}/sid_img`" tabindex="-1"></Link>  
+                                <Link class="img_option" id="sid_img_4" :href="`/profile/${$page.props.auth.user.id}/${img4}/sid_img`" tabindex="-1"></Link>  
+                                <Link class="img_option" id="sid_img_5" :href="`/profile/${$page.props.auth.user.id}/${img5}/sid_img`" tabindex="-1"></Link>  
+                                <Link class="img_option" id="sid_img_6" :href="`/profile/${$page.props.auth.user.id}/${img6}/sid_img`" tabindex="-1"></Link>  
+                                <Link class="img_option" id="sid_img_7" :href="`/profile/${$page.props.auth.user.id}/${img7}/sid_img`" tabindex="-1"></Link>  
+                                <Link class="img_option" id="sid_img_8" :href="`/profile/${$page.props.auth.user.id}/${img8}/sid_img`" tabindex="-1"></Link>  
+                                <Link class="img_option" id="sid_img_9" :href="`/profile/${$page.props.auth.user.id}/${img9}/sid_img`" tabindex="-1"></Link>   
+
                             </div>
                         </div>
                         <div class="filters">
                             <p>filters</p>
                             <div class="filter_list list">
-                                <filter_option id="sid_filter_1"></filter_option>  
-                                <filter_option id="sid_filter_2"></filter_option>  
-                                <filter_option id="sid_filter_3"></filter_option>  
-                                <filter_option id="sid_filter_4"></filter_option>  
-                                <filter_option id="sid_filter_5"></filter_option>  
-                                <filter_option id="sid_filter_6"></filter_option>  
-                                <filter_option id="sid_filter_7"></filter_option>  
+
+                                <Link class="filter_option" id="sid_filter_1" :href="`/profile/${$page.props.auth.user.id}/${color1}/theme`" tabindex="-1"></Link> 
+                                <Link class="filter_option" id="sid_filter_2" :href="`/profile/${$page.props.auth.user.id}/${color2}/theme`" tabindex="-1"></Link> 
+                                <Link class="filter_option" id="sid_filter_3" :href="`/profile/${$page.props.auth.user.id}/${color3}/theme`" tabindex="-1"></Link> 
+                                <Link class="filter_option" id="sid_filter_4" :href="`/profile/${$page.props.auth.user.id}/${color4}/theme`" tabindex="-1"></Link> 
+                                <Link class="filter_option" id="sid_filter_5" :href="`/profile/${$page.props.auth.user.id}/${color5}/theme`" tabindex="-1"></Link> 
+                                <Link class="filter_option" id="sid_filter_6" :href="`/profile/${$page.props.auth.user.id}/${color6}/theme`" tabindex="-1"></Link> 
+                                <Link class="filter_option" id="sid_filter_7" :href="`/profile/${$page.props.auth.user.id}/${color7}/theme`" tabindex="-1"></Link>  
+
                             </div>
                         </div>
                     </div>
@@ -208,8 +211,6 @@
 <script setup>
 import { ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import img_option from '@/Components/sid_bar/img_option.vue';
-import filter_option from '@/Components/sid_bar/filter_option.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
@@ -221,10 +222,29 @@ const showingNavigationDropdown = ref(false);
 <script>
 
 export default {
+    components: {
+        Link,
+    },
     data() {
         return {
             openEdite_frame : false,
             openTickets_frame : false,
+            img1: 'img_1.jpg',
+            img2: 'img_2.jpg',
+            img3: 'img_3.jpg',
+            img4: 'img_4.jpg',
+            img5: 'img_5.jpg',
+            img6: 'img_6.jpg',
+            img7: 'img_7.jpg',
+            img8: 'img_8.jpg',
+            img9: 'img_9.png',
+            color1: 'ffc502',
+            color2: 'ff5602',
+            color3: '8b1bd2',
+            color4: '02bf09',
+            color5: '02ff1b',
+            color6: '02e1ff',
+            color7: '020aff',
         }
     },
     methods: {
@@ -237,7 +257,14 @@ export default {
             this.openTickets_frame ? 
                 this.openTickets_frame=false : 
                 this.openTickets_frame=true;
-        }
+        },
+        updateRootCSSVariable(color) {
+            document.documentElement.style.setProperty('--action_color', this.$page.props.auth.user.filter);
+        },
+    },
+    mounted() {
+        const color = this.color;
+        this.updateRootCSSVariable(color);
     },
 }
 </script>

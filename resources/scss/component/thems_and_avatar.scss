@@ -54,6 +54,24 @@
             flex-direction: row;
             justify-content: space-around;
             flex-wrap: wrap;
+            .img_option{
+                width: 65px;
+                height: 170px;
+                margin-bottom: 10px;
+                background-color: #fff;
+                border: 0px solid transparent;
+                border-radius: 5px;
+                overflow: hidden;
+                background-size: cover;
+                background-position: center;
+                cursor: pointer;
+                opacity: 0.5;
+                transition: 0.4s ease;
+            }
+            .img_option:hover{
+                transform: scale(1.1);
+                opacity: 1;
+            }
             #sid_img_1{
                 background-image: url("../../public/icon/sid_bar/wallpapers/img_1.jpg");
             }
@@ -92,6 +110,15 @@
             flex-direction: row;
             justify-content: center;
             flex-wrap: wrap;
+            .filter_option{
+                width: 40px;
+                height: 40px;
+                margin: 10px;
+                border: 0px solid transparent;
+                border-radius: 50%;
+                overflow: hidden;
+                cursor: pointer;
+            }
             #sid_filter_1{
                 background-color: #ffc502;
             }
@@ -114,5 +141,69 @@
                 background-color: #020aff;
             }
         }
+    }
+}
+.avatar_list{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    .avatar{
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        border: 0px solid transparent;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+    }
+    #img_avatar1{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar1.png");
+    }
+    #img_avatar2{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar2.png");
+    }
+    #img_avatar3{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar3.png");
+    }
+    #img_avatar4{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar4.png");
+    }
+    #img_avatar5{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar5.png");
+    }
+    #img_avatar6{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar6.png");
+    }
+    #img_avatar7{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar7.png");
+    }
+    #img_avatar8{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar8.png");
+    }
+    #img_avatar9{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar9.png");
+    }
+    #img_avatar10{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar10.png");
+    }
+    #img_avatar11{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar11.png");
+    }
+    #img_avatar12{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar12.png");
+    }
+    #img_avatar13{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar13.png");
+    }
+    #img_avatar14{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar14.png");
+    }
+    #img_avatar15{
+        background-image: url("../../public/icon/sid_bar/avatar/avatar15.png");
     }
 }

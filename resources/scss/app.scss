@@ -32,6 +32,9 @@
 .focus\:ring-offset-2:focus {
     --tw-ring-offset-width: none;
 }
+.border_correct{
+    border: 3px solid var(--action_color);
+}
 ///////pages style
 //***************login
 @import "login/login.scss";

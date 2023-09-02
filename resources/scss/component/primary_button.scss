@@ -4,7 +4,7 @@
     min-height: 45px;
     border-radius: 20px;
     background-color: #090b3b;
-    border: 3px solid #090b3b;
+    border: 0px solid transparent;
     font-weight: 600;
     font-size: 20px;
     color: #fff;
@@ -15,4 +15,7 @@
 }
 .primary_button:hover{
     transform: scale(1.1);
+}
+.in_app{
+    background-color: var(--action_color);
 }

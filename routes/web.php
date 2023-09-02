@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\DashboardController;
-use App\Http\Controllers\Auth\ConfigController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,16 +33,17 @@ Route::get('/Region', function () {
 
 //config theme and imgs
 
-Route::get('/Config', [ConfigController::class, 'index'])->name('config.index')->middleware('auth');
-Route::get('/Config/create', [ConfigController::class, 'create'])->name('config.create')->middleware('auth');
-Route::get('/Config/Config', [ConfigController::class, 'update'])->name('config.update')->middleware('auth');
-Route::get('/Config/store', [ConfigController::class, 'store'])->name('config.store')->middleware('auth');
-Route::get('/Config/icons', [ConfigController::class, 'icons_get'])->name('config.icons_get')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //update_theme
+    Route::get('/profile/{user}/{theme_id}/theme', [ProfileController::class, 'updateTheme'])->name('profile.updateTheme');
+    //update_sid_img
+    Route::get('/profile/{user}/{sid_img_id}/sid_img', [ProfileController::class, 'updateSideImg'])->name('profile.updateSideImg');
+    //update_avatar
+    Route::get('/profile/{user}/{avatar}/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
 });
 
 require __DIR__.'/auth.php';
