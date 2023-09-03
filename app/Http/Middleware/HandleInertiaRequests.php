@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Icons;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -44,6 +45,28 @@ class HandleInertiaRequests extends Middleware
                         'sid_img' => $request->user()->sid_img,
                         'filter' => $request->user()->filter,
                     ] : null,
+                    'icons' =>[
+                        'cat1' =>[
+                            'title' => 'clothes',
+                            'items' => Icons::where('categories', 'clothes')
+                            ->pluck('items')
+                        ],
+                        'cat2' =>[
+                            'title' => 'food',
+                            'items' => Icons::where('categories', 'food')
+                            ->pluck('items')
+                        ],
+                        'cat3' =>[
+                            'title' => 'electronics',
+                            'items' => Icons::where('categories', 'electronics')
+                            ->pluck('items')
+                        ],
+                        'cat4' =>[
+                            'title' => 'transportation',
+                            'items' => Icons::where('categories', 'transportation')
+                            ->pluck('items')
+                        ]
+                    ]
                 ];
             },
             'ziggy' => function () use ($request) {

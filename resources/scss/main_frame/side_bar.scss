@@ -6,16 +6,15 @@
     flex-direction: column;
     align-items: center;
     background-color: var(--bg2);
-    overflow: hidden;
     .side_color_picture{
         position: absolute;
         top: 0;
         left: 0;
-        transform: translateX(-20%);
-        width: 150%;
-        height: 110%;
+        width: 100%;
+        height: 100%;
         z-index: 0;
         opacity: .5;
+        overflow: hidden;
         img{
             width: 100%;
             height: 100%;

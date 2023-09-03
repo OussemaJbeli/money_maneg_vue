@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('icons', function (Blueprint $table) {
-            $table->integer('categories');
-            $table->integer('items');
+            $table->string('categories');
+            $table->string('items');
+            $table->timestamps();
         });
     }
 

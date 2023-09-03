@@ -2,34 +2,36 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\Auth\TicketsController;
+use App\Http\Controllers\Auth\CarrencyController;
+use App\Http\Controllers\Auth\ItemsController;
+use App\Http\Controllers\Auth\RegionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard')
     ->middleware('auth');
 
-Route::get('/Tickets', function () {
-    return Inertia::render('Tickets');
-})->middleware(['auth', 'verified'])->name('Tickets');
+Route::get('/Tickets', [TicketsController::class, 'index'])
+    ->name('Tickets')
+    ->middleware('auth');
 
-Route::get('/Items', function () {
-    return Inertia::render('Items');
-})->middleware(['auth', 'verified'])->name('Items');
+Route::get('/Items', [ItemsController::class, 'index'])
+    ->name('Items')
+    ->middleware('auth');
 
-Route::get('/Carrency', function () {
-    return Inertia::render('Carrency');
-})->middleware(['auth', 'verified'])->name('Carrency');
+Route::get('/Carrency', [CarrencyController::class, 'index'])
+    ->name('Carrency')
+    ->middleware('auth');
 
-Route::get('/Region', function () {
-    return Inertia::render('Region');
-})->middleware(['auth', 'verified'])->name('Region');
+Route::get('/Region', [RegionController::class, 'index'])
+    ->name('Region')
+    ->middleware('auth');
+
 
 //config theme and imgs
 

@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
-class DashboardController extends Controller
+class RegionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Dashboard/index');
+        return Inertia::render('Region/index');
     }
 
     /**

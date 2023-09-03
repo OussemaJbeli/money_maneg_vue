@@ -39,7 +39,7 @@
                                 </NavLink>
                                 <NavLink :href="route('Region')" :active="route().current('Region')" class="NavLink">
                                     <i class="fa-solid fa-globe"></i>
-                                    Region {{ test }}
+                                    Region
                                 </NavLink>
                             </div>
                             <!-- add items -->
@@ -52,8 +52,86 @@
                                         <div class="logo"><i class="fa-solid fa-cart-plus"></i></div>
                                         <div class="exite" id="exit_popup" @click="openTickets"><i class="fa-sharp fa-solid fa-circle-xmark"></i></div>
                                     </div>
-                                    <div>
-                                        
+                                    <div class="body_fram">
+                                        <div class="region_carrency">
+                                            <div class="region">
+                                                <i class="fa-solid fa-globe"></i>
+                                                <select name="select state" id="state" class="region_select" required>
+                                                    <option value="Beja" >Beja</option>
+                                                    <option value="Ariana" >Ariana</option>
+                                                    <option value="Manouba">Manouba</option>
+                                                    <option value="Tunis">Tunis</option>
+                                                    <option value="Kasserine">Kasserine</option>
+                                                    <option value="Kairouan">Kairouan</option>
+                                                    <option value="Jendouba">Jendouba</option>
+                                                    <option value="Kef">Kef</option>
+                                                    <option value="Mahdia">Mahdia</option>
+                                                    <option value="Monastir">Monastir</option>
+                                                    <option value="Bizerte">Bizerte</option>
+                                                    <option value="Nabeul">Nabeul</option>
+                                                    <option value="Siliana">Siliana</option>
+                                                    <option value="Sousse">Sousse</option>
+                                                    <option value="Ben Arous">Ben Arous</option>
+                                                    <option value="Medenine">Medenine</option>
+                                                    <option value="Gabes">Gabes</option>
+                                                    <option value="Gafsa">Gafsa</option>
+                                                    <option value="Kebili">Kebili</option>
+                                                    <option value="Sfax">Sfax</option>
+                                                    <option value="Sidi Bouzid">Sidi Bouzid</option>
+                                                    <option value="Tataouine">Tataouine</option>
+                                                    <option value="Tozeur">Tozeur</option>
+                                                    <option value="Zaghouan">Zaghouan</option>
+                                                </select>
+                                                <select name="slect accreditation" id=" accreditation" class="region_select" required>
+                                                    <option value="amdoun" selected> Amdoun</option>
+                                                    <option value="beja center"> Beja</option>
+                                                </select>
+                                            </div>
+                                            <div class="carrency">
+                                                <i class="fa-solid fa-coins"></i>
+                                                <select name="select carrency" id="state" class="carrency_select" required>
+                                                    <option value="TND">TND</option>
+                                                    <option value="EUR">EUR</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="items_shoser">
+                                            <div id="list-example" class="list-group">
+                                                <a v-for="(icon, index) in  $page.props.auth.icons" :key="index" class="list-group-item list-group-item-action" :href='"#"+index'>
+                                                    <img :src="'icon/items_icon/'+icon.title+'.png'">
+                                                </a>
+                                            </div>
+                                            <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+                                                <div v-for="(icon, index) in  $page.props.auth.icons" :key="index" class="items_group" :id=index>
+                                                    <p class="cat_title">{{icon.title}}</p>
+                                                    <div class="items">
+                                                        <div v-for="(item, index1) in  icon.items" :key="index1" class="item" :id=item>
+                                                            <label :for="item+'.png'">
+                                                                <img id="item_path" :src="'icon/items_icon/'+icon.title+'/'+item+'.png'">
+                                                                <p>{{item}}</p>
+                                                            </label>
+                                                            <input :id="item+'.png'" class="item_chek" type="checkbox" :value="'icon/items_icon/'+icon.title+'/'+item+'.png'" :name=item>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item_info">
+                                            <table id='item_table'>
+                                                <thead>
+                                                    <td class="item_icon">icon</td>
+                                                    <td class="item_name">name</td>
+                                                    <td class="item_price">price</td>
+                                                    <td class="item_quentity">quentity</td>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="save">
+                                            <input type="submit" value="save" class="save">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -168,6 +246,7 @@
 
                 <!-- Page Content -->
                 <main>
+                    <!-- ************************ thems congig *********************** -->
                     <div class="theme_edite_button" @click="openEdite">
                         <i class="fa-solid fa-gear" style="color: #ffffff;"></i>
                     </div>
@@ -245,6 +324,7 @@ export default {
             color5: '02ff1b',
             color6: '02e1ff',
             color7: '020aff',
+            num: '',
         }
     },
     methods: {
