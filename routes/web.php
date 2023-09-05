@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\FlashedDataController;
 use App\Http\Controllers\Auth\TicketsController;
 use App\Http\Controllers\Auth\CarrencyController;
 use App\Http\Controllers\Auth\ItemsController;
@@ -16,14 +17,26 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard')
     ->middleware('auth');
 
+/////////////// tickets
+//page
 Route::get('/Tickets', [TicketsController::class, 'index'])
     ->name('Tickets')
     ->middleware('auth');
 
+Route::post('/Tickets/{user}', [TicketsController::class, 'store'])
+    ->name('items.store')
+    ->middleware('auth');
+////////////////items
+//page
 Route::get('/Items', [ItemsController::class, 'index'])
     ->name('Items')
     ->middleware('auth');
 
+Route::post('/Items/{user}', [ItemsController::class, 'store'])
+    ->name('items.store')
+    ->middleware('auth');
+
+////////////////carrency
 Route::get('/Carrency', [CarrencyController::class, 'index'])
     ->name('Carrency')
     ->middleware('auth');
@@ -47,5 +60,6 @@ Route::middleware('auth')->group(function () {
     //update_avatar
     Route::get('/profile/{user}/{avatar}/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
 });
+
 
 require __DIR__.'/auth.php';

@@ -53,85 +53,127 @@
                                         <div class="exite" id="exit_popup" @click="openTickets"><i class="fa-sharp fa-solid fa-circle-xmark"></i></div>
                                     </div>
                                     <div class="body_fram">
-                                        <div class="region_carrency">
-                                            <div class="region">
-                                                <i class="fa-solid fa-globe"></i>
-                                                <select name="select state" id="state" class="region_select" required>
-                                                    <option value="Beja" >Beja</option>
-                                                    <option value="Ariana" >Ariana</option>
-                                                    <option value="Manouba">Manouba</option>
-                                                    <option value="Tunis">Tunis</option>
-                                                    <option value="Kasserine">Kasserine</option>
-                                                    <option value="Kairouan">Kairouan</option>
-                                                    <option value="Jendouba">Jendouba</option>
-                                                    <option value="Kef">Kef</option>
-                                                    <option value="Mahdia">Mahdia</option>
-                                                    <option value="Monastir">Monastir</option>
-                                                    <option value="Bizerte">Bizerte</option>
-                                                    <option value="Nabeul">Nabeul</option>
-                                                    <option value="Siliana">Siliana</option>
-                                                    <option value="Sousse">Sousse</option>
-                                                    <option value="Ben Arous">Ben Arous</option>
-                                                    <option value="Medenine">Medenine</option>
-                                                    <option value="Gabes">Gabes</option>
-                                                    <option value="Gafsa">Gafsa</option>
-                                                    <option value="Kebili">Kebili</option>
-                                                    <option value="Sfax">Sfax</option>
-                                                    <option value="Sidi Bouzid">Sidi Bouzid</option>
-                                                    <option value="Tataouine">Tataouine</option>
-                                                    <option value="Tozeur">Tozeur</option>
-                                                    <option value="Zaghouan">Zaghouan</option>
-                                                </select>
-                                                <select name="slect accreditation" id=" accreditation" class="region_select" required>
-                                                    <option value="amdoun" selected> Amdoun</option>
-                                                    <option value="beja center"> Beja</option>
-                                                </select>
-                                            </div>
-                                            <div class="carrency">
-                                                <i class="fa-solid fa-coins"></i>
-                                                <select name="select carrency" id="state" class="carrency_select" required>
-                                                    <option value="TND">TND</option>
-                                                    <option value="EUR">EUR</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="items_shoser">
-                                            <div id="list-example" class="list-group">
-                                                <a v-for="(icon, index) in  $page.props.auth.icons" :key="index" class="list-group-item list-group-item-action" :href='"#"+index'>
-                                                    <img :src="'icon/items_icon/'+icon.title+'.png'">
-                                                </a>
-                                            </div>
-                                            <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
-                                                <div v-for="(icon, index) in  $page.props.auth.icons" :key="index" class="items_group" :id=index>
-                                                    <p class="cat_title">{{icon.title}}</p>
-                                                    <div class="items">
-                                                        <div v-for="(item, index1) in  icon.items" :key="index1" class="item" :id=item>
-                                                            <label :for="item+'.png'">
-                                                                <img id="item_path" :src="'icon/items_icon/'+icon.title+'/'+item+'.png'">
-                                                                <p>{{item}}</p>
-                                                            </label>
-                                                            <input :id="item+'.png'" class="item_chek" type="checkbox" :value="'icon/items_icon/'+icon.title+'/'+item+'.png'" :name=item>
+                                        <form @submit.prevent="save_items" class="form1">
+                                            <div class="items_shoser">
+                                                <div class="header_items">
+                                                    <label for="search">
+                                                        search
+                                                        <input type="search" class="search" id="search">
+                                                    </label>
+                                                    <div id="list-example" class="list-group">
+                                                        <a v-for="(icon, index) in  $page.props.auth.icons" :key="index" class="list-group-item list-group-item-action" :href='"#"+index'>
+                                                            <img :src="'icon/items_icon/'+icon.title+'.png'">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+                                                    <div v-for="(icon, index) in  $page.props.auth.icons" :key="index" class="items_group" :id=index>
+                                                        <p class="cat_title">{{icon.title}}</p>
+                                                        <div class="items">
+                                                            <div v-for="(item, index1) in  icon.items" :key="index1" class="item" :id=item>
+                                                                <label :for="item+'.png'">
+                                                                    <img id="item_path" :src="'icon/items_icon/'+icon.title+'/'+item+'.png'">
+                                                                    {{ item }}
+                                                                </label>
+                                                                <input 
+                                                                    :id="item+'.png'" 
+                                                                    class="item_chek" 
+                                                                    type="radio" 
+                                                                    :value="item" 
+                                                                    :name='"items"'
+                                                                    v-model="ticket_form.item_name"
+                                                                    :error="ticket_form.errors.item_name"
+                                                                    :required="isRequired(item)"
+                                                                >
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="item_info">
-                                            <table id='item_table'>
-                                                <thead>
-                                                    <td class="item_icon">icon</td>
-                                                    <td class="item_name">name</td>
-                                                    <td class="item_price">price</td>
-                                                    <td class="item_quentity">quentity</td>
-                                                </thead>
-                                                <tbody>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="save">
-                                            <input type="submit" value="save" class="save">
-                                        </div>
+                                            <div class="region_carrency">
+                                                <div class="region">
+                                                    <i class="fa-solid fa-globe"></i>
+                                                    <select 
+                                                        name="select state" 
+                                                        id="state" 
+                                                        class="region_select" 
+                                                        required
+                                                        @click="regionshoser"
+                                                        v-model="ticket_form.selectedOption"
+                                                        :error="ticket_form.errors.selectedOption"
+                                                    >
+                                                        <option 
+                                                            v-for="(region, index) in $page.props.auth.regions" 
+                                                            :key="index" 
+                                                            :id="index"
+                                                            :value="region.region"
+                                                            class="list-group-item list-group-item-action" 
+                                                            >
+                                                                {{ region.region}}
+                                                        </option>
+                                                    </select>
+                                                    <select
+                                                        name="slect accreditation" 
+                                                        id=" accreditation" 
+                                                        class="region_select" 
+                                                        required
+                                                        v-model="ticket_form.state"
+                                                        :error="ticket_form.errors.state">
+                                                        <option 
+                                                            v-for="(state, index1) in region_selectetd" 
+                                                            :key="index1" 
+                                                            :id="index1"
+                                                            :value= index1
+                                                            >
+                                                                {{state}} 
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="carrency">
+                                                    <i class="fa-solid fa-coins"></i>
+                                                    <select 
+                                                        name="select carrency" 
+                                                        id="state" 
+                                                        class="carrency_select" 
+                                                        required
+                                                        v-model="ticket_form.carrency"
+                                                        :error="ticket_form.errors.carrency"
+                                                        >
+                                                        <option 
+                                                            v-for="carrency in $page.props.auth.carrency" 
+                                                            :key="carrency.id" 
+                                                            class="list-group-item list-group-item-action" 
+                                                            :value= carrency.id>
+                                                                {{ carrency.currency }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="item_info" id="test">
+                                                <input 
+                                                    type="text" 
+                                                    id="price" 
+                                                    placeholder="price"
+                                                    v-model="ticket_form.price"
+                                                    :error="ticket_form.errors.price"
+                                                    required
+                                                >
+                                                <input
+                                                    type="number" 
+                                                    id="quentity" 
+                                                    placeholder="quentity"
+                                                    v-model="ticket_form.quentity"
+                                                    :error="ticket_form.errors.quentity"
+                                                    required
+                                                >
+                                            </div>
+                                            <div class="save">
+                                                <button type="submit" class="tiket_save">
+                                                    save
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -299,10 +341,13 @@ import { Link } from '@inertiajs/vue3';
 const showingNavigationDropdown = ref(false);
 </script>
 <script>
-
+import axios from 'axios';
 export default {
     components: {
         Link,
+    },
+    props: {
+        Ticket: Object,
     },
     data() {
         return {
@@ -324,22 +369,123 @@ export default {
             color5: '02ff1b',
             color6: '02e1ff',
             color7: '020aff',
-            num: '',
+            region_selectetd: '',
+
+            ticket_form: this.$inertia.form({
+                selectedOption: null,
+                state: null,
+                carrency: null,
+                price: null,
+                quentity: null,
+                item_name: null,
+            }),
         }
     },
     methods: {
+        isRequired(optionValue) {
+            return this.requiredValue === optionValue;
+        },
+        regionshoser(){
+            switch (this.ticket_form.selectedOption) {
+                    case 'Beja':
+                    this.region_selectetd = this.$page.props.auth.regions.regions1.state
+                    break;
+                    case 'Ariana':
+                    this.region_selectetd = this.$page.props.auth.regions.regions2.state
+                    break;
+                    case 'Manouba':
+                    this.region_selectetd = this.$page.props.auth.regions.regions3.state
+                    break;
+                    case 'Tunis':
+                    this.region_selectetd = this.$page.props.auth.regions.regions4.state
+                    break;
+                    case 'Kasserine':
+                    this.region_selectetd = this.$page.props.auth.regions.regions5.state
+                    break;
+                    case 'Kairouan':
+                    this.region_selectetd = this.$page.props.auth.regions.regions6.state
+                    break;
+                    case 'Jendouba':
+                    this.region_selectetd = this.$page.props.auth.regions.regions7.state
+                    break;
+                    case 'Kef':
+                    this.region_selectetd = this.$page.props.auth.regions.regions8.state
+                    break;
+                    case 'Mahdia':
+                    this.region_selectetd = this.$page.props.auth.regions.regions9.state
+                    break;
+                    case 'Monastir':
+                    this.region_selectetd = this.$page.props.auth.regions.regions10.state
+                    break;
+                    case 'Bizerte':
+                    this.region_selectetd = this.$page.props.auth.regions.regions11.state
+                    break;
+                    case 'Nabeul':
+                    this.region_selectetd = this.$page.props.auth.regions.regions12.state
+                    break;
+                    case 'Siliana':
+                    this.region_selectetd = this.$page.props.auth.regions.regions13.state
+                    break;
+                    case 'Sousse':
+                    this.region_selectetd = this.$page.props.auth.regions.regions14.state
+                    break;
+                    case 'Ben_Arous':
+                    this.region_selectetd = this.$page.props.auth.regions.regions15.state
+                    break;
+                    case 'Medenine':
+                    this.region_selectetd = this.$page.props.auth.regions.regions16.state
+                    break;
+                    case 'Gabes':
+                    this.region_selectetd = this.$page.props.auth.regions.regions17.state
+                    break;
+                    case 'Gafsa':
+                    this.region_selectetd = this.$page.props.auth.regions.regions18.state
+                    break;
+                    case 'Kebili':
+                    this.region_selectetd = this.$page.props.auth.regions.regions19.state
+                    break;
+                    case 'Sfax':
+                    this.region_selectetd = this.$page.props.auth.regions.regions20.state
+                    break;
+                    case 'Sidi_Bouzid':
+                    this.region_selectetd = this.$page.props.auth.regions.regions21.state
+                    break;
+                    case 'Tataouine':
+                    this.region_selectetd = this.$page.props.auth.regions.regions22.state
+                    break;
+                    case 'Tozeur':
+                    this.region_selectetd = this.$page.props.auth.regions.regions23.state
+                    break;
+                    case 'Zaghouan':
+                    this.region_selectetd = this.$page.props.auth.regions.regions24.state
+                    break;
+                default:
+                    break;
+            }
+        },
         openEdite() {
             this.openEdite_frame ? 
                 this.openEdite_frame=false : 
                 this.openEdite_frame=true;
         },
         openTickets() {
-            this.openTickets_frame ? 
-                this.openTickets_frame=false : 
+            if(this.openTickets_frame){
+                this.openTickets_frame=false;
+            }
+            else{
+                //*********************add tikcets */
+                this.$inertia.post(`/Tickets/${this.$page.props.auth.user.id}`)
                 this.openTickets_frame=true;
+            }
+                
         },
         updateRootCSSVariable(color) {
             document.documentElement.style.setProperty('--action_color', this.$page.props.auth.user.filter);
+        },
+
+        //*********************add items */
+        save_items() {
+            this.ticket_form.post(`/Items/${this.$page.props.auth.user.id}`);
         },
     },
     mounted() {

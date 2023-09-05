@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Carrency;
+use App\Models\Region;
+use App\Models\Ticket;
+use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -30,14 +35,25 @@ class TicketsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(User $user)
     {
-        //
+
+        $currentDate = date('d-m-Y'); // Get the current date in YYYY-MM-DD format
+        $existingItem = Ticket::where('ticket_id', $currentDate)->first();
+
+        if ($existingItem) {
+            return Redirect::back();
+        } 
+        else {
+            // Item with the current date doesn't exist, create one
+            $ticket = new Ticket();
+            $ticket->ticket_id = date('d-m-Y');
+            $ticket->user_id = $user->id;
+            $ticket->save();
+            return Redirect::back();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //

@@ -62,7 +62,7 @@ class ProfileController extends Controller
     {
         $user->filter = "#".$theme_id;
         $user->save();
-        return Redirect::route('dashboard');
+        return Redirect::back();
 
     }
 
@@ -71,7 +71,7 @@ class ProfileController extends Controller
     {
         $user->sid_img = 'icon/sid_bar/wallpapers/'.$sid_img_id;
         $user->save();
-        return Redirect::route('dashboard');
+        return Redirect::back();
     }
 
     //avatar
@@ -79,6 +79,6 @@ class ProfileController extends Controller
     {
         $user->avatar = 'icon/sid_bar/avatar/'.$avatar;
         $user->save();
-        return Redirect::route('profile.edit');
+        return Redirect::back();
     }
 }

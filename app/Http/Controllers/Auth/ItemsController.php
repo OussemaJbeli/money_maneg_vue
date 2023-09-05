@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Items;
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -30,9 +33,27 @@ class ItemsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request,User $user,Ticket $tickets)
     {
-        //
+        
+        $price = $request->get('price');
+        $state = $request->get('state');
+        $carrency = $request->get('carrency');
+        $quentity = $request->get('quentity');
+        $item = $request->get('item_name');
+
+        $items = new Items();
+        $items->user_id = $user->id;
+        $items->ticket_id = date('d-m-Y');
+        $items->id_region = $state;
+        $items->id_currency = $carrency;
+        $items->item_name = $item;
+        $items->item_prix = $price;
+        $items->item_quentity = $quentity;
+        $items->save();
+
+        return Redirect::back()
+        ->with('success', 'item saved');
     }
 
     /**

@@ -13,13 +13,18 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_ticket')->constrained('ticket');
-            $table->foreignId('id_region')->constrained('region');
-            $table->foreignId('id_currency')->constrained('carrency');
+            $table->unsignedBigInteger('user_id');
+                $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('ticket_id');
+                $table->foreign('ticket_id')->references('ticket_id')->on('tickets');
+            $table->integer('id_region');
+                $table->foreign('id_region')->references('id')->on('regions');
+            $table->integer('id_currency');
+                $table->foreign('id_currency')->references('id')->on('carrencies');
             $table->string('item_name');
             $table->integer('item_prix');
             $table->integer('item_quentity');
-            $table->timestamp('date_of_save');
+            $table->timestamps();
         });
     }
 
