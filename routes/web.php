@@ -13,7 +13,7 @@ use Inertia\Inertia;
 
 
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
+Route::get('dashboard', [DashboardController::class, 'index'])
     ->name('dashboard')
     ->middleware('auth');
 
@@ -24,8 +24,14 @@ Route::get('/Tickets', [TicketsController::class, 'index'])
     ->middleware('auth');
 
 Route::post('/Tickets/{user}', [TicketsController::class, 'store'])
-    ->name('items.store')
+    ->name('Tickets.store')
     ->middleware('auth');
+
+Route::get('/Tickets/{Ticket}/show', [TicketsController::class, 'show'])
+    ->name('Tickets.show')
+    ->middleware('auth');
+
+
 ////////////////items
 //page
 Route::get('/Items', [ItemsController::class, 'index'])
@@ -34,6 +40,14 @@ Route::get('/Items', [ItemsController::class, 'index'])
 
 Route::post('/Items/{user}', [ItemsController::class, 'store'])
     ->name('items.store')
+    ->middleware('auth');
+
+Route::get('/Items/{item}/edit', [ItemsController::class, 'edit'])
+    ->name('items.edit')
+    ->middleware('auth');
+
+Route::get('/Items/{item}/delete', [ItemsController::class, 'destroy'])
+    ->name('items.destroy')
     ->middleware('auth');
 
 ////////////////carrency
@@ -59,6 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/{user}/{sid_img_id}/sid_img', [ProfileController::class, 'updateSideImg'])->name('profile.updateSideImg');
     //update_avatar
     Route::get('/profile/{user}/{avatar}/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
+
 });
 
 

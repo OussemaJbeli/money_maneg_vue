@@ -5,7 +5,7 @@
             <nav class="bg-white border-b border-gray-100 side_barre">
                 <div class="back_block_transparent"></div>
                 <div class="side_color_picture" id="side_color_picture">
-                    <img :src=" $page.props.auth.user.sid_img ">
+                    <img :src="'/'+$page.props.auth.user.sid_img ">
                 </div>
                     <div class="flex justify-between h-16 nave_liste">
                         <!-- **************nave option*************** -->

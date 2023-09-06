@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'oussema',
             'email' => 'admin@gmail.com',
             'password' => '123456789',
-            'avatar'=>'icon/sid_bar/avatar/avatar1.png',
-            'sid_img'=> 'icon/sid_bar/wallpapers/img_1.jpg',
+            'avatar'=>'../../../public/icon/sid_bar/avatar/avatar1.png',
+            'sid_img'=> '../../../public/icon/sid_bar/wallpapers/img_1.jpg',
             'filter'=>'#ffc502',
         ]);
 

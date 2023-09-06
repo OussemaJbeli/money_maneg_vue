@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Models\Carrency;
+use App\Models\Items;
 use App\Models\Region;
 use App\Models\Ticket;
 use App\Models\User;
@@ -21,7 +23,15 @@ class TicketsController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Tickets/index');
+        return Inertia::render('Tickets/index', [
+            'tickets' => Items::where('user_id', Auth::user()->id)
+                ->select('ticket_date',
+                        'ticket_id', 
+                        DB::raw('SUM(item_quentity) as quentity')
+                )
+                ->groupBy('ticket_date')
+                ->get(),
+        ]);
     }
 
     /**
@@ -38,7 +48,7 @@ class TicketsController extends Controller
     public function store(User $user)
     {
 
-        $currentDate = date('d-m-Y'); // Get the current date in YYYY-MM-DD format
+        $currentDate = date('dmY'); // Get the current date in YYYY-MM-DD format
         $existingItem = Ticket::where('ticket_id', $currentDate)->first();
 
         if ($existingItem) {
@@ -47,24 +57,28 @@ class TicketsController extends Controller
         else {
             // Item with the current date doesn't exist, create one
             $ticket = new Ticket();
-            $ticket->ticket_id = date('d-m-Y');
+            $ticket->ticket_id = date('dmY');
+            $ticket->ticket_date = date('d-m-Y');
             $ticket->user_id = $user->id;
             $ticket->save();
             return Redirect::back();
         }
     }
 
-    public function show(string $id)
+    public function show(string $tickets)
     {
-        //
+        return Inertia::render('Tickets/show', [
+            'items' => Items::select('items.*', 'regions.*', 'carrencies.*')
+            ->join('regions', 'regions.id', '=', 'items.id_region')
+            ->join('carrencies', 'carrencies.id', '=', 'items.id_currency')
+            ->where('items.ticket_id', $tickets)
+            ->get()
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        return Inertia::render('Tickets/edite');
     }
 
     /**

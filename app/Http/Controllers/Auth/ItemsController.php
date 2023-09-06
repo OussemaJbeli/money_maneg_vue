@@ -44,7 +44,8 @@ class ItemsController extends Controller
 
         $items = new Items();
         $items->user_id = $user->id;
-        $items->ticket_id = date('d-m-Y');
+        $items->ticket_id = date('dmY');
+        $items->ticket_date = date('d-m-Y');
         $items->id_region = $state;
         $items->id_currency = $carrency;
         $items->item_name = $item;
@@ -69,7 +70,7 @@ class ItemsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return Inertia::render('Tickets/edite');
     }
 
     /**
@@ -83,8 +84,9 @@ class ItemsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Items $item)
     {
-        //
+        $item->delete();
+        return Redirect::back()->with('success', 'تم حذف المستخدم.');
     }
 }

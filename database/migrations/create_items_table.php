@@ -17,6 +17,7 @@ return new class extends Migration
                 $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('ticket_id');
                 $table->foreign('ticket_id')->references('ticket_id')->on('tickets');
+            $table->string('ticket_date');
             $table->integer('id_region');
                 $table->foreign('id_region')->references('id')->on('regions');
             $table->integer('id_currency');
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->integer('item_prix');
             $table->integer('item_quentity');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
