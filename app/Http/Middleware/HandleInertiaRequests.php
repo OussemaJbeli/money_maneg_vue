@@ -52,171 +52,175 @@ class HandleInertiaRequests extends Middleware
                         'cat1' =>[
                             'title' => 'clothes',
                             'items' => Icons::where('categories', 'clothes')
-                            ->pluck('items')
+                            ->pluck('items','id_icons')
+                            ->all(),
                         ],
                         'cat2' =>[
                             'title' => 'food',
                             'items' => Icons::where('categories', 'food')
-                            ->pluck('items')
+                            ->pluck('items','id_icons')
+                            ->all(),
                         ],
                         'cat3' =>[
                             'title' => 'electronics',
                             'items' => Icons::where('categories', 'electronics')
-                            ->pluck('items')
+                            ->pluck('items','id_icons')
+                            ->all(),
                         ],
                         'cat4' =>[
                             'title' => 'transportation',
                             'items' => Icons::where('categories', 'transportation')
-                            ->pluck('items')
+                            ->pluck('items','id_icons')
+                            ->all(),
                         ]
                     ],
                     'regions' =>[
                         'regions1' =>[
                             'region' => 'Beja',
                             'state' => Region::where('region', 'beja')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions2' =>[
                             'region' => 'Ariana',
                             'state' => Region::where('region', 'Ariana')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions3' =>[
                             'region' => 'Manouba',
                             'state' => Region::where('region', 'Manouba')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions4' =>[
                             'region' => 'Tunis',
                             'state' => Region::where('region', 'Tunis')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions5' =>[
                             'region' => 'Kasserine',
                             'state' => Region::where('region', 'Kasserine')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions6' =>[
                             'region' => 'Kairouan',
                             'state' => Region::where('region', 'Kairouan')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions7' =>[
                             'region' => 'Jendouba',
                             'state' => Region::where('region', 'Jendouba')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions8' =>[
                             'region' => 'Kef',
                             'state' => Region::where('region', 'Kef')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions9' =>[
                             'region' => 'Mahdia',
                             'state' => Region::where('region', 'Mahdia')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions10' =>[
                             'region' => 'Monastir',
                             'state' => Region::where('region', 'Monastir')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions11' =>[
                             'region' => 'Bizerte',
                             'state' => Region::where('region', 'Bizerte')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions12' =>[
                             'region' => 'Nabeul',
                             'state' => Region::where('region', 'Nabeul')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions13' =>[
                             'region' => 'Siliana',
                             'state' => Region::where('region', 'Siliana')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions14' =>[
                             'region' => 'Sousse',
                             'state' => Region::where('region', 'Sousse')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions15' =>[
                             'region' => 'Ben_Arous',
                             'state' => Region::where('region', 'Ben_Arous')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions16' =>[
                             'region' => 'Medenine',
                             'state' => Region::where('region', 'Medenine')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions17' =>[
                             'region' => 'Gabes',
                             'state' => Region::where('region', 'Gabes')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions18' =>[
                             'region' => 'Gafsa',
                             'state' => Region::where('region', 'Gafsa')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions19' =>[
                             'region' => 'Kebili',
                             'state' => Region::where('region', 'Kebili')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions20' =>[
                             'region' => 'Sfax',
                             'state' => Region::where('region', 'Sfax')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions21' =>[
                             'region' => 'Sidi_Bouzid',
                             'state' => Region::where('region', 'Sidi_Bouzid')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions22' =>[
                             'region' => 'Tataouine',
                             'state' => Region::where('region', 'Tataouine')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions23' =>[
                             'region' => 'Tozeur',
                             'state' => Region::where('region', 'Tozeur')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],
                         'regions24' =>[
                             'region' => 'Zaghouan',
                             'state' => Region::where('region', 'Zaghouan')
-                            ->pluck('state','id')
+                            ->pluck('state','id_region')
                             ->all(),
                         ],            
                     ],
-                    'carrency' => Carrency::select('id', 'currency')->get()
+                    'carrency' => Carrency::select('id_carrency', 'currency')->get()
                 ];
             },
             'ziggy' => function () use ($request) {

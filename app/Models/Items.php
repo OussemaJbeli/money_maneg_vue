@@ -18,6 +18,10 @@ class Items extends Model
     {
         return $this->belongsTo(Ticket::class);
     }
+    public function icons()
+    {
+        return $this->belongsTo(Icon::class);
+    }
     public function region()
     {
         return $this->belongsTo(Region::class);

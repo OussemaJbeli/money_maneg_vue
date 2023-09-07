@@ -68,9 +68,10 @@ class TicketsController extends Controller
     public function show(string $tickets)
     {
         return Inertia::render('Tickets/show', [
-            'items' => Items::select('items.*', 'regions.*', 'carrencies.*')
-            ->join('regions', 'regions.id', '=', 'items.id_region')
-            ->join('carrencies', 'carrencies.id', '=', 'items.id_currency')
+            'items' => Items::select('items.*', 'regions.*', 'carrencies.*', 'icons.*')
+            ->join('regions', 'regions.id_region', '=', 'items.id_region')
+            ->join('carrencies', 'carrencies.id_carrency', '=', 'items.id_currency')
+            ->join('icons', 'icons.id_icons', '=', 'items.id_icon')
             ->where('items.ticket_id', $tickets)
             ->get()
         ]);

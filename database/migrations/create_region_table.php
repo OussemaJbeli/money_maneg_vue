@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('regions', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id_region');
             $table->string('region')->nullable(false);
             $table->string('state')->nullable(false);
             $table->timestamps();

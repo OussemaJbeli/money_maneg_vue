@@ -16,5 +16,8 @@ class Icons extends Model
      *
      * @var array<int, string>
      */
-
+    public function items()
+    {
+        return $this->belongsTo(Items::class);
+    }
 }

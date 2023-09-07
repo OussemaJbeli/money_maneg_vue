@@ -48,7 +48,7 @@ class ItemsController extends Controller
         $items->ticket_date = date('d-m-Y');
         $items->id_region = $state;
         $items->id_currency = $carrency;
-        $items->item_name = $item;
+        $items->id_icon = $item;
         $items->item_prix = $price;
         $items->item_quentity = $quentity;
         $items->save();

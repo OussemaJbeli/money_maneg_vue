@@ -62,7 +62,7 @@
                                                     </label>
                                                     <div id="list-example" class="list-group">
                                                         <a v-for="(icon, index) in  $page.props.auth.icons" :key="index" class="list-group-item list-group-item-action" :href='"#"+index'>
-                                                            <img :src="'icon/items_icon/'+icon.title+'.png'">
+                                                            <img :src="'/icon/items_icon/'+icon.title+'.png'">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -72,14 +72,14 @@
                                                         <div class="items">
                                                             <div v-for="(item, index1) in  icon.items" :key="index1" class="item" :id=item>
                                                                 <label :for="item+'.png'">
-                                                                    <img id="item_path" :src="'icon/items_icon/'+icon.title+'/'+item+'.png'">
+                                                                    <img id="item_path" :src="'/icon/items_icon/'+icon.title+'/'+item+'.png'">
                                                                     {{ item }}
                                                                 </label>
                                                                 <input 
                                                                     :id="item+'.png'" 
                                                                     class="item_chek" 
                                                                     type="radio" 
-                                                                    :value="item" 
+                                                                    :value="index1" 
                                                                     :name='"items"'
                                                                     v-model="ticket_form.item_name"
                                                                     :error="ticket_form.errors.item_name"
@@ -141,9 +141,9 @@
                                                         >
                                                         <option 
                                                             v-for="carrency in $page.props.auth.carrency" 
-                                                            :key="carrency.id" 
+                                                            :key="carrency.id_carrency" 
                                                             class="list-group-item list-group-item-action" 
-                                                            :value= carrency.id>
+                                                            :value= carrency.id_carrency>
                                                                 {{ carrency.currency }}
                                                         </option>
                                                     </select>

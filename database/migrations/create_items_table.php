@@ -12,17 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id_item');
             $table->unsignedBigInteger('user_id');
                 $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('ticket_id');
                 $table->foreign('ticket_id')->references('ticket_id')->on('tickets');
             $table->string('ticket_date');
             $table->integer('id_region');
-                $table->foreign('id_region')->references('id')->on('regions');
+                $table->foreign('id_region')->references('id_region')->on('regions');
             $table->integer('id_currency');
-                $table->foreign('id_currency')->references('id')->on('carrencies');
-            $table->string('item_name');
+                $table->foreign('id_currency')->references('id_carrency')->on('carrencies');
+            $table->integer('id_icon');
+                $table->foreign('id_icon')->references('id_icons')->on('icons');
             $table->integer('item_prix');
             $table->integer('item_quentity');
             $table->timestamps();
