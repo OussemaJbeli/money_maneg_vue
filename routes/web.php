@@ -42,7 +42,7 @@ Route::post('/Items/{user}', [ItemsController::class, 'store'])
     ->name('items.store')
     ->middleware('auth');
 
-Route::get('/Items/{item}/edit', [ItemsController::class, 'edit'])
+Route::put('/Items/{item}/update', [ItemsController::class, 'update'])
     ->name('items.edit')
     ->middleware('auth');
 

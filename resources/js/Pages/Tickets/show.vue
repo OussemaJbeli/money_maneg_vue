@@ -70,7 +70,7 @@
                     <div class="logo"><i class="fa-solid fa-cart-plus"></i></div>
                     <div class="exite" id="exit_popup" @click="openEdite_items(item_id)"><i class="fa-sharp fa-solid fa-circle-xmark"></i></div>
                 </div>
-                <form action="" class="form">
+                <form @submit.prevent="save_item_update" class="form">
                     <header>
                         <img :src="'/icon/items_icon/'+item_form_update.categorie+'/'+item_form_update.name+'.png'" alt="">
                         <p>{{ item_form_update.name }}</p>
@@ -93,7 +93,6 @@
                             </label>
                             <label for="">currency
                                 <select 
-                                    v-if="open_currency_select"
                                     name="select carrency" 
                                     id="state" 
                                     class="carrency_select" 
@@ -104,24 +103,17 @@
                                     <option 
                                         v-for="carrency in $page.props.auth.carrency" 
                                         :key="carrency.id_carrency" 
+                                        :id="carrency.currency"
                                         class="list-group-item list-group-item-action" 
                                         :value= carrency.id_carrency
                                         >
                                             {{ carrency.currency }}
                                     </option>
                                 </select>
-                                <input 
-                                    v-if="open_currency_select == false"
-                                    type="text"
-                                    v-model="item_form_update.currency"
-                                    :error="item_form_update.errors.currency"
-                                    @click="open_currency"
-                                    >
                             </label>
                         </div>
                         <div class="input_group">
-                            <label for="">state
-                                
+                            <label for="">state                            
                                 <select 
                                     name="select state" 
                                     id="state" 
@@ -144,7 +136,6 @@
                             </label>
                             <label for="">region
                                 <select 
-                                    v-if="open_region_select"
                                     name="select state" 
                                     id="state" 
                                     class="region_select" 
@@ -161,13 +152,6 @@
                                         {{state}} 
                                     </option>
                                 </select>
-                                <input 
-                                    v-if="open_region_select == false"
-                                    type="text"
-                                    v-model="item_form_update.state"
-                                    :error="item_form_update.errors.state"
-                                    @click="open_regions"
-                                    >
                             </label>
                         </div>
                     </body>
@@ -194,7 +178,6 @@ export default {
     },
     data() {
         return {
-            open_region_select: false,
             open_currency_select: false,
             item_id: null,
             region_selectetd: '',
@@ -214,8 +197,6 @@ export default {
         openEdite_items(id,names,categories,prices,currencys,quentitys,regions,states) {
             if(this.edite_frame){
                 this.edite_frame = false;
-                this.open_region_select= false;
-                this.open_currency_select= false;
             }
             else{
                 this.edite_frame = true;
@@ -308,12 +289,9 @@ export default {
                     break;
             }
         },
-        open_regions(){
-            this.open_region_select = true;
+        save_item_update() {
+            this.item_form_update.put(`/Items/${this.item_id}/update`);
         },
-        open_currency(){
-            this.open_currency_select = true;
-        }
     },
 }
 </script>

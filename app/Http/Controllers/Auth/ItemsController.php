@@ -70,7 +70,7 @@ class ItemsController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('Tickets/edite');
+        
     }
 
     /**
@@ -78,7 +78,24 @@ class ItemsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $price = $request->get('price');
+        $region = $request->get('state');
+        $carrency = $request->get('currency');
+        $quentity = $request->get('quentity');
+
+        $item = Items::find($id);
+        if ($item) {
+            $item->update([
+                $item->id_region = $region,
+                $item->id_currency = $carrency,
+                $item->item_prix = $price,
+                $item->item_quentity = $quentity,
+            ]);
+        }
+        
+        return Redirect::back()
+        ->with('success', 'item saved');
+
     }
 
     /**

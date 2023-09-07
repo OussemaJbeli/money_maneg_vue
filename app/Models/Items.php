@@ -14,6 +14,13 @@ class Items extends Model
     use SoftDeletes;
     use HasApiTokens;
 
+    protected $fillable = [
+        'id_region',
+        'id_currency', 
+        'item_prix',
+        'item_quentity'
+    ];
+    protected $primaryKey = 'id_item';
     public function ticket()
     {
         return $this->belongsTo(Ticket::class);
