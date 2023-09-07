@@ -19,7 +19,15 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Items/index');
+
+        return Inertia::render('Items/index', [
+            'items_list' => Items::select('items.*', 'regions.*', 'carrencies.*', 'icons.*')
+            ->join('regions', 'regions.id_region', '=', 'items.id_region')
+            ->join('carrencies', 'carrencies.id_carrency', '=', 'items.id_currency')
+            ->join('icons', 'icons.id_icons', '=', 'items.id_icon')
+            ->get()
+            ->groupBy('ticket_id'),
+        ]);
     }
 
     /**
@@ -68,9 +76,16 @@ class ItemsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $tickets)
     {
-        
+        return Inertia::render('Items/show', [
+            'items' => Items::select('items.*', 'regions.*', 'carrencies.*', 'icons.*')
+            ->join('regions', 'regions.id_region', '=', 'items.id_region')
+            ->join('carrencies', 'carrencies.id_carrency', '=', 'items.id_currency')
+            ->join('icons', 'icons.id_icons', '=', 'items.id_icon')
+            ->where('items.ticket_id', $tickets)
+            ->get()
+        ]);
     }
 
     /**

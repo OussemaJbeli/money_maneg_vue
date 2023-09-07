@@ -1,23 +1,3 @@
-<script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-</script>
-<script>
-export default {
-
-    props: {
-        items_val: Object,
-    },
-    data() {
-        return {
-            
-        }
-    },
-    methods: {
-
-    },
-}
-</script>
 <template>
     <Head title="Items" />
 
@@ -31,10 +11,89 @@ export default {
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">{{items_val}}</div>
+                <div class=" overflow-hidden shadow-sm sm:rounded-lg">
+                    <div v-for="(Items, index) in  items_list" :key="index" class="ticket_item_group">
+                        <div class="ball_corner" id="corner1"></div>
+                        <div class="ball_corner" id="corner2"></div>
+                        <div class="ball_corner" id="corner3"></div>
+                        <div class="ball_corner" id="corner4"></div>
+                        <div class="table">
+                            <table class="w-full items_table">
+                                <thead>
+                                    <tr class="text-center font-bold bg-gray-600">
+                                        <th class="pb-4 pt-6 px-6">name</th>
+                                        <th class="pb-4 pt-6 px-6">price</th>
+                                        <th class="pb-4 pt-6 px-6">currency</th>
+                                        <th class="pb-4 pt-6 px-6">quentity</th>
+                                        <th class="pb-4 pt-6 px-6">state</th>
+                                        <th class="pb-4 pt-6 px-6">region</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-right">
+                                    <tr v-for="item in Items" :key="index1" class="hover:bg-gray-100 focus-within:bg-gray-100 ">
+                                        <td class="border-t text-center text-white px-6 py-4">
+                                            {{ item.items }}
+                                        </td>
+                                        <td class="border-t text-center text-white">
+                                            {{ item.item_prix }}
+                                        </td>
+                                        <td class="border-t text-center text-white">
+                                            {{ item.currency }}
+                                        </td>
+                                        <td class="border-t text-center text-white">
+                                            {{ item.item_quentity}}
+                                        </td>
+                                        <td class="border-t text-center text-white">
+                                            {{ item.region}}
+                                        </td>
+                                        <td class="border-t text-center text-white">
+                                            {{ item.state}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="date_general">
+                            <div class="under_date">
+                                <div class="buttons">
+                                    <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 
+                                        :href="`/Tickets/${Items[1].ticket_date}/delete`">
+                                        <i class="fa-solid fa-trash" style="color: #e00000;"></i>
+                                    </Link>
+                                    <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 
+                                        :href="`/Items/${Items[1].ticket_id}/edit`">
+                                        <i class="fa-solid fa-pen-to-square" style="color: #1d962b;"></i>
+                                    </Link>
+                                </div>
+                                <p>{{ Items[1].ticket_date }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </AuthenticatedLayout>
 </template>
+<script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head , Link} from '@inertiajs/vue3';
+</script>
+<script>
+export default {
+    components: {
+        Head,
+        Link,
+    },
+    props: {
+        items_list: Object,
+    },
+    data() {
+        return {
+            
+        }
+    },
+    methods: {
+
+    },
+}
+</script>

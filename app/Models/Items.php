@@ -27,7 +27,7 @@ class Items extends Model
     }
     public function icons()
     {
-        return $this->belongsTo(Icon::class);
+        return $this->belongsTo(Icons::class);
     }
     public function region()
     {

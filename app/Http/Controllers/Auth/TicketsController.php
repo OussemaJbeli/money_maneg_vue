@@ -93,8 +93,9 @@ class TicketsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $date_item)
     {
-        //
+        Items::where('ticket_date', $date_item)->delete();
+        return Redirect::back()->with('success', 'تم حذف المستخدم.');
     }
 }

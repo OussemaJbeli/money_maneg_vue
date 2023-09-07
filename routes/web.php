@@ -31,7 +31,9 @@ Route::get('/Tickets/{Ticket}/show', [TicketsController::class, 'show'])
     ->name('Tickets.show')
     ->middleware('auth');
 
-
+Route::get('/Tickets/{item}/delete', [TicketsController::class, 'destroy'])
+    ->name('Tickets.destroy')
+    ->middleware('auth');
 ////////////////items
 //page
 Route::get('/Items', [ItemsController::class, 'index'])
@@ -47,6 +49,10 @@ Route::put('/Items/{item}/update', [ItemsController::class, 'update'])
     ->middleware('auth');
 
 Route::get('/Items/{item}/delete', [ItemsController::class, 'destroy'])
+    ->name('items.destroy')
+    ->middleware('auth');
+
+Route::get('/Items/{tickets}/edit', [ItemsController::class, 'edit'])
     ->name('items.destroy')
     ->middleware('auth');
 
