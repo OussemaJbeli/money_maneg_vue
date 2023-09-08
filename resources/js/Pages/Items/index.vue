@@ -57,15 +57,15 @@
                             <div class="under_date">
                                 <div class="buttons">
                                     <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 
-                                        :href="`/Tickets/${Items[1].ticket_date}/delete`">
+                                        :href="`/Tickets/${Items[0].ticket_date}/delete`">
                                         <i class="fa-solid fa-trash" style="color: #e00000;"></i>
                                     </Link>
                                     <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 
-                                        :href="`/Items/${Items[1].ticket_id}/edit`">
+                                        :href="`/Items/${Items[0].ticket_id}/edit`">
                                         <i class="fa-solid fa-pen-to-square" style="color: #1d962b;"></i>
                                     </Link>
                                 </div>
-                                <p>{{ Items[1].ticket_date }}</p>
+                                <p>{{ Items[0].ticket_date }}</p>
                             </div>
                         </div>
                     </div>

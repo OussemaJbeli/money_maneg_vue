@@ -15,7 +15,20 @@ class DashboardController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {   
+        /**********api request */
+        // $key = '955383a8b7292ef7cf00b8339a8eb993';
+        // $link= 'http://api.exchangeratesapi.io/v1/latest?access_key='.$key;
+        // $ch= curl_init();
+        // curl_setopt($ch, CURLOPT_URL,$link);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+
+        // $resp = curl_exec($ch);
+        // $data = json_decode($resp,true);
+
+        // return Inertia::render('Dashboard/index',[
+        //     "api_currency" => $data
+        // ]);
         return Inertia::render('Dashboard/index');
     }
 

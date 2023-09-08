@@ -17,7 +17,7 @@
                             <tr class="text-center font-bold bg-gray-600">
                                 <th class="pb-4 pt-6 px-6">date</th>
                                 <th class="pb-4 pt-6 px-6">total items</th>
-                                <th class="pb-4 pt-6 px-6"></th>
+                                <th class="pb-4 pt-6 px-6" colspan="2"></th>
                             </tr>
                             </thead>
                             <tbody class="text-right">
@@ -32,6 +32,12 @@
                                         <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 
                                         :href="`/Tickets/${ticket.ticket_id}/show`">
                                         <i class="fa-solid fa-chevron-right"></i>
+                                        </Link>
+                                    </td>
+                                    <td class="border-t text-center text-white">
+                                        <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 
+                                            :href="`/Tickets/${ticket.ticket_date}/delete`">
+                                            <i class="fa-solid fa-trash" style="color: #e00000;"></i>
                                         </Link>
                                     </td>
                                 </tr>

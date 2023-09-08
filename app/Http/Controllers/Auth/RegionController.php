@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use App\Models\Items;
+use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -16,7 +19,11 @@ class RegionController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Region/index');
+        return Inertia::render('Region/index',[
+            'regions_tab' => Region::select('region', 'state')
+                ->get()
+                ->groupBy('region'),
+        ]);
     }
 
     /**
@@ -32,7 +39,18 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $region = $request->get('region');
+        $state = $request->get('state');
+
+        $regions = new Region();
+
+        $regions->region = $region;
+        $regions->state = $state;
+
+        $regions->save();
+        
+        return Redirect::back()
+        ->with('success', 'item saved');
     }
 
     /**
@@ -56,7 +74,7 @@ class RegionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**

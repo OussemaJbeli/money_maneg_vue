@@ -18,7 +18,6 @@ Route::get('dashboard', [DashboardController::class, 'index'])
     ->middleware('auth');
 
 /////////////// tickets
-//page
 Route::get('/Tickets', [TicketsController::class, 'index'])
     ->name('Tickets')
     ->middleware('auth');
@@ -34,8 +33,8 @@ Route::get('/Tickets/{Ticket}/show', [TicketsController::class, 'show'])
 Route::get('/Tickets/{item}/delete', [TicketsController::class, 'destroy'])
     ->name('Tickets.destroy')
     ->middleware('auth');
+
 ////////////////items
-//page
 Route::get('/Items', [ItemsController::class, 'index'])
     ->name('Items')
     ->middleware('auth');
@@ -61,8 +60,13 @@ Route::get('/Carrency', [CarrencyController::class, 'index'])
     ->name('Carrency')
     ->middleware('auth');
 
+////////////////region
 Route::get('/Region', [RegionController::class, 'index'])
     ->name('Region')
+    ->middleware('auth');
+
+Route::put('/Region/store', [RegionController::class, 'store'])
+    ->name('Region.store')
     ->middleware('auth');
 
 

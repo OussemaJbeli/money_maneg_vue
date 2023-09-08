@@ -290,7 +290,13 @@ export default {
             }
         },
         save_item_update() {
-            this.item_form_update.put(`/Items/${this.item_id}/update`);
+            this.item_form_update.put(`/Items/${this.item_id}/update`, {
+                preserveScroll: true,
+                onSuccess: () => {
+                this.edite_frame = false;
+                this.item_form_update.reset();
+                },
+            });
         },
     },
 }

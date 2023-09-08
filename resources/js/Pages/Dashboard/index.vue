@@ -1,9 +1,3 @@
-<script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import charts from '@/Components/cards/charts.vue';
-import total_cards from '@/Components/cards/total_cards.vue';
-import { Head } from '@inertiajs/vue3';
-</script>
 <template>
     <Head title="Dashboard" />
 
@@ -59,7 +53,6 @@ import { Head } from '@inertiajs/vue3';
         <!-- //charts -->
         <div class="charts_frame">
             <charts class="first_chart">
-                
             </charts>
             <charts class="second_chart">
             </charts>
@@ -68,3 +61,26 @@ import { Head } from '@inertiajs/vue3';
         </div>
     </AuthenticatedLayout>
 </template>
+<script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import charts from '@/Components/cards/charts.vue';
+import total_cards from '@/Components/cards/total_cards.vue';
+import { Head } from '@inertiajs/vue3';
+</script>
+<script>
+export default {
+    components: {
+        Head,
+    },
+    props: {
+    },
+    data() {
+        return {
+            
+        }
+    },
+    methods: {
+
+    },
+}
+</script>
