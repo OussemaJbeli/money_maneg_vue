@@ -248,6 +248,13 @@
                     </div>
                     <!-- **************profile*************** -->
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <!-- currency -->
+                        <div class="currency">
+                            <p>{{ $page.props.auth.user.main_currency }}</p>
+                            <div class="logo">
+                                <img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">
+                            </div>
+                        </div>
                                 <!-- Settings Dropdown -->
                                 <div class="ml-3 relative">
                                     <Dropdown align="right" width="48">

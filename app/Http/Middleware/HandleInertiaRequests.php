@@ -47,6 +47,7 @@ class HandleInertiaRequests extends Middleware
                         'avatar' => $request->user()->avatar,
                         'sid_img' => $request->user()->sid_img,
                         'filter' => $request->user()->filter,
+                        'main_currency' => $request->user()->main_currency,
                     ] : null,
                     'icons' =>[
                         'cat1' =>[

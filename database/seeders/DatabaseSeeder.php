@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'avatar'=>'icon/sid_bar/avatar/avatar1.png',
             'sid_img'=> 'icon/sid_bar/wallpapers/img_1.jpg',
             'filter'=>'#ffc502',
+            'main_currency' => 'TND'
         ]);
 
         //icons
@@ -477,6 +478,55 @@ class DatabaseSeeder extends Seeder
         foreach ($currencies as $currency) {
             DB::table('carrencies')->insert([
                 'currency' => $currency,
+            ]);
+        }
+        //extchage rate
+        $TNDrate = [
+            ['currencys'=>'USD','rate'=>'0.3193'],
+            ['currencys'=>'EUR','rate'=>'0.2979'],
+            ['currencys'=>'JPY','rate'=>'47.12'],
+        ];
+        $USDrate = [
+            ['currencys'=>'TND','rate'=>'3.1316'],
+            ['currencys'=>'EUR','rate'=>'0.9341'],
+            ['currencys'=>'JPY','rate'=>'147.6308'],
+        ];
+        $EURrate = [
+            ['currencys'=>'TND','rate'=>'3.3574'],
+            ['currencys'=>'USD','rate'=>'1.0705'],
+            ['currencys'=>'JPY','rate'=>'158.1385'],
+        ];
+        $JPYrate = [
+            ['currencys'=>'TND','rate'=>'0.02122'],
+            ['currencys'=>'USD','rate'=>'0.00677'],
+            ['currencys'=>'EUR','rate'=>'0.006324'],
+        ];
+        foreach ($TNDrate as $TND) {
+            DB::table('exchange_rates')->insert([
+                'base' => 'TND',
+                'currencys' => $TND['currencys'],
+                'rate' => $TND['rate'],
+            ]);
+        }
+        foreach ($USDrate as $USD) {
+            DB::table('exchange_rates')->insert([
+                'base' => 'USD',
+                'currencys' => $USD['currencys'],
+                'rate' => $USD['rate'],
+            ]);
+        }
+        foreach ($EURrate as $EUR) {
+            DB::table('exchange_rates')->insert([
+                'base' => 'EUR',
+                'currencys' => $EUR['currencys'],
+                'rate' => $EUR['rate'],
+            ]);
+        }
+        foreach ($JPYrate as $JPY) {
+            DB::table('exchange_rates')->insert([
+                'base' => 'JPY',
+                'currencys' => $JPY['currencys'],
+                'rate' => $JPY['rate'],
             ]);
         }
     }

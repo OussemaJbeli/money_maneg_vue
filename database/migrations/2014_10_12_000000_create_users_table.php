@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->string('sid_img')->nullable();
             $table->string('filter')->nullable();
+            $table->string('main_currency')->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps();
         });

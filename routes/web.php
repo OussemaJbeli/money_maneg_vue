@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\DashboardController;
-use App\Http\Controllers\FlashedDataController;
+use App\Http\Controllers\exchange_rateController;
 use App\Http\Controllers\Auth\TicketsController;
 use App\Http\Controllers\Auth\CarrencyController;
 use App\Http\Controllers\Auth\ItemsController;
@@ -58,6 +58,10 @@ Route::get('/Items/{tickets}/edit', [ItemsController::class, 'edit'])
 ////////////////carrency
 Route::get('/Carrency', [CarrencyController::class, 'index'])
     ->name('Carrency')
+    ->middleware('auth');
+
+Route::get('/Exchange_rate', [exchange_rateController::class, 'index'])
+    ->name('exchange_rate')
     ->middleware('auth');
 
 ////////////////region
