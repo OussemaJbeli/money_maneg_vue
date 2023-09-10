@@ -15,8 +15,10 @@
                             <thead>
                             <tr class="text-center font-bold bg-gray-600">
                                 <th class="pb-4 pt-6 px-6">name</th>
-                                <th class="pb-4 pt-6 px-6">price(by one)</th>
-                                <th class="pb-4 pt-6 px-6">currency</th>
+                                <th class="pb-4 pt-6 px-6">origin price</th>
+                                <th class="pb-4 pt-6 px-6">
+                                    <p>main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
+                                </th>
                                 <th class="pb-4 pt-6 px-6">quentity</th>
                                 <th class="pb-4 pt-6 px-6">state</th>
                                 <th class="pb-4 pt-6 px-6">region</th>
@@ -29,10 +31,13 @@
                                         {{ item.items }}
                                     </td>
                                     <td class="border-t text-center text-white">
-                                        {{ item.item_prix }}
+                                        {{ item.item_prix }} {{ item.currency }}
                                     </td>
-                                    <td class="border-t text-center text-white">
-                                        {{ item.currency }}
+                                    <td class="border-t text-center text-white" v-if="item.currency == $page.props.auth.user.main_currency">
+                                        {{ item.item_prix }} {{ item.currency }}
+                                    </td>
+                                    <td class="border-t text-center text-white" v-else>
+                                        {{ item[current_currency] }} {{ $page.props.auth.user.main_currency }}
                                     </td>
                                     <td class="border-t text-center text-white">
                                         {{ item.item_quentity}}
@@ -178,6 +183,7 @@ export default {
     },
     data() {
         return {
+            current_currency: this.$page.props.auth.user.main_currency,
             open_currency_select: false,
             item_id: null,
             region_selectetd: '',

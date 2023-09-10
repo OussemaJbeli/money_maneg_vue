@@ -154,7 +154,7 @@
                                                 <input 
                                                     type="text" 
                                                     id="price" 
-                                                    placeholder="price"
+                                                    placeholder="price of one piece"
                                                     v-model="ticket_form.price"
                                                     :error="ticket_form.errors.price"
                                                     required

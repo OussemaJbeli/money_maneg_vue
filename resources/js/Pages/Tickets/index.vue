@@ -17,6 +17,9 @@
                             <tr class="text-center font-bold bg-gray-600">
                                 <th class="pb-4 pt-6 px-6">date</th>
                                 <th class="pb-4 pt-6 px-6">total items</th>
+                                <th class="pb-4 pt-6 px-6">
+                                    <p>total price (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
+                                </th>
                                 <th class="pb-4 pt-6 px-6" colspan="2"></th>
                             </tr>
                             </thead>
@@ -27,6 +30,9 @@
                                     </td>
                                     <td class="border-t text-center text-white">
                                         {{ ticket.quentity }}
+                                    </td>
+                                    <td class="border-t text-center text-white">
+                                        {{ ticket[$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}
                                     </td>
                                     <td class="border-t text-center text-white">
                                         <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 

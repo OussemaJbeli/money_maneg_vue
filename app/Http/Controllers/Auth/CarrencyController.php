@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Exchange;
 use App\Models\Exchange_rate;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
@@ -19,11 +21,18 @@ class CarrencyController extends Controller
      */
     public function index()
     {   
+        $date_update = Exchange_rate::select('updated_at')
+            ->where('id', 1)
+            ->first();
+        $carbonDate = Carbon::parse($date_update['updated_at']);
+        $formattedDate = $carbonDate->format('d-m-y');
+    
         return Inertia::render('Carrency/index',[
             'exchange_rate' => Exchange_rate::select(
-                'base','currencys','rate')
+                'base','currencys','rate','updated_at')
                 ->where('base',Auth::user()->main_currency)
-                ->get()
+                ->get(),
+            'update_at' => $formattedDate,
         ]);
     }
 
@@ -62,9 +71,15 @@ class CarrencyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function main_update( User $user , string $currency)
     {
-        //
+
+        $user->update([
+            $user->main_currency = $currency,
+        ]);
+        
+        // return Redirect::back()
+        // ->with('success', 'item saved');
     }
 
     /**

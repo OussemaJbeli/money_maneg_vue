@@ -24,8 +24,12 @@ return new class extends Migration
                 $table->foreign('id_currency')->references('id_carrency')->on('carrencies');
             $table->integer('id_icon');
                 $table->foreign('id_icon')->references('id_icons')->on('icons');
-            $table->integer('item_prix');
-            $table->integer('item_quentity');
+            $table->integer('item_prix')->nullable();
+            $table->integer('item_quentity')->nullable();
+            $table->integer('TND')->nullable();
+            $table->integer('EUR')->nullable();
+            $table->integer('USD')->nullable();
+            $table->integer('JPY')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

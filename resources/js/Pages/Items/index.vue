@@ -22,11 +22,14 @@
                                 <thead>
                                     <tr class="text-center font-bold bg-gray-600">
                                         <th class="pb-4 pt-6 px-6">name</th>
-                                        <th class="pb-4 pt-6 px-6">price</th>
-                                        <th class="pb-4 pt-6 px-6">currency</th>
+                                        <th class="pb-4 pt-6 px-6">origin price</th>
+                                        <th class="pb-4 pt-6 px-6">
+                                            <p>main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
+                                        </th>
                                         <th class="pb-4 pt-6 px-6">quentity</th>
                                         <th class="pb-4 pt-6 px-6">state</th>
                                         <th class="pb-4 pt-6 px-6">region</th>
+                                        <th class="pb-4 pt-6 px-6" colspan="2"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-right">
@@ -35,10 +38,13 @@
                                             {{ item.items }}
                                         </td>
                                         <td class="border-t text-center text-white">
-                                            {{ item.item_prix }}
+                                        {{ item.item_prix }} {{ item.currency }}
                                         </td>
-                                        <td class="border-t text-center text-white">
-                                            {{ item.currency }}
+                                        <td class="border-t text-center text-white" v-if="item.currency == $page.props.auth.user.main_currency">
+                                            {{ item.item_prix }} {{ item.currency }}
+                                        </td>
+                                        <td class="border-t text-center text-white" v-else>
+                                            {{ item[current_currency] }} {{ $page.props.auth.user.main_currency }}
                                         </td>
                                         <td class="border-t text-center text-white">
                                             {{ item.item_quentity}}
@@ -49,6 +55,9 @@
                                         <td class="border-t text-center text-white">
                                             {{ item.state}}
                                         </td>
+                                    </tr>
+                                    <tr v-if="items_list.length === 0">
+                                        <td class="px-6 py-4 border-t text-center" colspan="4"> Tickets impty </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -66,6 +75,39 @@
                                     </Link>
                                 </div>
                                 <p>{{ Items[0].ticket_date }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="items_list.length === 0" class="ticket_item_group">
+                        <div class="ball_corner" id="corner1"></div>
+                        <div class="ball_corner" id="corner2"></div>
+                        <div class="ball_corner" id="corner3"></div>
+                        <div class="ball_corner" id="corner4"></div>
+                        <div class="table">
+                            <table class="w-full items_table">
+                                <thead>
+                                    <tr class="text-center font-bold bg-gray-600">
+                                        <th class="pb-4 pt-6 px-6">name</th>
+                                        <th class="pb-4 pt-6 px-6">origin price</th>
+                                        <th class="pb-4 pt-6 px-6">
+                                            <p>main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
+                                        </th>
+                                        <th class="pb-4 pt-6 px-6">quentity</th>
+                                        <th class="pb-4 pt-6 px-6">state</th>
+                                        <th class="pb-4 pt-6 px-6">region</th>
+                                        <th class="pb-4 pt-6 px-6" colspan="2"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-right">
+                                    <tr>
+                                        <td class="px-6 py-4 border-t text-center" colspan="7"> Items impty </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="date_general">
+                            <div class="under_date">
+                                <p>empty</p>
                             </div>
                         </div>
                     </div>
@@ -89,7 +131,7 @@ export default {
     },
     data() {
         return {
-            
+            current_currency: this.$page.props.auth.user.main_currency,
         }
     },
     methods: {

@@ -472,7 +472,6 @@ class DatabaseSeeder extends Seeder
             'TND',
             'USD',
             'EUR',
-            'JPY',
             // Add more currencies as needed
         ];
         foreach ($currencies as $currency) {
@@ -482,30 +481,26 @@ class DatabaseSeeder extends Seeder
         }
         //extchage rate
         $TNDrate = [
+            ['currencys'=>'TND','rate'=>'1'],
             ['currencys'=>'USD','rate'=>'0.3193'],
             ['currencys'=>'EUR','rate'=>'0.2979'],
-            ['currencys'=>'JPY','rate'=>'47.12'],
         ];
         $USDrate = [
+            ['currencys'=>'USD','rate'=>'1'],
             ['currencys'=>'TND','rate'=>'3.1316'],
             ['currencys'=>'EUR','rate'=>'0.9341'],
-            ['currencys'=>'JPY','rate'=>'147.6308'],
         ];
         $EURrate = [
+            ['currencys'=>'EUR','rate'=>'1'],
             ['currencys'=>'TND','rate'=>'3.3574'],
             ['currencys'=>'USD','rate'=>'1.0705'],
-            ['currencys'=>'JPY','rate'=>'158.1385'],
-        ];
-        $JPYrate = [
-            ['currencys'=>'TND','rate'=>'0.02122'],
-            ['currencys'=>'USD','rate'=>'0.00677'],
-            ['currencys'=>'EUR','rate'=>'0.006324'],
         ];
         foreach ($TNDrate as $TND) {
             DB::table('exchange_rates')->insert([
                 'base' => 'TND',
                 'currencys' => $TND['currencys'],
                 'rate' => $TND['rate'],
+                'updated_at' => '2023-09-10 13:50:02'
             ]);
         }
         foreach ($USDrate as $USD) {
@@ -513,6 +508,7 @@ class DatabaseSeeder extends Seeder
                 'base' => 'USD',
                 'currencys' => $USD['currencys'],
                 'rate' => $USD['rate'],
+                'updated_at' => '2023-09-10 13:50:02'
             ]);
         }
         foreach ($EURrate as $EUR) {
@@ -520,13 +516,7 @@ class DatabaseSeeder extends Seeder
                 'base' => 'EUR',
                 'currencys' => $EUR['currencys'],
                 'rate' => $EUR['rate'],
-            ]);
-        }
-        foreach ($JPYrate as $JPY) {
-            DB::table('exchange_rates')->insert([
-                'base' => 'JPY',
-                'currencys' => $JPY['currencys'],
-                'rate' => $JPY['rate'],
+                'updated_at' => '2023-09-10 13:50:02'
             ]);
         }
     }

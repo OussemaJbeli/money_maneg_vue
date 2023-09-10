@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Carrency;
+use App\Models\Exchange_rate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -37,6 +39,18 @@ class DashboardController extends Controller
         // return Inertia::render('Dashboard/index',[
         //     "api_currency" => $data
         // ]);
+        // $curency_name=Carrency::select('currency')
+        // ->where('id_carrency',1)
+        // ->get();
+    
+        // $extchange_currency=Exchange_rate::select('currencys','rate')
+        //     ->where('base',$curency_name[0]['currency'])
+        //     ->get();
+
+        // return Inertia::render('Dashboard/index',[
+        //     'extchange_currency' => $extchange_currency[3],
+        // ]);
+
         return Inertia::render('Dashboard/index');
     }
 

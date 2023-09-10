@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Carrency;
+use App\Models\Exchange_rate;
 use App\Models\Items;
 use App\Models\Ticket;
 use App\Models\User;
@@ -41,7 +43,7 @@ class ItemsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,User $user,Ticket $tickets)
+    public function store(Request $request,User $user)
     {
         
         $price = $request->get('price');
@@ -49,6 +51,14 @@ class ItemsController extends Controller
         $carrency = $request->get('carrency');
         $quentity = $request->get('quentity');
         $item = $request->get('item_name');
+
+        $curency_name=Carrency::select('currency')
+            ->where('id_carrency',$carrency)
+            ->get();
+        
+        $extchange_currency=Exchange_rate::select('currencys','rate')
+            ->where('base',$curency_name[0]['currency'])
+            ->get();
 
         $items = new Items();
         $items->user_id = $user->id;
@@ -59,6 +69,23 @@ class ItemsController extends Controller
         $items->id_icon = $item;
         $items->item_prix = $price;
         $items->item_quentity = $quentity;
+
+        for($i=0;$i<3;$i++){
+            switch ($extchange_currency[$i]['currencys']) {
+                case 'TND':
+                    $items->TND = ($extchange_currency[$i]['rate'] * $price);
+                    break;
+                case 'USD':
+                    $items->USD = ($extchange_currency[$i]['rate'] * $price);
+                    break;
+                case 'EUR':
+                    $items->EUR = ($extchange_currency[$i]['rate'] * $price);
+                    break;
+                case 'JPY':
+                    $items->JPY = ($extchange_currency[$i]['rate'] * $price);
+                    break;
+            }
+        }
         $items->save();
 
         return Redirect::back()
@@ -98,19 +125,56 @@ class ItemsController extends Controller
         $carrency = $request->get('currency');
         $quentity = $request->get('quentity');
 
-        $item = Items::find($id);
-        if ($item) {
-            $item->update([
-                $item->id_region = $region,
-                $item->id_currency = $carrency,
-                $item->item_prix = $price,
-                $item->item_quentity = $quentity,
-            ]);
-        }
+        $curency_name=Carrency::select('currency')
+            ->where('id_carrency',$carrency)
+            ->get();
         
-        return Redirect::back()
-        ->with('success', 'item saved');
+        $extchange_currency=Exchange_rate::select('currencys','rate')
+            ->where('base',$curency_name[0]['currency'])
+            ->get();
+        
+            $item = Items::find($id);
 
+            if ($item) {
+                $item->id_region = $region;
+                $item->id_currency = $carrency;
+                $item->item_prix = $price;
+                $item->item_quentity = $quentity;
+            
+                // Calculate and update exchange rates
+                for ($i = 0; $i <= 3; $i++) {
+                    switch ($extchange_currency[$i]['currencys']) {
+                        case 'TND':
+                            if($extchange_currency[$i]['currencys']==$curency_name[0]['currency']){
+                                $item->TND = $extchange_currency[$i]['rate'] * 1;
+                            }
+                            else{
+                                $item->TND = $extchange_currency[$i]['rate'] * $price;
+                            }
+                            break;
+                        case 'USD':
+                            if($extchange_currency[$i]['currencys']==$curency_name[0]['currency']){
+                                $item->USD = $extchange_currency[$i]['rate'] * 1;
+                            }
+                            else{
+                                $item->USD = $extchange_currency[$i]['rate'] * $price;
+                            }
+                            break;
+                        case 'EUR':
+                            if($extchange_currency[$i]['currencys']==$curency_name[0]['currency']){
+                                $item->EUR = $extchange_currency[$i]['rate'] * 1;
+                            }
+                            else{
+                                $item->EUR = $extchange_currency[$i]['rate'] * $price;
+                            }
+                            break;
+
+                    }
+                }
+            
+                // Save the updated item
+                $item->save();
+            }            
     }
 
     /**

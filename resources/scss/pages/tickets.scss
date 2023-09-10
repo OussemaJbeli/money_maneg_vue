@@ -1,4 +1,19 @@
 .tickets_table{
+    thead{
+        th{
+            font-size: 18px;
+            p{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                img{
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+    }
     tbody{
         td{
             i{
@@ -8,6 +23,7 @@
     }
 }
 .frame_edite_item{
+    z-index: 999;
     position: absolute;
     top: 0;
     left: 0;

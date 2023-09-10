@@ -27,7 +27,10 @@ class TicketsController extends Controller
             'tickets' => Items::where('user_id', Auth::user()->id)
                 ->select('ticket_date',
                         'ticket_id', 
-                        DB::raw('SUM(item_quentity) as quentity')
+                        DB::raw('SUM(item_quentity) as quentity'),
+                        DB::raw('SUM(TND) as TND'),
+                        DB::raw('SUM(EUR) as EUR'),
+                        DB::raw('SUM(USD) as USD'),
                 )
                 ->groupBy('ticket_date')
                 ->get(),

@@ -53,7 +53,6 @@
         <!-- //charts -->
         <div class="charts_frame">
             <charts class="first_chart">
-                
             </charts>
             <charts class="second_chart">
             </charts>
@@ -74,7 +73,6 @@ export default {
         Head,
     },
     props: {
-        api_currency :Object,
     },
     data() {
         return {

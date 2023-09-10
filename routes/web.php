@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\DashboardController;
-use App\Http\Controllers\exchange_rateController;
+use App\Http\Controllers\Exchange_Controller;
 use App\Http\Controllers\Auth\TicketsController;
 use App\Http\Controllers\Auth\CarrencyController;
 use App\Http\Controllers\Auth\ItemsController;
@@ -60,7 +60,13 @@ Route::get('/Carrency', [CarrencyController::class, 'index'])
     ->name('Carrency')
     ->middleware('auth');
 
-Route::get('/Exchange_rate', [exchange_rateController::class, 'index'])
+Route::get('/main_update/{user}/{currency}', [CarrencyController::class, 'main_update'])
+    ->name('main_update')
+    ->middleware('auth');
+
+////api currency
+
+Route::get('/Exchange_rate', [Exchange_Controller::class, 'index'])
     ->name('exchange_rate')
     ->middleware('auth');
 
