@@ -45,7 +45,8 @@ class ItemsController extends Controller
      */
     public function store(Request $request,User $user)
     {
-        
+        $this->storeTicket($user);
+
         $price = $request->get('price');
         $state = $request->get('state');
         $carrency = $request->get('carrency');
@@ -89,9 +90,27 @@ class ItemsController extends Controller
         $items->save();
 
         return Redirect::back()
-        ->with('success', 'item saved');
+        ->with('success', 'item stored successfuly');
     }
 
+    private function storeTicket(User $user)
+    {
+
+        $currentDate = date('dmY'); // Get the current date in YYYY-MM-DD format
+        $existingItem = Ticket::where('ticket_id', $currentDate)->first();
+
+        if ($existingItem) {
+            return Redirect::back();
+        } 
+        else {
+            // Item with the current date doesn't exist, create one
+            $ticket = new Ticket();
+            $ticket->ticket_id = date('dmY');
+            $ticket->ticket_date = date('d-m-Y');
+            $ticket->user_id = $user->id;
+            $ticket->save();
+        }
+    }
     /**
      * Display the specified resource.
      */
@@ -174,7 +193,9 @@ class ItemsController extends Controller
             
                 // Save the updated item
                 $item->save();
-            }            
+            }
+            return Redirect::back()
+            ->with('success', 'item updated successfuly');            
     }
 
     /**
@@ -182,7 +203,7 @@ class ItemsController extends Controller
      */
     public function destroy(Items $item)
     {
-        $item->delete();
-        return Redirect::back()->with('success', 'تم حذف المستخدم.');
+        return Redirect::back()
+        ->with('success', 'item deleted successfuly');  
     }
 }

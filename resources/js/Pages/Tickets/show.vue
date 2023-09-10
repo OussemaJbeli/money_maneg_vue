@@ -53,13 +53,13 @@
                                             item.items,item.categories,item.item_prix
                                             ,item.currency,item.item_quentity,item.region,item.state)" 
                                             class="flex items-center px-6 py-4 focus:text-indigo-500" >
-                                            <i class="fa-solid fa-pen-to-square" style="color: #1d962b;"></i>
+                                            <i class="fa-solid fa-pen-to-square"></i>
                                         </button>
                                     </td>
                                     <td class="border-t text-center text-white">
                                         <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 
                                         :href="`/Items/${item.id_item}/delete`">
-                                            <i class="fa-solid fa-trash" style="color: #e00000;"></i>
+                                            <i class="fa-solid fa-trash"></i>
                                         </Link>
                                     </td>
                                 </tr>

@@ -35,7 +35,7 @@ class exchange_rate_Controller extends Controller
         }
         
         return Redirect::back()
-        ->with('success', 'item saved');
+        ->with('success', 'exchange rate is uptodate');  
     }
     private function insert_data($base, $targets, $index, $to)
     {

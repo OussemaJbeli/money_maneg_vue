@@ -8,7 +8,6 @@
                 /Carrency
             </h2>
         </template>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden shadow-sm sm:rounded-lg">
@@ -18,7 +17,7 @@
                             <img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">
                             <button @click="openEdite_currency" 
                                 class="flex items-center px-6 py-4 focus:text-indigo-500" >
-                                    <i class="fa-solid fa-pen-to-square" style="color: #1d962b;"></i>
+                                    <i class="fa-solid fa-pen-to-square" ></i>
                             </button>
                         </div>
                         <table class="w-full currency_table">
@@ -88,12 +87,6 @@
                                         <p>EUR</p>
                                     </Link>
                                     <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 
-                                        :style="{ backgroundColor: $page.props.auth.user.main_currency === 'JPY' ? $page.props.auth.user.filter : '' }"
-                                        :href="`/main_update/${this.$page.props.auth.user.id}/JPY`">
-                                        <img :src="'/icon/currency/JPY.png'">
-                                        <p>JPY</p>
-                                    </link>
-                                    <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 
                                         :style="{ backgroundColor: $page.props.auth.user.main_currency === 'USD' ? $page.props.auth.user.filter : '' }"
                                         :href="`/main_update/${this.$page.props.auth.user.id}/USD`">
                                         <img :src="'/icon/currency/USD.png'">
@@ -124,7 +117,12 @@ export default {
     data() {
         return {
             edite_frame_currency: false,
+            successMessage: null,
         }
+    },
+    created() {
+    // Set the successMessage from the prop passed from Laravel
+        this.successMessage = this.$props.successMessage;
     },
     methods: {
         openEdite_currency(){

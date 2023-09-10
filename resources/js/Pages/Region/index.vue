@@ -30,7 +30,7 @@
                                         <td class="border-t text-center text-white">
                                             <button @click="openEdite_region(index)" 
                                                 class="flex items-center px-6 py-4 focus:text-indigo-500" >
-                                                <i class="fa-solid fa-pen-to-square" style="color: #1d962b;"></i>
+                                                <i class="fa-solid fa-pen-to-square"></i>
                                             </button>
                                         </td>
                                         <td class="border-t text-center text-white show_button">

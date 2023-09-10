@@ -33,7 +33,8 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit');
+        return Redirect::back()
+        ->with('success', 'user update successfuly');  
     }
 
     /**
@@ -54,7 +55,8 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/')
+        ->with('success', 'user destroy successfuly');
     }
 
     //theme
@@ -62,7 +64,8 @@ class ProfileController extends Controller
     {
         $user->filter = "#".$theme_id;
         $user->save();
-        return Redirect::back();
+        return Redirect::back()
+        ->with('success', 'filter update successfuly');  
 
     }
 
@@ -71,7 +74,8 @@ class ProfileController extends Controller
     {
         $user->sid_img = 'icon/sid_bar/wallpapers/'.$sid_img_id;
         $user->save();
-        return Redirect::back();
+        return Redirect::back()
+        ->with('success', 'side image update successfuly');  
     }
 
     //avatar
@@ -79,6 +83,7 @@ class ProfileController extends Controller
     {
         $user->avatar = 'icon/sid_bar/avatar/'.$avatar;
         $user->save();
-        return Redirect::back();
+        return Redirect::back()
+        ->with('success', 'avatar update successfuly');  
     }
 }

@@ -78,8 +78,8 @@ class CarrencyController extends Controller
             $user->main_currency = $currency,
         ]);
         
-        // return Redirect::back()
-        // ->with('success', 'item saved');
+        return Redirect::back()
+        ->with('success', 'main currency changed');
     }
 
     /**

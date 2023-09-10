@@ -99,6 +99,7 @@ class TicketsController extends Controller
     public function destroy(string $date_item)
     {
         Items::where('ticket_date', $date_item)->delete();
-        return Redirect::back()->with('success', 'تم حذف المستخدم.');
+        return Redirect::back()
+        ->with('success', 'Ticket deleted successfuly');  
     }
 }

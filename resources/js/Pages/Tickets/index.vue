@@ -43,7 +43,7 @@
                                     <td class="border-t text-center text-white">
                                         <Link class="flex items-center px-6 py-4 focus:text-indigo-500" 
                                             :href="`/Tickets/${ticket.ticket_date}/delete`">
-                                            <i class="fa-solid fa-trash" style="color: #e00000;"></i>
+                                            <i class="fa-solid fa-trash"></i>
                                         </Link>
                                     </td>
                                 </tr>

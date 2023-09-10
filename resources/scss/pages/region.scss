@@ -3,22 +3,25 @@
     .region_frame{
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: end;
         .map{
+            top: 20%;
+            left: 15%;
             position: fixed;
             width: 450px;
             height: 550px;
-            margin-right: 500px;
             background-image: url(../../public/icon/tn-07.png);
             background-position: center;
             background-repeat: no-repeat;
             background-size: contain;
         }
         .table{
-            width: 600px;
+            i{
+                color: var(--action_color);
+            }
+            width: 700px;
             border: 0 solid transparent;
             border-radius: 10px;
-            margin-left: 500px;
             position: relative;
             overflow: hidden;
             table{

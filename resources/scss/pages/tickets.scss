@@ -1,4 +1,7 @@
 .tickets_table{
+    i{
+        color: var(--action_color);
+    }
     thead{
         th{
             font-size: 18px;
@@ -23,6 +26,7 @@
     }
 }
 .frame_edite_item{
+    
     z-index: 999;
     position: absolute;
     top: 0;
