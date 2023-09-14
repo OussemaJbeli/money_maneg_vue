@@ -28,9 +28,9 @@ class TicketsController extends Controller
                 ->select('ticket_date',
                         'ticket_id', 
                         DB::raw('SUM(item_quentity) as quentity'),
-                        DB::raw('SUM(TND) as TND'),
-                        DB::raw('SUM(EUR) as EUR'),
-                        DB::raw('SUM(USD) as USD'),
+                        DB::raw('ROUND(SUM(totalTND), 3) as TND'),
+                        DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
+                        DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
                 )
                 ->groupBy('ticket_date')
                 ->get(),

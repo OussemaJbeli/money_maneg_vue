@@ -52,6 +52,7 @@ class ItemsController extends Controller
         $carrency = $request->get('carrency');
         $quentity = $request->get('quentity');
         $item = $request->get('item_name');
+        $totalprice= $price*$quentity;
 
         $curency_name=Carrency::select('currency')
             ->where('id_carrency',$carrency)
@@ -69,21 +70,22 @@ class ItemsController extends Controller
         $items->id_currency = $carrency;
         $items->id_icon = $item;
         $items->item_prix = $price;
+        $items->totalitem_prix = $totalprice;
         $items->item_quentity = $quentity;
 
         for($i=0;$i<3;$i++){
             switch ($extchange_currency[$i]['currencys']) {
                 case 'TND':
                     $items->TND = ($extchange_currency[$i]['rate'] * $price);
+                    $items->totalTND = ($extchange_currency[$i]['rate'] * $price) * $quentity;
                     break;
                 case 'USD':
                     $items->USD = ($extchange_currency[$i]['rate'] * $price);
+                    $items->totalUSD = ($extchange_currency[$i]['rate'] * $price) * $quentity;
                     break;
                 case 'EUR':
                     $items->EUR = ($extchange_currency[$i]['rate'] * $price);
-                    break;
-                case 'JPY':
-                    $items->JPY = ($extchange_currency[$i]['rate'] * $price);
+                    $items->totalEUR = ($extchange_currency[$i]['rate'] * $price) * $quentity;
                     break;
             }
         }
@@ -143,6 +145,7 @@ class ItemsController extends Controller
         $region = $request->get('state');
         $carrency = $request->get('currency');
         $quentity = $request->get('quentity');
+        $totalprice= $price*$quentity;
 
         $curency_name=Carrency::select('currency')
             ->where('id_carrency',$carrency)
@@ -158,33 +161,40 @@ class ItemsController extends Controller
                 $item->id_region = $region;
                 $item->id_currency = $carrency;
                 $item->item_prix = $price;
+                $item->totalitem_prix = $totalprice;
                 $item->item_quentity = $quentity;
             
                 // Calculate and update exchange rates
-                for ($i = 0; $i <= 3; $i++) {
+                for ($i = 0; $i < 3; $i++) {
                     switch ($extchange_currency[$i]['currencys']) {
                         case 'TND':
                             if($extchange_currency[$i]['currencys']==$curency_name[0]['currency']){
                                 $item->TND = $extchange_currency[$i]['rate'] * 1;
+                                $item->totalTND = ($extchange_currency[$i]['rate'] * $price) * 1;
                             }
                             else{
                                 $item->TND = $extchange_currency[$i]['rate'] * $price;
+                                $item->totalTND = ($extchange_currency[$i]['rate'] * $price) * $quentity;
                             }
                             break;
                         case 'USD':
                             if($extchange_currency[$i]['currencys']==$curency_name[0]['currency']){
                                 $item->USD = $extchange_currency[$i]['rate'] * 1;
+                                $item->totalUSD = ($extchange_currency[$i]['rate'] * $price) * 1;
                             }
                             else{
                                 $item->USD = $extchange_currency[$i]['rate'] * $price;
+                                $item->totalUSD = ($extchange_currency[$i]['rate'] * $price) * $quentity;
                             }
                             break;
                         case 'EUR':
                             if($extchange_currency[$i]['currencys']==$curency_name[0]['currency']){
                                 $item->EUR = $extchange_currency[$i]['rate'] * 1;
+                                $item->totalEUR = ($extchange_currency[$i]['rate'] * $price) * 1;
                             }
                             else{
                                 $item->EUR = $extchange_currency[$i]['rate'] * $price;
+                                $item->totalEUR = ($extchange_currency[$i]['rate'] * $price) * $quentity;
                             }
                             break;
 

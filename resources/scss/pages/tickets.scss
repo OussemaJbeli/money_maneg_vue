@@ -1,10 +1,28 @@
 .tickets_table{
+    border-collapse: collapse;
+    width: 100%;
     i{
         color: var(--action_color);
     }
     thead{
         th{
+            p{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                img{
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+    }
+    .show_items{
+        th{
             font-size: 18px;
+            border: 1px solid #ddd;
+            padding: 8px;
             p{
                 display: flex;
                 justify-content: center;

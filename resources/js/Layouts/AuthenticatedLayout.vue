@@ -54,7 +54,7 @@
                                 </NavLink>
                             </div>
                             <!-- add items -->
-                            <div class="add_tikets_button" @click="openTickets" >
+                            <div class="add_tikets_button" id="add_tikets_button" @click="openTickets" >
                                 <i class="fa-solid fa-cart-plus"></i>
                             </div>
                             <div class="add_tikets_frame" v-if="openTickets_frame" >

@@ -1,30 +1,254 @@
 .cards_panel{
     width: 100%;
-    padding: 20px 0;
+    padding-top: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     .first_card{
-        background-color: #5017a1;
+        width: 30%;
+        background-color: #ff5689;
     }
     .second_card{
-        background-color: #0ee7d1;
+        width: 30%;
+        background-color: #03a9f4;
     }
     .theerd_card{
-        background-color: #002fff;
-    }
-    .forth_card{
-        background-color: #26dd4b;
+        width: 30%;
+        background-color: #6e22af;
     }
 }
 .charts_frame{
     width: 100%;
-    padding: 20px 0;
+    padding-top: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    .first_chart{
+        width: 60%;
+        background-color: var(--bg2);
+    }
+    .second_chart{
+        width: 30%;
+        background-color: var(--bg2);
+    }
+}
+.charts_frame{
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .first_chart{
+        width: 60%;
+        background-color: var(--bg2);
+        .chart_store_by{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            p{
+                color: #fff;
+                font-size: 20px;
+            }
+            select{
+                width: 150px;
+                height: 40px;
+                background-color: var(--action_color);
+                border: 2.5px solid transparent;
+                border-radius: 10px;
+                color: #fff;
+            }
+        }
+    }
+    .second_chart{
+        width: 30%;
+        background-color: var(--bg2);
+    }
+}
+.lists_frame_big{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--bg2);
+    border: 0 solid transparent;
+    border-radius: 10px;
+    padding: 0 30px 30px;
+    margin-bottom: 20px;
+    .Top_10{
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        p{ 
+            font-size: 20px;
+            color: #fff;
+        }
+        .chart_store_by{
+            select{
+                width: 150px;
+                height: 40px;
+                background-color: var(--action_color);
+                border: 2.5px solid transparent;
+                border-radius: 10px;
+                color: #fff;
+            }
+        }
+    }
+    .lists_frame{
+        width: 100%;
+        max-height: 500px;
+        overflow: hidden auto;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .list_panel{
+            width: 23%;
+        }
+        .card_rank{
+            width: 100%;
+            height: 70px;
+            margin-bottom: 15px;
+            border: 0px solid transparent;
+            background-color: #425a60;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            i{
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+            }
+            span{
+                color: var(--action_color);
+            }
+        }
+        .list_data{
+            background-color: var(--bg2);
+            border: 0 solid transparent;
+            border-radius: 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            overflow: hidden;
+            .row_list{
+                width: 100%;
+                height: 50px;
+                border: 0px solid transparent;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                background-color: #425a60;
+                margin-bottom: 10px;
+                padding: 0 5px;
+                .icon{
+                    width: 50px;
+                    height: 50px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    i{
+                        font-size: 30px;
+                        color: #fff;
+                    }
+                }
+                .info{
+                    width: calc(100% - 50px);
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    .title{
+                        font-size: 15px;
+                        color: #fff;
+                        height: 50%;
+                        width: 100%;
+                    }
+                    .parcour{
+                        height: 50%;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        .chartframe{
+                            width: 70%;
+                            height: 10px;
+                            background: #b1b1b1;
+                            border: 0 solid transparent;
+                            border-radius: 5px;
+                            .chart_panel{
+                                height: 100%;
+                            }
+                        }
+                        .number{
+                            font-size: 15px;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        .first_card_rank{
+            background-color: #fc9943;
+            i{
+                background-color: #fac393;
+                color: #fe7700;
+            }
+
+        }
+        .second_card_rank{
+            background-color: #69f941;
+            i{
+                background-color: #b7fda4;
+                color: #37fd00;
+            }
+        }
+        .third_card_rank{
+            background-color: #6f8ff7;
+            i{
+                background-color: #a1b6fc;
+                color: #003cff;
+            }
+        }
+        .forth_card_rank{
+            background-color: #ff63a9;
+            i{
+                background-color: #fb91c1;
+                color: #ec006a;
+            }
+        }
+
+        .chart_panel1{
+            background-color: #fe7700;
+        }
+        .chart_panel2{
+            background-color: #37fd00;
+        }
+        .chart_panel3{
+            background-color: #003cff;
+        }
+        .chart_panel4{
+            background-color: #ec006a;
+        }
+    }
 }

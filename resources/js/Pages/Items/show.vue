@@ -12,18 +12,27 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="bg-white rounded-md shadow overflow-x-auto">
                         <table class="w-full tickets_table">
-                            <thead>
-                            <tr class="text-center font-bold bg-gray-600">
-                                <th class="pb-4 pt-6 px-6">name</th>
-                                <th class="pb-4 pt-6 px-6">origin price</th>
-                                <th class="pb-4 pt-6 px-6">
-                                    <p>main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
-                                </th>
-                                <th class="pb-4 pt-6 px-6">quentity</th>
-                                <th class="pb-4 pt-6 px-6">state</th>
-                                <th class="pb-4 pt-6 px-6">region</th>
-                                <th class="pb-4 pt-6 px-6" colspan="2"></th>
-                            </tr>
+                            <thead class="show_items">
+                                <tr class="text-center font-bold bg-gray-600">
+                                    <th class="pb-4 pt-6 px-6" rowspan="2">name</th>
+                                    <th class="pb-4 pt-6 px-6" colspan="2">one item price</th>
+                                    <th class="pb-4 pt-6 px-6" colspan="2">total price</th>
+                                    <th class="pb-4 pt-6 px-6" colspan="3">other information</th>
+                                    <th class="pb-4 pt-6 px-6" colspan="2" rowspan="2"></th>
+                                </tr>
+                                <tr class="text-center font-bold bg-gray-600">
+                                    <th class="pb-4 pt-6 px-6">origin price</th>
+                                    <th class="pb-4 pt-6 px-6">
+                                        <p>main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
+                                    </th>
+                                    <th class="pb-4 pt-6 px-6">origin price</th>
+                                    <th class="pb-4 pt-6 px-6">
+                                        <p>main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
+                                    </th>
+                                    <th class="pb-4 pt-6 px-6">quentity</th>
+                                    <th class="pb-4 pt-6 px-6">state</th>
+                                    <th class="pb-4 pt-6 px-6">region</th>
+                                </tr>
                             </thead>
                             <tbody class="text-right">
                                 <tr v-for="item in items" class="hover:bg-gray-100 focus-within:bg-gray-100">
@@ -38,6 +47,15 @@
                                     </td>
                                     <td class="border-t text-center text-white" v-else>
                                         {{ item[current_currency] }} {{ $page.props.auth.user.main_currency }}
+                                    </td>
+                                    <td class="border-t text-center text-white">
+                                        {{ item.totalitem_prix }} {{ item.currency }}
+                                    </td>
+                                    <td class="border-t text-center text-white" v-if="item.currency == $page.props.auth.user.main_currency">
+                                        {{ item.totalitem_prix }} {{ item.currency }}
+                                    </td>
+                                    <td class="border-t text-center text-white" v-else>
+                                        {{ item[TOTALcurrent_currency] }} {{ $page.props.auth.user.main_currency }}
                                     </td>
                                     <td class="border-t text-center text-white">
                                         {{ item.item_quentity}}
@@ -62,6 +80,9 @@
                                             <i class="fa-solid fa-trash"></i>
                                         </Link>
                                     </td>
+                                </tr>
+                                <tr v-if="items.length === 0">
+                                    <td class="px-6 py-4 border-t text-center" colspan="4"> Items impty </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -184,6 +205,7 @@ export default {
     data() {
         return {
             current_currency: this.$page.props.auth.user.main_currency,
+            TOTALcurrent_currency: 'total'+this.$page.props.auth.user.main_currency,
             open_currency_select: false,
             item_id: null,
             region_selectetd: '',

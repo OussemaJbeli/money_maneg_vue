@@ -25,11 +25,14 @@ return new class extends Migration
             $table->integer('id_icon');
                 $table->foreign('id_icon')->references('id_icons')->on('icons');
             $table->integer('item_prix')->nullable();
+            $table->integer('totalitem_prix')->nullable();
             $table->integer('item_quentity')->nullable();
             $table->integer('TND')->nullable();
             $table->integer('EUR')->nullable();
             $table->integer('USD')->nullable();
-            $table->integer('JPY')->nullable();
+            $table->integer('totalTND')->nullable();
+            $table->integer('totalEUR')->nullable();
+            $table->integer('totalUSD')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

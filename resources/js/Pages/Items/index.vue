@@ -22,9 +22,9 @@
                                 <thead>
                                     <tr class="text-center font-bold bg-gray-600">
                                         <th class="pb-4 pt-6 px-6">name</th>
-                                        <th class="pb-4 pt-6 px-6">origin price</th>
+                                        <th class="pb-4 pt-6 px-6">total origin price</th>
                                         <th class="pb-4 pt-6 px-6">
-                                            <p>main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
+                                            <p>total main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
                                         </th>
                                         <th class="pb-4 pt-6 px-6">quentity</th>
                                         <th class="pb-4 pt-6 px-6">state</th>
@@ -38,13 +38,13 @@
                                             {{ item.items }}
                                         </td>
                                         <td class="border-t text-center text-white">
-                                        {{ item.item_prix }} {{ item.currency }}
+                                        {{ item.totalitem_prix }} {{ item.currency }}
                                         </td>
                                         <td class="border-t text-center text-white" v-if="item.currency == $page.props.auth.user.main_currency">
-                                            {{ item.item_prix }} {{ item.currency }}
+                                            {{ item.totalitem_prix }} {{ item.currency }}
                                         </td>
                                         <td class="border-t text-center text-white" v-else>
-                                            {{ item[current_currency] }} {{ $page.props.auth.user.main_currency }}
+                                            {{ item[TOTALcurrent_currency] }} {{ $page.props.auth.user.main_currency }}
                                         </td>
                                         <td class="border-t text-center text-white">
                                             {{ item.item_quentity}}
@@ -88,9 +88,9 @@
                                 <thead>
                                     <tr class="text-center font-bold bg-gray-600">
                                         <th class="pb-4 pt-6 px-6">name</th>
-                                        <th class="pb-4 pt-6 px-6">origin price</th>
+                                        <th class="pb-4 pt-6 px-6">total origin price</th>
                                         <th class="pb-4 pt-6 px-6">
-                                            <p>main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
+                                            <p>total main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
                                         </th>
                                         <th class="pb-4 pt-6 px-6">quentity</th>
                                         <th class="pb-4 pt-6 px-6">state</th>
@@ -132,6 +132,7 @@ export default {
     data() {
         return {
             current_currency: this.$page.props.auth.user.main_currency,
+            TOTALcurrent_currency: 'total'+this.$page.props.auth.user.main_currency,
         }
     },
     methods: {
