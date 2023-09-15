@@ -13,9 +13,12 @@
         </div>
         <div class="min-h-screen bg-gray-100 main_frame">
 <!-- ////////////////////////////////////nave barre//////////////////////// -->
-            <nav class="bg-white border-b border-gray-100 side_barre">
+            <nav class="bg-white border-b border-gray-100 side_barre"
+                :style="{ width: sid_bar? '250px' : '70px' }"
+                >
                 <div class="back_block_transparent"></div>
-                <div class="side_color_picture" id="side_color_picture">
+                <div class="side_color_picture" id="side_color_picture"
+                    v-if="sid_bar">
                     <img :src="'/'+$page.props.auth.user.sid_img ">
                 </div>
                     <div class="flex justify-between h-16 nave_liste">
@@ -24,38 +27,40 @@
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center Logo_user">
                                 <Link :href="route('profile.edit')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 Logo_user_under"
-                                    />
+                                    <img class="user_logo" :src="'/'+$page.props.auth.user.avatar "
+                                    :style="{ height: sid_bar? '100px' : '60px',width: sid_bar? '100px' : '60px' }" >
+                                    <p class="user_name_logo" v-if="sid_bar">{{ $page.props.auth.user.name }}</p>       
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex options_nave">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="NavLink">
-                                    <i class="fa-solid fa-chart-line"></i>
-                                    Dashboard
+                                    <i class="fa-solid fa-chart-line" :style="{ left: sid_bar? '10px' : '15px' }"></i>
+                                    <p v-if="sid_bar">Dashboard</p>
                                 </NavLink>
                                 <NavLink :href="route('Tickets')" :active="route().current('Tickets')" class="NavLink">
-                                    <i class="fa-solid fa-ticket"></i>
-                                    Tickets
+                                    <i class="fa-solid fa-ticket"  :style="{ left: sid_bar? '10px' : '15px' }"></i>
+                                    <p v-if="sid_bar">Tickets</p>
                                 </NavLink>
                                 <NavLink :href="route('Items')" :active="route().current('Items')" class="NavLink">
-                                    <i class="fa-solid fa-sitemap"></i>
-                                    Items
+                                    <i class="fa-solid fa-sitemap"  :style="{ left: sid_bar? '10px' : '15px' }"></i>
+                                    <p v-if="sid_bar">Items</p>
                                 </NavLink>
                                 <NavLink :href="route('Carrency')" :active="route().current('Carrency')" class="NavLink">
-                                    <i class="fa-solid fa-coins"></i>
-                                    Carrency
+                                    <i class="fa-solid fa-coins"  :style="{ left: sid_bar? '10px' : '15px' }"></i>
+                                    <p v-if="sid_bar">Carrency</p>
                                 </NavLink>
                                 <NavLink :href="route('Region')" :active="route().current('Region')" class="NavLink">
-                                    <i class="fa-solid fa-globe"></i>
-                                    Region
+                                    <i class="fa-solid fa-globe"  :style="{ left: sid_bar? '10px' : '15px' }"></i>
+                                    <p v-if="sid_bar">Region</p>
                                 </NavLink>
                             </div>
                             <!-- add items -->
-                            <div class="add_tikets_button" id="add_tikets_button" @click="openTickets" >
-                                <i class="fa-solid fa-cart-plus"></i>
+                            <div class="add_tikets_button" id="add_tikets_button" @click="openTickets"
+                            :style="{ height: sid_bar? '100px' : '60px',width: sid_bar? '100px' : '60px' }" >
+                                <i class="fa-solid fa-cart-plus"
+                                :style="{ fontSize: sid_bar? '60px' : '30px'}" ></i>
                             </div>
                             <div class="add_tikets_frame" v-if="openTickets_frame" >
                                 <div class="fram_tikets">
@@ -250,11 +255,13 @@
                 </div>
             </nav>
 <!-- ////////////////////////////////////main_content//////////////////////// -->
-            <div class="main_content">
+            <div class="main_content" :style="{ width: sid_bar? 'calc(100% - 260px)' : 'calc(100% - 80px)' }">
                 <!-- header -->
                 <header class="bg-white shadow header" v-if="$slots.header">
                     <!-- **************name_page*************** -->
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 title_session">
+                    <div class="mx-auto  title_session">
+                        <i class="fa-solid fa-bars" @click="min_sid_bar"
+                            :style="{transform: sid_bar? 'rotateZ(0)' : 'rotateZ(90deg)' }"></i>
                         <slot name="header" />
                     </div>
                     <!-- **************profile*************** -->
@@ -350,7 +357,6 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
@@ -372,6 +378,7 @@ export default {
     },
     data() {
         return {
+            sid_bar : this.$page.props.auth.user.sid_bare_state,
             openEdite_frame : false,
             openTickets_frame : false,
             img1: 'img_1.jpg',
@@ -489,13 +496,16 @@ export default {
                 this.openEdite_frame=false : 
                 this.openEdite_frame=true;
         },
+        min_sid_bar(){
+            this.sid_bar ? 
+                this.sid_bar=false : 
+                this.sid_bar=true;
+        },
         openTickets() {
             if(this.openTickets_frame){
                 this.openTickets_frame=false;
             }
             else{
-                //*********************add tikcets */
-                //this.$inertia.post(`/Tickets/${this.$page.props.auth.user.id}`)
                 this.openTickets_frame=true;
             }
                 
