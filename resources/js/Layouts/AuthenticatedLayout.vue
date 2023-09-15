@@ -14,53 +14,54 @@
         <div class="min-h-screen bg-gray-100 main_frame">
 <!-- ////////////////////////////////////nave barre//////////////////////// -->
             <nav class="bg-white border-b border-gray-100 side_barre"
-                :style="{ width: sid_bar? '250px' : '70px' }"
+                :style="{ width: (sid_bar || test_side)? '250px' : '70px' }"
+                @mouseover="hover_side_bar" @mouseout="out_side_bar"
                 >
                 <div class="back_block_transparent"></div>
                 <div class="side_color_picture" id="side_color_picture"
-                    v-if="sid_bar">
+                :style="{ width: (sid_bar || test_side)? '250px' : '250px' }">
                     <img :src="'/'+$page.props.auth.user.sid_img ">
                 </div>
                     <div class="flex justify-between h-16 nave_liste">
                         <!-- **************nave option*************** -->
                         <div class="flex nave_options">
                             <!-- Logo -->
-                            <div class="shrink-0 flex items-center Logo_user">
+                            <div class="Logo_user">
                                 <Link :href="route('profile.edit')">
                                     <img class="user_logo" :src="'/'+$page.props.auth.user.avatar "
-                                    :style="{ height: sid_bar? '100px' : '60px',width: sid_bar? '100px' : '60px' }" >
-                                    <p class="user_name_logo" v-if="sid_bar">{{ $page.props.auth.user.name }}</p>       
+                                    :style="{ height: (sid_bar || test_side)? '100px' : '60px',width: (sid_bar || test_side)? '100px' : '60px' }" >
+                                    <p class="user_name_logo" :style="{ visibility: (sid_bar || test_side)? 'visible' : 'hidden' }">{{ $page.props.auth.user.name }}</p>       
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex options_nave">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="NavLink">
-                                    <i class="fa-solid fa-chart-line" :style="{ left: sid_bar? '10px' : '15px' }"></i>
-                                    <p v-if="sid_bar">Dashboard</p>
+                                    <i class="fa-solid fa-chart-line" :style="{ left: (sid_bar || test_side)? '10px' : '15px' }"></i>
+                                    <p :style="{ visibility: (sid_bar || test_side)? 'visible' : 'hidden' }">Dashboard</p>
                                 </NavLink>
                                 <NavLink :href="route('Tickets')" :active="route().current('Tickets')" class="NavLink">
-                                    <i class="fa-solid fa-ticket"  :style="{ left: sid_bar? '10px' : '15px' }"></i>
-                                    <p v-if="sid_bar">Tickets</p>
+                                    <i class="fa-solid fa-ticket"  :style="{ left: (sid_bar || test_side)? '10px' : '15px' }"></i>
+                                    <p :style="{ visibility: (sid_bar || test_side)? 'visible' : 'hidden' }">Tickets</p>
                                 </NavLink>
                                 <NavLink :href="route('Items')" :active="route().current('Items')" class="NavLink">
-                                    <i class="fa-solid fa-sitemap"  :style="{ left: sid_bar? '10px' : '15px' }"></i>
-                                    <p v-if="sid_bar">Items</p>
+                                    <i class="fa-solid fa-sitemap"  :style="{ left: (sid_bar || test_side)? '10px' : '15px' }"></i>
+                                    <p :style="{ visibility: (sid_bar || test_side)? 'visible' : 'hidden' }">Items</p>
                                 </NavLink>
                                 <NavLink :href="route('Carrency')" :active="route().current('Carrency')" class="NavLink">
-                                    <i class="fa-solid fa-coins"  :style="{ left: sid_bar? '10px' : '15px' }"></i>
-                                    <p v-if="sid_bar">Carrency</p>
+                                    <i class="fa-solid fa-coins"  :style="{ left: (sid_bar || test_side)? '10px' : '15px' }"></i>
+                                    <p :style="{ visibility: (sid_bar || test_side)? 'visible' : 'hidden' }">Carrency</p>
                                 </NavLink>
                                 <NavLink :href="route('Region')" :active="route().current('Region')" class="NavLink">
-                                    <i class="fa-solid fa-globe"  :style="{ left: sid_bar? '10px' : '15px' }"></i>
-                                    <p v-if="sid_bar">Region</p>
+                                    <i class="fa-solid fa-globe"  :style="{ left: (sid_bar || test_side)? '10px' : '15px' }"></i>
+                                    <p :style="{ visibility: (sid_bar || test_side)? 'visible' : 'hidden' }">Region</p>
                                 </NavLink>
                             </div>
                             <!-- add items -->
                             <div class="add_tikets_button" id="add_tikets_button" @click="openTickets"
-                            :style="{ height: sid_bar? '100px' : '60px',width: sid_bar? '100px' : '60px' }" >
+                            :style="{ height: (sid_bar || test_side)? '100px' : '60px',width: (sid_bar || test_side)? '100px' : '60px' }" >
                                 <i class="fa-solid fa-cart-plus"
-                                :style="{ fontSize: sid_bar? '60px' : '30px'}" ></i>
+                                :style="{ fontSize: (sid_bar || test_side)? '60px' : '30px'}" ></i>
                             </div>
                             <div class="add_tikets_frame" v-if="openTickets_frame" >
                                 <div class="fram_tikets">
@@ -255,13 +256,13 @@
                 </div>
             </nav>
 <!-- ////////////////////////////////////main_content//////////////////////// -->
-            <div class="main_content" :style="{ width: sid_bar? 'calc(100% - 260px)' : 'calc(100% - 80px)' }">
+            <div class="main_content" :style="{ width: (sid_bar || test_side)? 'calc(100% - 260px)' : 'calc(100% - 80px)' }">
                 <!-- header -->
                 <header class="bg-white shadow header" v-if="$slots.header">
                     <!-- **************name_page*************** -->
                     <div class="mx-auto  title_session">
                         <i class="fa-solid fa-bars" @click="min_sid_bar"
-                            :style="{transform: sid_bar? 'rotateZ(0)' : 'rotateZ(90deg)' }"></i>
+                            :style="{transform: (sid_bar || test_side)? 'rotateZ(0)' : 'rotateZ(90deg)' }"></i>
                         <slot name="header" />
                     </div>
                     <!-- **************profile*************** -->
@@ -378,7 +379,8 @@ export default {
     },
     data() {
         return {
-            sid_bar : this.$page.props.auth.user.sid_bare_state,
+            sid_bar : true,
+            test_side: false,
             openEdite_frame : false,
             openTickets_frame : false,
             img1: 'img_1.jpg',
@@ -497,9 +499,27 @@ export default {
                 this.openEdite_frame=true;
         },
         min_sid_bar(){
+            if(this.sid_bar){
+                this.sid_bar=false 
+                this.test_side=false;
+            }
+            else{
+                this.sid_bar=true 
+                this.test_side=true;
+            }
+        },
+        hover_side_bar(){
             this.sid_bar ? 
-                this.sid_bar=false : 
-                this.sid_bar=true;
+                this.test_side=true : 
+                this.test_side=true;
+
+                console.log("sid_bar "+this.sid_bar);
+                console.log("test_side "+this.test_side);
+        },
+        out_side_bar(){
+            this.sid_bar ? 
+                this.test_side=true : 
+                this.test_side=false;
         },
         openTickets() {
             if(this.openTickets_frame){
