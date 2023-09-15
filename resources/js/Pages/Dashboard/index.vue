@@ -45,7 +45,7 @@
             <total_cards class="theerd_card">
                 <div class="logo_card">
                     <i class="fa-solid fa-truck"></i>
-                    <p>month({{ date.day }})</p>
+                    <p>month({{ date.month }})</p>
                 </div>
                 <div class="values_card" v-for="(month_value,index) in month" :key="index">
                     <p class="value" v-if="month_value[$page.props.auth.user.main_currency]">
