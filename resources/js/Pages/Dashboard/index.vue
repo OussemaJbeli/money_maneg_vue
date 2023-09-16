@@ -91,16 +91,21 @@
             <target_limit class="second_chart">
                 <div class="chart" v-if="Target_limit.target_data">
                     <div class="plane_chart">
-                        <div class="big_circle">
+                        <div class="big_circle"
+                        :style="{
+                                backgroundColor:(Target_limit.percent[$page.props.auth.user.main_currency] <= 30)? 
+                                `green`:'blue'
+                                }">
                             <div class="under_circle"></div>
                         </div>
                         <div class="frame_plane"
-                        :style="{ 
-                            transform: `rotateZ(${ (Target_limit.target_mereg[0][$page.props.auth.user.main_currency] * 100)/Target_limit.target_data['limit'+$page.props.auth.user.main_currency] * 1.8}deg)` 
-                        }">
+                        :style="{ transform: (Target_limit.percent[$page.props.auth.user.main_currency] <= 100)? 
+                                `rotateZ(${ Target_limit.percent[$page.props.auth.user.main_currency] * 1.8}deg)`:
+                                'rotateZ(180deg)'}"
+                        >
                         </div>
                         <div class="target_edit">
-                            <p class="progress_persent">{{ (Target_limit.target_mereg[0][$page.props.auth.user.main_currency] * 100)/Target_limit.target_data['limit'+$page.props.auth.user.main_currency] }}%</p>
+                            <p class="progress_persent">{{ Target_limit.percent[$page.props.auth.user.main_currency]  }}%</p>
                             <p class="progress_currency" v-if="Target_limit.target_mereg[0][$page.props.auth.user.main_currency]">
                                 {{ Target_limit.target_mereg[0][$page.props.auth.user.main_currency]}} {{ $page.props.auth.user.main_currency }} / {{ Target_limit.target_data['limit'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}
                             </p>
@@ -113,19 +118,32 @@
                     <div class="details">
                         <div class="cards">
                             <div class="dayly_target target_card">
-                                <p>
+                                <p class="title">
                                     <i class="fa-solid fa-star"></i>
-                                    Dayly Target
+                                    Target/day
                                 </p>
                                 <span>{{ Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}</span>
                             </div>
                             <div class="your_consomation target_card">
-                                <p>
+                                <p class="title">
                                     <i class="fa-solid fa-user"></i>
-                                    today Consomation
+                                    consom/day
                                 </p>
                                 <span v-if="today[0][$page.props.auth.user.main_currency]">{{ today[0][$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}</span>
                                 <span v-else>0 {{ $page.props.auth.user.main_currency }}</span>
+                            </div>
+                            <div class="rest target_card">
+                                <p class="title"
+                                :style="{ backgroundColor: ((Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]) > 0)? 'green' : 'red' }"
+                                >
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    rest/day
+                                </p>
+                                <span v-if="today[0][$page.props.auth.user.main_currency]"
+                                    :style="{ color: ((Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]) > 0)? 'green' : 'red' }">
+                                    {{ (Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]).toFixed(1) }} {{ $page.props.auth.user.main_currency }}
+                                </span>
+                                <span v-else>{{ Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - 0 }} {{ $page.props.auth.user.main_currency }}</span>
                             </div>
                         </div>
                         <div class="reset_day">
@@ -180,14 +198,22 @@
                             <p>Limit date</p>
                             <div class="group">
                                 <label for="date1">
-                                    from 
-                                    <input type="text" readonly :value=date.year>
+                                    from<input 
+                                        type="date" 
+                                        id="date2"
+                                        v-model="limit_form_add.date_from_add"
+                                        :error="limit_form_add.errors.date_from_add"
+                                        required
+                                    >
                                 </label>
                                 <label for="date2">
-                                    to<input name="date_to"  type="date" id="date2"
-                                    v-model="limit_form_add.date_to_add"
-                                    :error="limit_form_add.errors.date_to_add_add"
-                                    required>
+                                    to<input 
+                                        type="date" 
+                                        id="date2"
+                                        v-model="limit_form_add.date_to_add"
+                                        :error="limit_form_add.errors.date_to_add"
+                                        required
+                                    >
                                 </label>
                             </div>
                         </div>
@@ -510,7 +536,7 @@ export default {
                 }]
             },
             chartOptions: {
-                responsive: false
+                responsive: true
             },
             form: this.$inertia.form({
                 selectedOption: 'this Month',
@@ -518,11 +544,11 @@ export default {
             }),
             id_limit: 0,
             show_select_chart: 'this Month',
-            openLimit_frame: false,
             openLimit_add_frame: false,
             limit_form_add: this.$inertia.form({
                 selectedOption_add: "monthly",
                 date_to_add: null,
+                date_from_add: null,
                 value_add: null,
                 currency_add: null,
             }),

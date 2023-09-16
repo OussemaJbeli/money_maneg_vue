@@ -13,13 +13,18 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-//dashboard
+////////////////dashboard
 Route::get('dashboard', [DashboardController::class, 'index'])
     ->name('dashboard')
     ->middleware('auth');
-    ///money plane limit
-Route::get('/Limit/{user}', [target_limitController::class, 'index'])
+
+///////////////money plane limit
+Route::get('/Limit', [target_limitController::class, 'index'])
     ->name('Limit')
+    ->middleware('auth');
+
+Route::get('/Limit/{user}', [target_limitController::class, 'create'])
+    ->name('Limit.create')
     ->middleware('auth');
 
 /////////////// tickets

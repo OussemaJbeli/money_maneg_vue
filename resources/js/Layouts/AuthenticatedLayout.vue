@@ -40,6 +40,10 @@
                                     <i class="fa-solid fa-chart-line" :style="{ left: (sid_bar || test_side)? '10px' : '15px' }"></i>
                                     <p :style="{ visibility: (sid_bar || test_side)? 'visible' : 'hidden' }">Dashboard</p>
                                 </NavLink>
+                                <NavLink :href="route('Limit')" :active="route().current('Limit')" class="NavLink">
+                                    <i class="fa-solid fa-check-to-slot" :style="{ left: (sid_bar || test_side)? '10px' : '15px' }"></i>
+                                    <p :style="{ visibility: (sid_bar || test_side)? 'visible' : 'hidden' }">Plane Target</p>
+                                </NavLink>
                                 <NavLink :href="route('Tickets')" :active="route().current('Tickets')" class="NavLink">
                                     <i class="fa-solid fa-ticket"  :style="{ left: (sid_bar || test_side)? '10px' : '15px' }"></i>
                                     <p :style="{ visibility: (sid_bar || test_side)? 'visible' : 'hidden' }">Tickets</p>

@@ -218,9 +218,9 @@ class DashboardController extends Controller
         if($target_data){
 
             $target_data_avrig = Target_limit::select(
-                DB::raw('ROUND(avrig_perdayTND, 3) as avrig_perdayTND'),
-                DB::raw('ROUND(avrig_perdayEUR, 3) as avrig_perdayEUR'),
-                DB::raw('ROUND(avrig_perdayUSD, 3) as avrig_perdayUSD'),
+                DB::raw('ROUND(avrig_perdayTND, 2) as avrig_perdayTND'),
+                DB::raw('ROUND(avrig_perdayEUR, 2) as avrig_perdayEUR'),
+                DB::raw('ROUND(avrig_perdayUSD, 2) as avrig_perdayUSD'),
                 )
             ->where('user_id', Auth::user()->id)
             ->first();
@@ -232,12 +232,12 @@ class DashboardController extends Controller
             $target_date_monthname=Carbon::parse($last_date_target)->format('F');
 
             $date1 = Carbon::createFromFormat('d-m-Y', date('d-m-Y'));
-            $date2 = Carbon::createFromFormat('d-m-Y', $last_date_target); 
+            $date2 = Carbon::parse($last_date_target);
             $target_date_days = $date1->diffInDays($date2);
 
             $target_date_year=Carbon::parse($last_date_target)->format('Y');;
 
-            $target_mereg = Items::whereBetween('ticket_date', [$target_data['start_date'],$target_data['reset_date']])
+            $target_mereg = Items::whereBetween('created_at', [$target_data['start_date'],$target_data['reset_date']])
                 ->select(
                     DB::raw('ROUND(SUM(totalTND), 3) as TND'),
                     DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
@@ -335,6 +335,11 @@ class DashboardController extends Controller
             'Target_limit' => [
                 'target_data' => $target_data,
                 'target_mereg' => $target_mereg,
+                'percent'=>[
+                    'TND'=>number_format(($target_mereg[0]['TND'] * 100)/$target_data['limitTND'], 2),
+                    'USD'=>number_format(($target_mereg[0]['USD'] * 100)/$target_data['limitUSD'], 2),
+                    'EUR'=>number_format(($target_mereg[0]['EUR'] * 100)/$target_data['limitEUR'], 2),
+                ],
                 'target_data_avrig'=> $target_data_avrig,
                 'daynum'=>$target_date_daynum,
                 'dayname'=>$target_date_dayname,

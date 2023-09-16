@@ -7,6 +7,7 @@ use App\Models\Target_limit;
 use App\Models\User;
 use App\Models\Carrency;
 use App\Models\Exchange_rate;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -15,15 +16,20 @@ use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use DateTime;
 
+use function Termwind\render;
+
 class target_limitController extends Controller
 {
 
-    public function index(Request $request, string $id)
+    public function index()
     { 
-        // Request::validate([
-        //     'date_to' => 'date|after_or_equal:today',
-        // ]);
-
+            return Inertia::render('Limit/index');
+    }
+        /**
+     * Show the form for creating a new resource.
+     */
+    public function create(Request $request, string $id)
+    {
         $endDate = new DateTime('last day of this month');
         $last_day = $endDate->format('j');
 
@@ -48,8 +54,8 @@ class target_limitController extends Controller
                 break;
             case 'custom':
                 //ragne date
-                $date1 = Carbon::createFromFormat('d-m-Y', date('d-m-Y'));
-                $date2 = Carbon::createFromFormat('d-m-Y', $request->get('date_to_add')); 
+                $date1 = Carbon::parse($request->get('date_from_add'));
+                $date2 = Carbon::parse($request->get('date_to_add'));
                 $range_date = $date1->diffInDays($date2);
                 $limit_avrig = $limit_value/$range_date;
                 $limit_start_date = $date1 ;
@@ -141,5 +147,4 @@ class target_limitController extends Controller
         return redirect()->route('dashboard')
         ->with('success', $message);
     }
-
 }
