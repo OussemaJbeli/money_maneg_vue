@@ -522,13 +522,9 @@ export default {
                 this.test_side=false;
         },
         openTickets() {
-            if(this.openTickets_frame){
-                this.openTickets_frame=false;
-            }
-            else{
+            this.openTickets_frame?
+                this.openTickets_frame=false:
                 this.openTickets_frame=true;
-            }
-                
         },
         updateRootCSSVariable(color) {
             document.documentElement.style.setProperty('--action_color', this.$page.props.auth.user.filter);

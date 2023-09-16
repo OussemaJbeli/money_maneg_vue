@@ -58,4 +58,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Region::class);
     }
+    public function target_limit()
+    {
+        return $this->hasMany(Target_limit::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\Auth\target_limitController;
 use App\Http\Controllers\Exchange_Controller;
 use App\Http\Controllers\Auth\TicketsController;
 use App\Http\Controllers\Auth\CarrencyController;
@@ -12,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-
+//dashboard
 Route::get('dashboard', [DashboardController::class, 'index'])
     ->name('dashboard')
+    ->middleware('auth');
+    ///money plane limit
+Route::get('/Limit/{user}', [target_limitController::class, 'index'])
+    ->name('Limit')
     ->middleware('auth');
 
 /////////////// tickets
