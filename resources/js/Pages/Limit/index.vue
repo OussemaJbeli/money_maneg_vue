@@ -27,8 +27,8 @@
                         </div>
                         <div class="target_edit">
                             <p class="progress_persent">{{ Target_limit.percent[$page.props.auth.user.main_currency]  }}%</p>
-                            <p class="progress_currency" v-if="Target_limit.target_mereg[0][$page.props.auth.user.main_currency]">
-                                {{ Target_limit.target_mereg[0][$page.props.auth.user.main_currency]}} {{ $page.props.auth.user.main_currency }} / {{ Target_limit.target_data['limit'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}
+                            <p class="progress_currency" v-if="Target_limit.target_deference[0][$page.props.auth.user.main_currency]">
+                                {{ Target_limit.target_deference[0][$page.props.auth.user.main_currency]}} {{ $page.props.auth.user.main_currency }} / {{ Target_limit.target_data['limit'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}
                             </p>
                             <p class="progress_currency" v-else>
                                 0 {{ $page.props.auth.user.main_currency }} / {{ Target_limit.target_data['limit'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}

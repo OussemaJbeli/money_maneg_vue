@@ -72,40 +72,43 @@ class target_limitController extends Controller
 
             if($target_data['limit_type'] == 'dayly'){
                 $target_mereg = Items::whereBetween('ticket_date', [$target_data['start_date'],$target_data['reset_date']])
-                    ->select(
+                    ->select('ticket_date',
                         DB::raw('ROUND(SUM(totalTND), 3) as TND'),
                         DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
                         DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
                         )
                     ->where('items.user_id', Auth::user()->id)
+                    ->groupBy('ticket_date')
                     ->get();
             }
             else{
                 $target_mereg = Items::whereBetween('created_at', [$target_data['start_date'],$target_data['reset_date']])
-                    ->select(
+                    ->select('ticket_date',
                         DB::raw('ROUND(SUM(totalTND), 3) as TND'),
                         DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
                         DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
                         )
                     ->where('items.user_id', Auth::user()->id)
+                    ->groupBy('ticket_date')
                     ->get();
             }
             
             $target_deference = Items::whereBetween('created_at', [$target_data['start_date'],$target_data['reset_date']])
-                ->select(
+                ->select('ticket_date',
                     DB::raw('ROUND(SUM(totalTND), 3) as TND'),
                     DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
                     DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
                     )
                 ->where('items.user_id', Auth::user()->id)
                 ->get();
+
             $target_count = Ticket::whereBetween('created_at', [$target_data['start_date'],$target_data['reset_date']])
                 ->where('user_id', Auth::user()->id)
                 ->count();
 
-            $TND = number_format(($target_mereg[0]['TND'] * 100)/$target_data['limitTND'], 2);
-            $USD = number_format(($target_mereg[0]['USD'] * 100)/$target_data['limitUSD'], 2);
-            $EUR = number_format(($target_mereg[0]['EUR'] * 100)/$target_data['limitEUR'], 2);
+            $TND = number_format(($target_deference[0]['TND'] * 100)/$target_data['limitTND'], 2);
+            $USD = number_format(($target_deference[0]['USD'] * 100)/$target_data['limitUSD'], 2);
+            $EUR = number_format(($target_deference[0]['EUR'] * 100)/$target_data['limitEUR'], 2);
 
             
         }
