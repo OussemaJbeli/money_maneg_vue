@@ -23,8 +23,12 @@ Route::get('/Limit', [target_limitController::class, 'index'])
     ->name('Limit')
     ->middleware('auth');
 
-Route::get('/Limit/{user}', [target_limitController::class, 'create'])
-    ->name('Limit.create')
+Route::get('/Limit/{user}/create_dachboard', [target_limitController::class, 'create_dachboard'])
+    ->name('Limit.create_dachboard')
+    ->middleware('auth');
+
+Route::get('/Limit/{user}/create_plan_target', [target_limitController::class, 'create_plan_target'])
+    ->name('Limit.create_plan_target')
     ->middleware('auth');
 
 /////////////// tickets

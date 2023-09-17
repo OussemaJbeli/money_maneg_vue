@@ -27,6 +27,7 @@ class ItemsController extends Controller
             ->join('regions', 'regions.id_region', '=', 'items.id_region')
             ->join('carrencies', 'carrencies.id_carrency', '=', 'items.id_currency')
             ->join('icons', 'icons.id_icons', '=', 'items.id_icon')
+            ->where('user_id', Auth::user()->id)
             ->get()
             ->groupBy('ticket_id'),
         ]);

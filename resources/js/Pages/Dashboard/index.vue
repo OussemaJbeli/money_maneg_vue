@@ -93,8 +93,8 @@
                     <div class="plane_chart">
                         <div class="big_circle"
                         :style="{
-                                backgroundColor:(Target_limit.percent[$page.props.auth.user.main_currency] <= 30)? 
-                                `green`:'blue'
+                                backgroundColor:(Target_limit.percent[$page.props.auth.user.main_currency] <= 80)? 
+                                `#0363e0`:'red'
                                 }">
                             <div class="under_circle"></div>
                         </div>
@@ -139,8 +139,7 @@
                                     <i class="fa-solid fa-chart-line"></i>
                                     rest/day
                                 </p>
-                                <span v-if="today[0][$page.props.auth.user.main_currency]"
-                                    :style="{ color: ((Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]) > 0)? 'green' : 'red' }">
+                                <span v-if="today[0][$page.props.auth.user.main_currency]">
                                     {{ (Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]).toFixed(1) }} {{ $page.props.auth.user.main_currency }}
                                 </span>
                                 <span v-else>{{ Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - 0 }} {{ $page.props.auth.user.main_currency }}</span>
@@ -590,7 +589,7 @@ export default {
             }
         },
         add_plane() {
-            this.limit_form_add.get(`/Limit/${this.id_limit}`, {
+            this.limit_form_add.get(`/Limit/${this.id_limit}/create_dachboard`, {
                 preserveScroll: true,
                 onSuccess: () => {
                 this.openLimit_add_frame = false;

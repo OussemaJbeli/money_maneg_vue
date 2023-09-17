@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
         $User->avatar = 'icon/sid_bar/avatar/avatar1.png';
         $User->sid_img = 'icon/sid_bar/wallpapers/img_1.jpg';
         $User->filter = '#ffc502';
+        $User->main_currency = 'TND';
 
         $User->save();
 

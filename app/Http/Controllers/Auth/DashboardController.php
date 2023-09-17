@@ -212,6 +212,9 @@ class DashboardController extends Controller
         $target_date_year=null;
         $target_mereg=null;
         $target_data_avrig=null;
+        $TND=null;
+        $USD=null;
+        $EUR=null;
         //methods
         $target_data = Target_limit::where('user_id',Auth::user()->id)
         ->first();
@@ -237,14 +240,29 @@ class DashboardController extends Controller
 
             $target_date_year=Carbon::parse($last_date_target)->format('Y');;
 
-            $target_mereg = Items::whereBetween('created_at', [$target_data['start_date'],$target_data['reset_date']])
-                ->select(
-                    DB::raw('ROUND(SUM(totalTND), 3) as TND'),
-                    DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
-                    DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
-                    )
-                ->where('items.user_id', Auth::user()->id)
-                ->get();
+            if($target_data['limit_type'] == 'dayly'){
+                $target_mereg = Items::whereBetween('ticket_date', [$target_data['start_date'],$target_data['reset_date']])
+                    ->select(
+                        DB::raw('ROUND(SUM(totalTND), 3) as TND'),
+                        DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
+                        DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
+                        )
+                    ->where('items.user_id', Auth::user()->id)
+                    ->get();
+            }
+            else{
+                $target_mereg = Items::whereBetween('created_at', [$target_data['start_date'],$target_data['reset_date']])
+                    ->select(
+                        DB::raw('ROUND(SUM(totalTND), 3) as TND'),
+                        DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
+                        DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
+                        )
+                    ->where('items.user_id', Auth::user()->id)
+                    ->get();
+            }
+            $TND = number_format(($target_mereg[0]['TND'] * 100)/$target_data['limitTND'], 2);
+            $USD = number_format(($target_mereg[0]['USD'] * 100)/$target_data['limitUSD'], 2);
+            $EUR = number_format(($target_mereg[0]['EUR'] * 100)/$target_data['limitEUR'], 2);
         }
 
         return Inertia::render('Dashboard/index', [
@@ -336,9 +354,9 @@ class DashboardController extends Controller
                 'target_data' => $target_data,
                 'target_mereg' => $target_mereg,
                 'percent'=>[
-                    'TND'=>number_format(($target_mereg[0]['TND'] * 100)/$target_data['limitTND'], 2),
-                    'USD'=>number_format(($target_mereg[0]['USD'] * 100)/$target_data['limitUSD'], 2),
-                    'EUR'=>number_format(($target_mereg[0]['EUR'] * 100)/$target_data['limitEUR'], 2),
+                    'TND'=>$TND,
+                    'USD'=>$USD,
+                    'EUR'=>$EUR,
                 ],
                 'target_data_avrig'=> $target_data_avrig,
                 'daynum'=>$target_date_daynum,
