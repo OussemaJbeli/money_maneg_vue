@@ -1,6 +1,6 @@
 .cards_panel{
     width: 100%;
-    padding-top: 10px;
+    padding: 20px 0;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -21,14 +21,14 @@
 }
 .charts_frame{
     width: 100%;
-    padding-top: 10px;
+    padding: 10px 0 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     .first_chart{
-        width: 55%;
+        width: 60%;
         background-color: var(--bg2);
         justify-content: space-between;
         .chart_store_by{
@@ -60,6 +60,7 @@
         width: 38%;
         background-color: var(--bg2);
         padding: 10px;
+        margin-right: 0;
         .chart{
             width: 100%;
             height: 100%;
@@ -219,6 +220,7 @@
     justify-content: center;
     align-items: center;
     z-index: 999;
+    padding: 30px;
     .limit_panel{
         width: 400px;
         display: flex;

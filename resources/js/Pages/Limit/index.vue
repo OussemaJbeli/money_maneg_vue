@@ -17,63 +17,82 @@
                                 backgroundColor:(Target_limit.percent[$page.props.auth.user.main_currency] <= 80)? 
                                 `#0363e0`:'red'
                                 }">
-                            <div class="under_circle"></div>
+                            <div class="under_circle">
+                            </div>
                         </div>
                         <div class="frame_plane"
-                        :style="{ transform: (Target_limit.percent[$page.props.auth.user.main_currency] <= 100)? 
+                            :style="{ transform: (Target_limit.percent[$page.props.auth.user.main_currency] <= 100)? 
                                 `rotateZ(${ Target_limit.percent[$page.props.auth.user.main_currency] * 1.8}deg)`:
                                 'rotateZ(180deg)'}"
-                        >
+                            >
                         </div>
                         <div class="target_edit">
                             <p class="progress_persent">{{ Target_limit.percent[$page.props.auth.user.main_currency]  }}%</p>
-                            <p class="progress_currency" v-if="Target_limit.target_deference[0][$page.props.auth.user.main_currency]">
-                                {{ Target_limit.target_deference[0][$page.props.auth.user.main_currency]}} {{ $page.props.auth.user.main_currency }} / {{ Target_limit.target_data['limit'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}
-                            </p>
-                            <p class="progress_currency" v-else>
-                                0 {{ $page.props.auth.user.main_currency }} / {{ Target_limit.target_data['limit'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}
-                            </p>
                             <button @click="openLimit_add">Edite target</button>
                         </div>
                     </div>
                     <div class="details">
-                        <div class="cards">
-                            <div class="dayly_target target_card">
-                                <p class="title">
-                                    <i class="fa-solid fa-star"></i>
-                                    Target/day
-                                </p>
-                                <span>{{ Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}</span>
+                        <div class="cards_details">
+                            <div class="cards total_card" v-if="Target_limit['total_days'] != 1">
+                                <p>{{ Target_limit['total_days'] }} days details</p>
+                                <div class="dayly_target target_card">
+                                    <p class="title_color">
+                                        <i class="fa-solid fa-star"></i>
+                                        total
+                                    </p>
+                                    <span>{{ Target_limit.target_data['limit'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}</span>
+                                </div>
+                                <div class="your_consomation target_card">
+                                    <p class="title_color">
+                                        <i class="fa-solid fa-user"></i>
+                                        your consom
+                                    </p>
+                                    <span v-if="Target_limit.target_deference[0][$page.props.auth.user.main_currency]">{{ Target_limit.target_deference[0][$page.props.auth.user.main_currency]}} {{ $page.props.auth.user.main_currency }}</span>
+                                    <span v-else>0 {{ $page.props.auth.user.main_currency }}</span>
+                                </div>
+                                <div class="rest target_card">
+                                    <p class="title_color"
+                                    :style="{ backgroundColor: ((Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]) > 0)? 'green' : 'red' }"
+                                    >
+                                        <i class="fa-solid fa-chart-line"></i>
+                                        rest of money
+                                    </p>
+                                    <span v-if="Target_limit.target_deference[0][$page.props.auth.user.main_currency]">
+                                        {{ (Target_limit.target_data['limit'+$page.props.auth.user.main_currency] - Target_limit.target_deference[0][$page.props.auth.user.main_currency]).toFixed(1) }} {{ $page.props.auth.user.main_currency }}
+                                    </span>
+                                    <span v-else>{{ Target_limit.target_data['limit'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}</span>
+                                </div>
                             </div>
-                            <div class="your_consomation target_card">
-                                <p class="title">
-                                    <i class="fa-solid fa-user"></i>
-                                    consom/day
-                                </p>
-                                <span v-if="today[0][$page.props.auth.user.main_currency]">{{ today[0][$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}</span>
-                                <span v-else>0 {{ $page.props.auth.user.main_currency }}</span>
+                            <div class="cards dayly_cards">
+                                <p>today details</p>
+                                <div class="dayly_target target_card">
+                                    <p class="title_color">
+                                        <i class="fa-solid fa-star"></i>
+                                        Target/day
+                                    </p>
+                                    <span>{{ Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}</span>
+                                </div>
+                                <div class="your_consomation target_card">
+                                    <p class="title_color">
+                                        <i class="fa-solid fa-user"></i>
+                                        consom/day
+                                    </p>
+                                    <span v-if="today[0][$page.props.auth.user.main_currency]">{{ today[0][$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}</span>
+                                    <span v-else>0 {{ $page.props.auth.user.main_currency }}</span>
+                                </div>
+                                <div class="rest target_card">
+                                    <p class="title_color"
+                                    :style="{ backgroundColor: ((Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]) > 0)? 'green' : 'red' }"
+                                    >
+                                        <i class="fa-solid fa-chart-line"></i>
+                                        rest/day
+                                    </p>
+                                    <span v-if="today[0][$page.props.auth.user.main_currency]">
+                                        {{ (Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]).toFixed(1) }} {{ $page.props.auth.user.main_currency }}
+                                    </span>
+                                    <span v-else>{{ Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - 0 }} {{ $page.props.auth.user.main_currency }}</span>
+                                </div>
                             </div>
-                            <div class="rest target_card">
-                                <p class="title"
-                                :style="{ backgroundColor: ((Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]) > 0)? 'green' : 'red' }"
-                                >
-                                    <i class="fa-solid fa-chart-line"></i>
-                                    rest/day
-                                </p>
-                                <span v-if="today[0][$page.props.auth.user.main_currency]">
-                                    {{ (Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]).toFixed(1) }} {{ $page.props.auth.user.main_currency }}
-                                </span>
-                                <span v-else>{{ Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - 0 }} {{ $page.props.auth.user.main_currency }}</span>
-                            </div>
-                        </div>
-                        <div class="plus_card">
-                            <p class="title">
-                                <i class="fa-solid fa-chart-line"></i>
-                                    test
-                            </p>
-                            <span>
-                                1000 TND
-                            </span>
                         </div>
                         <div class="reset_day">
                             <p>{{ Target_limit.rangday }} days until reset ( {{ Target_limit.dayname }}, {{ Target_limit.monthname}} {{ Target_limit.daynum }}, {{ Target_limit.year }})</p>
@@ -85,7 +104,7 @@
                 <p class="title">
                     <span>Historique Statistique</span>
                     <span class="type">{{ Target_limit.target_data['limit_type'] }}</span>
-                    <span>from : {{ Target_limit.target_data['start_date'] }} ,to : {{ Target_limit.target_data['reset_date'] }}</span>
+                    <span class="from_to">from : {{ Target_limit.target_data['start_date'] }} ,to : {{ Target_limit.target_data['reset_date'] }}</span>
                 </p>
                 <table class="w-full tickets_table">
                     <thead>
@@ -119,7 +138,7 @@
                         </tr>
                         <tr v-if="Target_limit.length != 0"
                             :style="{
-                                        backgroundColor:(Target_limit.target_data['avrig_perday'+$page.props.auth.user.main_currency]*Target_limit.target_length) - Target_limit.target_deference[0][$page.props.auth.user.main_currency] <= 0? 
+                                        backgroundColor:(Target_limit.target_data['avrig_perday'+$page.props.auth.user.main_currency]*Target_limit.target_length) - Target_limit.target_deference[0][$page.props.auth.user.main_currency] < 0? 
                                         `#d11515`:'#48d115'
                                     }">
                             <td class="px-28 py-4 border-t text-start" colspan="3"> total </td>

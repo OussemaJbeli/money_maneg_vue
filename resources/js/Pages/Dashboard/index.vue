@@ -8,7 +8,7 @@
                 /Dashboard</h2>
         </template>
         <div class="cards_panel">
-            <total_cards class="first_card">
+            <total_cards class="first_card total_card_panel">
                 <div class="logo_card">
                     <i class="fa-solid fa-star"></i>
                     <p>today ({{ date.day }})</p>
@@ -25,7 +25,7 @@
                 </div>
                 <p class="title_card">Totale for this day</p>
             </total_cards>
-            <total_cards class="second_card">
+            <total_cards class="second_card total_card_panel">
                 <div class="logo_card">
                     <i class="fa-solid fa-basket-shopping"></i>
                     <p>week(Mon/Sun)</p>
@@ -42,7 +42,7 @@
                 </div>
                 <p class="title_card">Totale for this week</p>
             </total_cards>
-            <total_cards class="theerd_card">
+            <total_cards class="theerd_card total_card_panel">
                 <div class="logo_card">
                     <i class="fa-solid fa-truck"></i>
                     <p>month({{ date.month }})</p>

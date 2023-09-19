@@ -19,15 +19,19 @@
             align-items: center;
             flex-direction: row;
             i{
-                color: #fff;
+                color: var(--action_color);
                 font-size: 30px;
                 margin: 0 0px 0 20px;
                 cursor: pointer;
                 transition: .4s ease;
             }
+            #sid_show2{
+                display: none;
+            }
             .page_title{
                 color: #fff;
                 i{
+                    color: #fff;
                     font-size: 20px;
                 }
             }

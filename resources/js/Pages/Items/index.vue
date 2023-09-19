@@ -22,14 +22,13 @@
                                 <thead>
                                     <tr class="text-center font-bold bg-gray-600">
                                         <th class="pb-4 pt-6 px-6">name</th>
-                                        <th class="pb-4 pt-6 px-6">total origin price</th>
+                                        <th class="pb-4 pt-6 px-6">total price</th>
                                         <th class="pb-4 pt-6 px-6">
-                                            <p>total main currency (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
+                                            <p>total (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
                                         </th>
                                         <th class="pb-4 pt-6 px-6">quentity</th>
                                         <th class="pb-4 pt-6 px-6">state</th>
                                         <th class="pb-4 pt-6 px-6">region</th>
-                                        <th class="pb-4 pt-6 px-6" colspan="2"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-right">

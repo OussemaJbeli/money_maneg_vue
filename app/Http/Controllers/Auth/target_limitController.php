@@ -45,6 +45,7 @@ class target_limitController extends Controller
         $TND=null;
         $USD=null;
         $EUR=null;
+        $total_days=null;
         //methods
         $target_data = Target_limit::where('user_id',Auth::user()->id)
         ->first();
@@ -110,7 +111,20 @@ class target_limitController extends Controller
             $USD = number_format(($target_deference[0]['USD'] * 100)/$target_data['limitUSD'], 2);
             $EUR = number_format(($target_deference[0]['EUR'] * 100)/$target_data['limitEUR'], 2);
 
-            
+            switch ($target_data['limit_type']) {
+                case 'monthly':
+                    $endDate = new DateTime('last day of this month');
+                    $total_days = $endDate->format('j');
+                    break;
+                case 'dayly':
+                    $total_days = 1;
+                    break;
+                case 'custom':
+                    $date1 = Carbon::parse($target_data['start_date']);
+                    $date2 = Carbon::parse($target_data['reset_date']);
+                    $total_days = $date1->diffInDays($date2);
+                    break;
+            }
         }
 
         return Inertia::render('Limit/index',[
@@ -140,6 +154,7 @@ class target_limitController extends Controller
                 'monthname'=>$target_date_monthname,
                 'rangday'=>$target_date_days,
                 'year'=>$target_date_year,
+                'total_days'=>$total_days,
             ]
         ]);
     }

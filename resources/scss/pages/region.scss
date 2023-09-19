@@ -6,7 +6,7 @@
         justify-content: end;
         .map{
             top: 20%;
-            left: 15%;
+            left: 250px;
             position: fixed;
             width: 450px;
             height: 550px;
@@ -19,7 +19,7 @@
             i{
                 color: var(--action_color);
             }
-            width: 700px;
+            width: 50%;
             border: 0 solid transparent;
             border-radius: 10px;
             position: relative;
