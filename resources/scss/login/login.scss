@@ -51,6 +51,7 @@ $light_coler: #fff;
                 height: 100px;
                 width: 100%;
                 padding: 0 5%;
+                position: relative;
             }
             .input{
                 height: 50px;
@@ -62,6 +63,13 @@ $light_coler: #fff;
                 font-size: 20px;
                 color: $black_coler;
                 outline: none;
+            }
+            .eye_pass{
+                position: absolute;
+                bottom: 20px;
+                right: 30px;
+                font-size: 20px;
+                cursor: pointer;
             }
             .input:focus{
                 --tw-ring-color :transparent;

@@ -28,7 +28,29 @@ const submit = () => {
     });
 };
 </script>
+<script>
+export default {
+    data() {
+        return {
+            eye_state: 'fa-solid fa-eye-slash',
+            input_type: 'password',
+        }
+    },
+    methods:{
+        password_visibility(){
+            if(this.input_type == 'password'){
+                this.input_type = 'text';
+                this.eye_state = 'fa-solid fa-eye';
+            }
+            else{
+                this.input_type = 'password';
+                this.eye_state = 'fa-solid fa-eye-slash';
+            }
+        }
+    }
+}
 
+</script>
 
 
 <!-- ////////////////// temlate///////////// -->
@@ -63,13 +85,13 @@ const submit = () => {
 
                 <TextInput
                     id="password"
-                    type="password"
+                    :type=input_type
                     class="mt-1 block w-full input"
                     v-model="form.password"
                     required
                     autocomplete="current-password"
                 />
-
+                <i :class=eye_state class="eye_pass" @click="password_visibility"></i>
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 

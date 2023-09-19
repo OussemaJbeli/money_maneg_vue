@@ -117,12 +117,7 @@ export default {
     data() {
         return {
             edite_frame_currency: false,
-            successMessage: null,
         }
-    },
-    created() {
-    // Set the successMessage from the prop passed from Laravel
-        this.successMessage = this.$props.successMessage;
     },
     methods: {
         openEdite_currency(){

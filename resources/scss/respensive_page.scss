@@ -122,7 +122,6 @@
                     }
                 }
                 .target_edit{
-                    justify-content: end;
                     .progress_persent{
                         font-weight: 900;
                         font-size: 15px;
@@ -706,6 +705,11 @@
         .form_login{
             width: 100%;
             height: 500px;
+            form{
+                .eye_pass{
+                    bottom: 30px;
+                }
+            }
         }
     }
 }
