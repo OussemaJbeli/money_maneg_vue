@@ -209,3 +209,39 @@
         background-image: url("../../public/icon/sid_bar/avatar/avatar15.png");
     }
 }
+.check_reset{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0 5px;
+    label{
+        width: 100%;
+        height: 50px;
+        color: #fff;
+        padding: 10px 0 0;
+    }
+    p{
+        color: #fff;
+        font-weight: 700;
+        margin-top: 10px;
+    }
+    .check_reset_radio{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        label{
+            color: var(--action_color);
+        }
+    }
+    .check_reset_list{
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border: 2.5px solid var(--bg1);
+        border-radius: 10px;
+    }
+}

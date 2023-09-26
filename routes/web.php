@@ -107,6 +107,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/{user}/{sid_img_id}/sid_img', [ProfileController::class, 'updateSideImg'])->name('profile.updateSideImg');
     //update_avatar
     Route::get('/profile/{user}/{avatar}/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
+    //reset_data
+    Route::get('/profile/Reset_Data', [ProfileController::class, 'Reset_Data'])->name('profile.Reset_Data');
 
 });
 

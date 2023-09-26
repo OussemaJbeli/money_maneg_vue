@@ -6,27 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Items;
 use App\Models\Target_limit;
-use App\Models\User;
-use App\Models\Carrency;
 use App\Models\Exchange_rate;
 use App\Models\Ticket;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Countable;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use DateTime;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Testing\Constraints\CountInDatabase;
-use LengthException;
-use SebastianBergmann\LinesOfCode\Counter;
-
-use function PHPUnit\Framework\countOf;
-use function Termwind\render;
 
 class target_limitController extends Controller
 {

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
+use App\Models\Items;
+use App\Models\Ticket;
+use App\Models\Target_limit;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -57,6 +60,50 @@ class ProfileController extends Controller
 
         return Redirect::to('/')
         ->with('success', 'user destroy successfuly');
+    }
+
+    //reset data
+    public function Reset_Data(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'password_test' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+
+        $Tickets_and_Items = $request->get('Tickets_and_Items');
+        $theme = $request->get('theme');
+        $action_color = $request->get('theme');
+        $avatar = $request->get('avatar');
+        $currency = $request->get('currency');
+        $target_plan = $request->get('target_plan');
+
+        if(isset($Tickets_and_Items)){
+            Ticket::where('user_id', $user->id)->delete();
+            Items::where('user_id', $user->id)->delete();
+        }
+        if(isset($theme)){
+            $user->sid_img = 'icon/sid_bar/wallpapers/img_1.jpg';
+            $user->save();
+        }
+        if(isset($action_color)){
+            $user->filter = '#ffc502';
+            $user->save();
+        }
+        if(isset($avatar)){
+            $user->avatar = 'icon/sid_bar/avatar/avatar1.png';
+            $user->save();
+        }
+        if(isset($currency)){
+            $user->main_currency = 'TND';
+            $user->save();
+        }
+        if(isset($target_plan)){
+            Target_limit::where('user_id', $user->id)->delete();
+        }
+
+        return Redirect::back()
+        ->with('success', 'data reset successfuly');
     }
 
     //theme
