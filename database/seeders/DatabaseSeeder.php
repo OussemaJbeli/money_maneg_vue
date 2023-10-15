@@ -26,47 +26,115 @@ class DatabaseSeeder extends Seeder
             'main_currency' => 'TND'
         ]);
 
-        //icons
-        $clothes = ['boot', 'short','cap',
+        $Téléphone_Tablettes = ['smartphone','tablet',"casque",'SIM','smartwatsh'];
+        $Cuisine_Électroménagers = ['Small appliance','kitchin','Big appliance',];
+        $Santé_Beautés = ['makeup','Soins','Perfumes'];
+        $video_games = ['Consoles','controller','Accessoires','Video game'];
+        $Maison_Bureaus = ['Furniture','Décor','house'];
+        $Articles_de_sports = ['Sport clothes','Sport shoes','Accessoires',
+                    'outdoors','nutrition'];
+        $Jardin_Plein_airs = ['gardening','gardening tool','Barbecue',"light"];
+        $Vehicles = ['Accessoires','Electroniques','Vehicles','motocycle','cycle'];
+        $Clothes = ['Vêtements homme','Accessoires homme','Vêtements femme',
+                    'Chaussures femme','Accessoires femme','Bagagerie','boot', 'short','cap',
                     'eyeglasses','gloves',
                     'hat','long-short','shirt',
                     'shoes','socks','t-shirt'];
-        $foods = ['cafe', 'cake','chicken',
+        $Electronics = ['TV','Audio','camera','central_unit',
+                    'Printer','mouse','server','storage',
+                    'usb','microphone','cooler','CPU','monitor',
+                    'keyboard','laptop'];
+        $Transportations = ['airplane', 'bus','car',
+                    'delivery','ship','taxi','train'];
+        $Foods = ['cafe', 'cake','chicken',
                     'cola','donut','freekase',
                     'fruits','hamburger','ice_cream',
                     'juice','milk','pizza','resteaux',
-                    'ty','vegtebuls'];
-        $electronics = ['camera', 'casque','central_unit',
-                    'controller_game','cooler','CPU',
-                    'keyboard','laptop','memory_ram',
-                    'microphone','monitor','mouse','server',
-                    'SIM','smartphone','smartwatsh',
-                    'storage','usb'];
-        $transportations = ['airplane', 'bus','car',
-                    'delivery','motor','ship',
-                    'taxi','train'];
-                    foreach ($clothes as $clothe) {
+                    'ty','vegtebuls','meet'];
+        $educations = ['book','pen','materials','backpack','notebook'];
+        $Autres_catégories = [];
+                    foreach ($Clothes as $clothe) {
                         DB::table('icons')->insert([
                             'categories' => 'clothes',
                             'items' => $clothe,
                         ]);
                     }
-                    foreach ($foods as $food) {
+                    foreach ($Foods as $food) {
                         DB::table('icons')->insert([
                             'categories' => 'food',
                             'items' => $food,
                         ]);
                     }
-                    foreach ($electronics as $electronic) {
+                    foreach ($Téléphone_Tablettes as $Téléphone_Tablette) {
                         DB::table('icons')->insert([
-                            'categories' => 'electronics',
+                            'categories' => 'Téléphone_Tablette',
+                            'items' => $Téléphone_Tablette,
+                        ]);
+                    }
+                    foreach ($Electronics as $electronic) {
+                        DB::table('icons')->insert([
+                            'categories' => 'electronic',
                             'items' => $electronic,
                         ]);
                     }
-                    foreach ($transportations as $transportation) {
+                    foreach ($Transportations as $transportation) {
                         DB::table('icons')->insert([
                             'categories' => 'transportation',
                             'items' => $transportation,
+                        ]);
+                    }
+                    foreach ($Vehicles as $Vehicle) {
+                        DB::table('icons')->insert([
+                            'categories' => 'Vehicle',
+                            'items' => $Vehicle,
+                        ]);
+                    }
+                    foreach ($Cuisine_Électroménagers as $Cuisine_Électroménager) {
+                        DB::table('icons')->insert([
+                            'categories' => 'Cuisine_Électroménager',
+                            'items' => $Cuisine_Électroménager,
+                        ]);
+                    }
+                    foreach ($Santé_Beautés as $Santé_Beauté) {
+                        DB::table('icons')->insert([
+                            'categories' => 'Santé_Beauté',
+                            'items' => $Santé_Beauté,
+                        ]);
+                    }
+                    foreach ($video_games as $video_game) {
+                        DB::table('icons')->insert([
+                            'categories' => 'video_game',
+                            'items' => $video_game,
+                        ]);
+                    }
+                    foreach ($Maison_Bureaus as $Maison_Bureau) {
+                        DB::table('icons')->insert([
+                            'categories' => 'Maison_Bureau',
+                            'items' => $Maison_Bureau,
+                        ]);
+                    }
+                    foreach ($Articles_de_sports as $Articles_de_sport) {
+                        DB::table('icons')->insert([
+                            'categories' => 'Articles_de_sport',
+                            'items' => $Articles_de_sport,
+                        ]);
+                    }
+                    foreach ($Jardin_Plein_airs as $Jardin_Plein_air) {
+                        DB::table('icons')->insert([
+                            'categories' => 'Jardin_Plein_air',
+                            'items' => $Jardin_Plein_air,
+                        ]);
+                    }
+                    foreach ($educations as $education) {
+                        DB::table('icons')->insert([
+                            'categories' => 'education',
+                            'items' => $education,
+                        ]);
+                    }
+                    foreach ($Autres_catégories as $Autres_catégorie) {
+                        DB::table('icons')->insert([
+                            'categories' => 'Autres_catégorie',
+                            'items' => $Autres_catégorie,
                         ]);
                     }
         //region

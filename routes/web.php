@@ -7,6 +7,7 @@ use App\Http\Controllers\Exchange_Controller;
 use App\Http\Controllers\Auth\TicketsController;
 use App\Http\Controllers\Auth\CarrencyController;
 use App\Http\Controllers\Auth\ItemsController;
+use App\Http\Controllers\Auth\IconsController;
 use App\Http\Controllers\Auth\RegionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,11 @@ Route::get('/Items/{item}/delete', [ItemsController::class, 'destroy'])
 
 Route::get('/Items/{tickets}/edit', [ItemsController::class, 'edit'])
     ->name('items.destroy')
+    ->middleware('auth');
+
+/////////////////icons
+Route::put('/Icons/create', [IconsController::class, 'create'])
+    ->name('icons.create')
     ->middleware('auth');
 
 ////////////////carrency

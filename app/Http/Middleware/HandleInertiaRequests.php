@@ -51,29 +51,103 @@ class HandleInertiaRequests extends Middleware
                     ] : null,
                     'icons' =>[
                         'cat1' =>[
-                            'title' => 'clothes',
-                            'items' => Icons::where('categories', 'clothes')
-                            ->pluck('items','id_icons')
-                            ->all(),
-                        ],
-                        'cat2' =>[
-                            'title' => 'food',
+                            'title' => 'Food',
+                            'categories'=>'food',
                             'items' => Icons::where('categories', 'food')
                             ->pluck('items','id_icons')
                             ->all(),
                         ],
+                        'cat2' =>[
+                            'title' => 'Clothes',
+                            'categories'=>'clothes',
+                            'items' => Icons::where('categories', 'clothes')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
                         'cat3' =>[
-                            'title' => 'electronics',
-                            'items' => Icons::where('categories', 'electronics')
+                            'title' => 'Téléphone & Tablettes',
+                            'categories'=>'Téléphone_Tablette',
+                            'items' => Icons::where('categories', 'Téléphone_Tablette')
                             ->pluck('items','id_icons')
                             ->all(),
                         ],
                         'cat4' =>[
-                            'title' => 'transportation',
+                            'title' => 'Electronic',
+                            'categories'=>'electronic',
+                            'items' => Icons::where('categories', 'electronic')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
+                        'cat5' =>[
+                            'title' => 'video games',
+                            'categories'=>'video_game',
+                            'items' => Icons::where('categories', 'video_game')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
+                        'cat6' =>[
+                            'title' => 'Transportation',
+                            'categories'=>'transportation',
                             'items' => Icons::where('categories', 'transportation')
                             ->pluck('items','id_icons')
                             ->all(),
-                        ]
+                        ],
+                        'cat7' =>[
+                            'title' => 'Vehicles',
+                            'categories'=>'Vehicle',
+                            'items' => Icons::where('categories', 'Vehicle')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
+                        'cat8' =>[
+                            'title' => 'Kitchen & Appliances',
+                            'categories'=>'Cuisine_Électroménager',
+                            'items' => Icons::where('categories', 'Cuisine_Électroménager')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
+                        'cat9' =>[
+                            'title' => 'Sports articles',
+                            'categories'=>'Articles_de_sport',
+                            'items' => Icons::where('categories', 'Articles_de_sport')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
+                        'cat10' =>[
+                            'title' => 'Garden Outdoors',
+                            'categories'=>'Jardin_Plein_air',
+                            'items' => Icons::where('categories', 'Jardin_Plein_air')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
+                        'cat11' =>[
+                            'title' => 'Home & Offices',
+                            'categories'=>'Maison_Bureau',
+                            'items' => Icons::where('categories', 'Maison_Bureau')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
+                        'cat12' =>[
+                            'title' => 'Health & Beauty',
+                            'categories'=>'Santé_Beauté',
+                            'items' => Icons::where('categories', 'Santé_Beauté')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
+                        'cat13' =>[
+                            'title' => 'Education',
+                            'categories'=>'education',
+                            'items' => Icons::where('categories', 'education')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
+                        'cat14' =>[
+                            'title' => 'Other categories',
+                            'categories'=>'Autres_catégorie',
+                            'items' => Icons::where('categories', 'Autres_catégorie')
+                            ->pluck('items','id_icons')
+                            ->all(),
+                        ],
                     ],
                     'regions' =>[
                         'regions1' =>[

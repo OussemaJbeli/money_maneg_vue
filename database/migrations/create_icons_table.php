@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id_icons');
             $table->string('categories');
             $table->string('items');
+            $table->boolean('added')->default(false);
             $table->timestamps();
         });
     }

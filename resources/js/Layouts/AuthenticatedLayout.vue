@@ -83,8 +83,47 @@
                                                         <input type="search" class="search" id="search">
                                                     </label>
                                                     <div id="list-example" class="list-group">
-                                                        <a v-for="(icon, index) in  $page.props.auth.icons" :key="index" class="list-group-item list-group-item-action" :href='"#"+index'>
-                                                            <img :src="'/icon/items_icon/'+icon.title+'.png'">
+                                                        <a class="list-group-item list-group-item-action" href='#cat1'>
+                                                            <i class="fa-solid fa-burger"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat2'>
+                                                            <i class="fa-solid fa-shirt"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat3'>
+                                                            <i class="fa-solid fa-mobile-screen-button"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat4'>
+                                                            <i class="fa-solid fa-desktop"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat5'>
+                                                            <i class="fa-solid fa-gamepad"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat6'>
+                                                            <i class="fa-solid fa-taxi"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat7'>
+                                                            <i class="fa-solid fa-car-side"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat8'>
+                                                            <i class="fa-solid fa-kitchen-set"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat9'>
+                                                            <i class="fa-solid fa-dumbbell"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat10'>
+                                                            <i class="fa-solid fa-faucet-drip"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat11'>
+                                                            <i class="fa-solid fa-house"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat12'>
+                                                            <i class="fa-solid fa-staff-snake"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat13'>
+                                                            <i class="fa-solid fa-book"></i>
+                                                        </a>
+                                                        <a class="list-group-item list-group-item-action" href='#cat14'>
+                                                            <i class="fa-solid fa-circle-info"></i>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -94,7 +133,21 @@
                                                         <div class="items">
                                                             <div v-for="(item, index1) in  icon.items" :key="index1" class="item" :id=item>
                                                                 <label :for="item+'.png'">
-                                                                    <img id="item_path" :src="'/icon/items_icon/'+icon.title+'/'+item+'.png'">
+                                                                    <img id="item_path" v-if='index1<=91' :src="'/icon/items_icon/'+icon.title+'/'+item+'.png'">
+                                                                    <i class="fa-solid fa-burger" v-if='index1>91 && icon.categories == "food"'></i>
+                                                                    <i class="fa-solid fa-shirt" v-if='index1>91 && icon.categories == "clothes"'></i>
+                                                                    <i class="fa-solid fa-mobile-screen-button" v-if='index1>91 && icon.categories == "Téléphone_Tablette"'></i>
+                                                                    <i class="fa-solid fa-desktop" v-if='index1>91 && icon.categories == "electronic"'></i>
+                                                                    <i class="fa-solid fa-gamepad" v-if='index1>91 && icon.categories == "video_game"'></i>
+                                                                    <i class="fa-solid fa-taxi" v-if='index1>91 && icon.categories == "transportation"'></i>
+                                                                    <i class="fa-solid fa-car-side" v-if='index1>91 && icon.categories == "Vehicle"'></i>
+                                                                    <i class="fa-solid fa-kitchen-set" v-if='index1>91 && icon.categories == "Cuisine_Électroménager"'></i>
+                                                                    <i class="fa-solid fa-dumbbell" v-if='index1>91 && icon.categories == "Articles_de_sport"'></i>
+                                                                    <i class="fa-solid fa-faucet-drip" v-if='index1>91 && icon.categories == "Jardin_Plein_air"'></i>
+                                                                    <i class="fa-solid fa-house" v-if='index1>91 && icon.categories == "Maison_Bureau"'></i>
+                                                                    <i class="fa-solid fa-staff-snake" v-if='index1>91 && icon.categories == "Santé_Beauté"'></i>
+                                                                    <i class="fa-solid fa-book" v-if='index1>91 && icon.categories == "education"'></i>
+                                                                    <i class="fa-solid fa-circle-info" v-if='index1>91 && icon.categories == "Autres_catégorie"'></i>
                                                                     {{ item }}
                                                                 </label>
                                                                 <input 
@@ -107,6 +160,11 @@
                                                                     :error="ticket_form.errors.item_name"
                                                                     :required="isRequired(item)"
                                                                 >
+                                                            </div>
+                                                            <div class="item" id="add" @click="openAdd_item(icon.categories)">
+                                                                <label class="add_item">
+                                                                    <i class="fa-solid fa-plus"></i>
+                                                                </label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -192,6 +250,33 @@
                                             </div>
                                             <div class="save">
                                                 <button type="submit" class="tiket_save" :class="{ 'opacity-25': ticket_form.processing }" :disabled="ticket_form.processing">
+                                                    save
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- add new item -->
+                            <div class="show_regions" v-if="add_frame_item">
+                                <div class="fram">
+                                    <div class="header">
+                                        <div class="exite" id="exit_popup" @click="openAdd_item(id_categorie)"><i class="fa-sharp fa-solid fa-circle-xmark"></i></div>
+                                    </div>
+                                    <div class="state_add">
+                                        <form @submit.prevent="region_add_item" class="form">
+                                            <p>{{ item_form_add.categories }}</p>
+                                            <div class="state_name_field">
+                                                <label for="">add item
+                                                    <input 
+                                                        type="text"
+                                                        v-model="item_form_add.item"
+                                                        :error="item_form_add.errors.item"
+                                                    >
+                                                </label>
+                                            </div>
+                                            <div class="save">
+                                                <button type="submit">
                                                     save
                                                 </button>
                                             </div>
@@ -363,6 +448,7 @@ export default {
             openEdite_frame : false,
             sid_bar_second: false,
             openTickets_frame : false,
+            add_frame_item: false,
             img1: 'img_1.jpg',
             img2: 'img_2.jpg',
             img3: 'img_3.jpg',
@@ -388,6 +474,11 @@ export default {
                 price: null,
                 quentity: null,
                 item_name: null,
+            }),
+            id_categorie: null,
+            item_form_add: this.$inertia.form({
+                categories: null,
+                item: null,
             }),
         }
     },
@@ -523,6 +614,25 @@ export default {
         save_items() {
             this.ticket_form.post(`/Items/${this.$page.props.auth.user.id}`);
         },
+        openAdd_item(categorie) {
+            if(this.add_frame_item){
+                this.add_frame_item = false;
+            }
+            else{
+                this.add_frame_item = true;
+                this.item_form_add.categories = categorie;
+                this.id_categorie=categorie;
+            }
+        },
+        region_add_item(){
+            this.item_form_add.put(`/Icons/create`, {
+                preserveScroll: true,
+                onSuccess: () => {
+                this.add_frame_item = false;
+                this.item_form_add.reset();
+                },
+            });
+        }
     },
     mounted() {
         const color = this.color;

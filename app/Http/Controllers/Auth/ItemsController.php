@@ -36,9 +36,20 @@ class ItemsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request,string $id)
     {
-        //
+        $categorie = $request->get('categorie');
+        $item = $request->get('item');
+
+        $Items = new Items();
+
+        $Items->categories = $categorie;
+        $Items->items = $item;
+
+        $Items->save();
+        
+        return Redirect::back()
+        ->with('success', 'item saved');
     }
 
     /**

@@ -72,7 +72,7 @@
                                     <form @submit.prevent="region_save" class="form">
                                         <p>{{ region_form_update.region }}</p>
                                         <div class="state_name_field">
-                                            <label for="">region
+                                            <label for="">add region
                                                 <input 
                                                     type="text"
                                                     v-model="region_form_update.state"
