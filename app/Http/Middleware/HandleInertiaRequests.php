@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use App\Models\Carrency;
 use App\Models\Icons;
 use App\Models\Region;
+use App\Models\Items;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -49,6 +51,17 @@ class HandleInertiaRequests extends Middleware
                         'filter' => $request->user()->filter,
                         'main_currency' => $request->user()->main_currency,
                     ] : null,
+                    'recent_icon' => $request->user() ? [
+                        Items::select('items.*','icons.*')
+                        ->join('icons', 'icons.id_icons', '=', 'items.id_icon')
+                        ->where('user_id', Auth::user()->id)
+                        ->orderBy('created_at', 'desc')
+                        ->take(5)
+                        ->get(),
+                    ] : null,
+                    'Allicons'=> Icons::select('categories','items','id_icons')
+                            ->orderBy('created_at', 'desc')
+                            ->get(),
                     'icons' =>[
                         'cat1' =>[
                             'title' => 'Food',

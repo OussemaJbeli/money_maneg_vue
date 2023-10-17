@@ -19,6 +19,10 @@ Route::get('dashboard', [DashboardController::class, 'index'])
     ->name('dashboard')
     ->middleware('auth');
 
+    Route::get('test', [DashboardController::class, 'test'])
+    ->name('test')
+    ->middleware('auth');
+
 ///////////////money plane limit
 Route::get('/Limit', [target_limitController::class, 'index'])
     ->name('Limit')

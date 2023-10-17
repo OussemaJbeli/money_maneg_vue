@@ -78,11 +78,20 @@
                                         <form @submit.prevent="save_items" class="form1">
                                             <div class="items_shoser">
                                                 <div class="header_items">
-                                                    <label for="search">
-                                                        search
-                                                        <input type="search" class="search" id="search">
+                                                    <label :style="{ width: search_run? '100%' : '20%' }">
+                                                        <i class="fa-solid fa-circle-xmark" v-if="search_run" @click="start_searsh()" ></i>
+                                                        <i class="fa-solid fa-magnifying-glass" v-else @click="start_searsh()" ></i>
+                                                        <input 
+                                                            class="search" type="search" 
+                                                            v-model="searchQuery" 
+                                                            placeholder="Search by Name" 
+                                                            :style="{ display: search_run? 'flex' : 'none' }"
+                                                            />
                                                     </label>
-                                                    <div id="list-example" class="list-group">
+                                                    <div id="list-example" class="list-group" :style="{ width: search_run? '0' : '80%' }">
+                                                        <a class="list-group-item list-group-item-action" href='#recently'>
+                                                            <i class="fa-solid fa-clock"></i>
+                                                        </a>
                                                         <a class="list-group-item list-group-item-action" href='#cat1'>
                                                             <i class="fa-solid fa-burger"></i>
                                                         </a>
@@ -127,13 +136,85 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+                                                <!-- search items -->
+                                                <div v-if="search_run" data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+                                                    <div class="items_group">
+                                                        <div class="items">
+                                                            <div v-for="(item, index1) in  filteredItems" :key="item.name" class="item" :id=item>
+                                                                <label :for="item.items+'.png'">
+                                                                    <img id="item_path" v-if='index1<=91' :src="'/icon/items_icon/'+item.categories+'/'+item.items+'.png'">
+                                                                    <i class="fa-solid fa-burger" v-if='index1>91 && item.categories == "food"'></i>
+                                                                    <i class="fa-solid fa-shirt" v-if='index1>91 && item.categories == "clothes"'></i>
+                                                                    <i class="fa-solid fa-mobile-screen-button" v-if='index1>91 && item.categories == "Téléphone_Tablette"'></i>
+                                                                    <i class="fa-solid fa-desktop" v-if='index1>91 && item.categories == "electronic"'></i>
+                                                                    <i class="fa-solid fa-gamepad" v-if='index1>91 && item.categories == "video_game"'></i>
+                                                                    <i class="fa-solid fa-taxi" v-if='index1>91 && item.categories == "transportation"'></i>
+                                                                    <i class="fa-solid fa-car-side" v-if='index1>91 && item.categories == "Vehicle"'></i>
+                                                                    <i class="fa-solid fa-kitchen-set" v-if='index1>91 && item.categories == "Cuisine_Électroménager"'></i>
+                                                                    <i class="fa-solid fa-dumbbell" v-if='index1>91 && item.categories == "Articles_de_sport"'></i>
+                                                                    <i class="fa-solid fa-faucet-drip" v-if='index1>91 && item.categories == "Jardin_Plein_air"'></i>
+                                                                    <i class="fa-solid fa-house" v-if='index1>91 && item.categories == "Maison_Bureau"'></i>
+                                                                    <i class="fa-solid fa-staff-snake" v-if='index1>91 && item.categories == "Santé_Beauté"'></i>
+                                                                    <i class="fa-solid fa-book" v-if='index1>91 && item.categories == "education"'></i>
+                                                                    <i class="fa-solid fa-circle-info" v-if='index1>91 && item.categories == "Autres_catégorie"'></i>
+                                                                    {{ item.items }}
+                                                                </label>
+                                                                <input 
+                                                                    :id="item.items+'.png'" 
+                                                                    class="item_chek" 
+                                                                    type="radio" 
+                                                                    :value="item.id_icons" 
+                                                                    :name='"items"'
+                                                                    v-model="ticket_form.item_name"
+                                                                    :error="ticket_form.errors.item_name"
+                                                                    :required="isRequired(item.items)"
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div v-else data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+                                                    <div class="items_group" id="recently">
+                                                        <p class="cat_title">Recently used</p>
+                                                        <div class="items">
+                                                            <div v-for="(item, index1) in  $page.props.auth.recent_icon[0]" :key="index1" class="item"  :id=item>
+                                                                <label :for="item.items+'.png'">
+                                                                    <img id="item_path" v-if='item.id_icons<=91' :src="'/icon/items_icon/'+item.categories+'/'+item.items+'.png'">
+                                                                    <i class="fa-solid fa-burger" v-if='item.id_icons>91 && item.categories == "food"'></i>
+                                                                    <i class="fa-solid fa-shirt" v-if='item.id_icons>91 && item.categories == "clothes"'></i>
+                                                                    <i class="fa-solid fa-mobile-screen-button" v-if='item.id_icons>91 && item.categories == "Téléphone_Tablette"'></i>
+                                                                    <i class="fa-solid fa-desktop" v-if='item.id_icons>91 && item.categories == "electronic"'></i>
+                                                                    <i class="fa-solid fa-gamepad" v-if='item.id_icons>91 && item.categories == "video_game"'></i>
+                                                                    <i class="fa-solid fa-taxi" v-if='item.id_icons>91 && item.categories == "transportation"'></i>
+                                                                    <i class="fa-solid fa-car-side" v-if='item.id_icons>91 && item.categories == "Vehicle"'></i>
+                                                                    <i class="fa-solid fa-kitchen-set" v-if='item.id_icons>91 && item.categories == "Cuisine_Électroménager"'></i>
+                                                                    <i class="fa-solid fa-dumbbell" v-if='item.id_icons>91 && item.categories == "Articles_de_sport"'></i>
+                                                                    <i class="fa-solid fa-faucet-drip" v-if='item.id_icons>91 && item.categories == "Jardin_Plein_air"'></i>
+                                                                    <i class="fa-solid fa-house" v-if='item.id_icons>91 && item.categories == "Maison_Bureau"'></i>
+                                                                    <i class="fa-solid fa-staff-snake" v-if='item.id_icons>91 && item.categories == "Santé_Beauté"'></i>
+                                                                    <i class="fa-solid fa-book" v-if='item.id_icons>91 && item.categories == "education"'></i>
+                                                                    <i class="fa-solid fa-circle-info" v-if='item.id_icons>91 && item.categories == "Autres_catégorie"'></i>
+                                                                    {{ item.items }}
+                                                                </label>
+                                                                <input 
+                                                                    :id="item.items+'.png'" 
+                                                                    class="item_chek" 
+                                                                    type="radio" 
+                                                                    :value="index1" 
+                                                                    :name='"items"'
+                                                                    v-model="ticket_form.item_name"
+                                                                    :error="ticket_form.errors.item_name"
+                                                                    :required="isRequired(item)"
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div v-for="(icon, index) in  $page.props.auth.icons" :key="index" class="items_group" :id=index>
                                                         <p class="cat_title">{{icon.title}}</p>
                                                         <div class="items">
                                                             <div v-for="(item, index1) in  icon.items" :key="index1" class="item" :id=item>
                                                                 <label :for="item+'.png'">
-                                                                    <img id="item_path" v-if='index1<=91' :src="'/icon/items_icon/'+icon.title+'/'+item+'.png'">
+                                                                    <img id="item_path" v-if='index1<=91' :src="'/icon/items_icon/'+icon.categories+'/'+item+'.png'">
                                                                     <i class="fa-solid fa-burger" v-if='index1>91 && icon.categories == "food"'></i>
                                                                     <i class="fa-solid fa-shirt" v-if='index1>91 && icon.categories == "clothes"'></i>
                                                                     <i class="fa-solid fa-mobile-screen-button" v-if='index1>91 && icon.categories == "Téléphone_Tablette"'></i>
@@ -443,6 +524,8 @@ export default {
     },
     data() {
         return {
+            search_run: false,
+            searchQuery: '',
             sid_bar : true,
             test_side: false,
             openEdite_frame : false,
@@ -632,11 +715,22 @@ export default {
                 this.item_form_add.reset();
                 },
             });
-        }
+        },
+        start_searsh(){
+            this.search_run?
+                this.search_run=false:
+                this.search_run=true;
+        },
     },
     mounted() {
         const color = this.color;
         this.updateRootCSSVariable(color);
     },
+    computed: {
+      filteredItems() {
+        const query = this.searchQuery.toLowerCase();
+        return this.$page.props.auth.Allicons.filter(item => item.items.toLowerCase().includes(query));
+      }
+    }
 }
 </script>
