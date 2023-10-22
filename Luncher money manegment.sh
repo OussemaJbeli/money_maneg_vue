@@ -9,7 +9,7 @@ echo "Starting npm development build..."
 npm run dev &
 
 # Wait for a moment to ensure the servers are up and running
-sleep 20
+sleep 12
 
 # Open the Laravel app in the default web browser (Windows)
 echo "Opening the Laravel app in your default web browser..."
