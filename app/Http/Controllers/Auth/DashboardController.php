@@ -182,6 +182,28 @@ class DashboardController extends Controller
                 ->orderBy(DB::raw('SUM(item_quentity)'), 'desc') 
                 ->take(10)
                 ->get();
+        //runk States
+        $runk_states_price = Items::select(
+                    'regions.region',
+                    DB::raw('ROUND(SUM(totalTND), 3) as TND'),
+                    DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
+                    DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
+                )
+                ->join('regions', 'regions.id_region', '=', 'items.id_region')
+                ->where('items.user_id', Auth::user()->id)
+                ->groupBy('regions.region')
+                ->orderBy(DB::raw('ROUND(SUM(TND), 3)'), 'desc') 
+                ->get();
+
+        $runk_states_quentity=Items::select(
+                    'regions.region',
+                    DB::raw('SUM(item_quentity) as quentity'),
+                )
+                ->join('regions', 'regions.id_region', '=', 'items.id_region')
+                ->where('items.user_id', Auth::user()->id)
+                ->groupBy('regions.region')
+                ->orderBy(DB::raw('SUM(item_quentity)'), 'desc') 
+                ->get();
         //runk currency
         $runk_currency_price=Items::select( 
             'currency',                   
@@ -344,6 +366,10 @@ class DashboardController extends Controller
                 'runk_region_price' => $runk_region_price,
                 'runk_region_quentity' => $runk_region_quentity,
             ],
+            'runk_states' => [
+                'runk_states_price' => $runk_states_price,
+                'runk_states_quentity' => $runk_states_quentity,
+            ],
 
             'runk_currency' => [
                 'runk_currency_price' => $runk_currency_price,
@@ -371,12 +397,9 @@ class DashboardController extends Controller
         // return Inertia::render('Dashboard/App');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function test()
     {
-        return Inertia::render('Dashboard/test');
+        return Inertia::render('Dashboard/App');
     }
 
     /**

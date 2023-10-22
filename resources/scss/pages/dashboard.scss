@@ -394,9 +394,10 @@
         padding-top: 10px;
         display: flex;
         flex-direction: row;
+        justify-content: center;
         flex-wrap: wrap;
         .list_panel{
-            width: 23%;
+            width: 22%;
         }
         .card_rank{
             width: 100%;
@@ -496,6 +497,60 @@
             }
 
         }
+        .map_panel{
+            width: 50%;
+            height: 500px;
+            position: relative;
+            #info-box {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: 1;
+                background-color: #ffffff;
+                border: 2px solid var(--action_color);
+                border-radius: 5px;
+                padding: 5px;
+                font-family: arial;
+                padding: 10px;
+                p{
+                    color:  var(--action_color);
+                    font-weight: 700;
+                    span{
+                        color: black;
+                        font-weight: 400;
+                    }
+                }
+            }
+            .tunisia_map{
+                height: 100%;
+                width: 110%;
+                .st0{
+                    fill:#808080;
+                    stroke:#FFFFFF;
+                    stroke-width:0.5;
+                    stroke-linecap:round;
+                    stroke-linejoin:round;
+                }
+                .st1{
+                    font-family:'Roboto-Regular';
+                }
+                .st2{
+                    font-size:14px;
+                }
+                path:hover, circle:hover {
+                    stroke: var(--action_color) !important;
+                    stroke-width:2px;
+                    stroke-linejoin: round;
+                    fill: var(--action_color) !important;
+                    cursor: pointer;
+                }
+            }
+        }
+        .list_panel5{
+            width: 40%;
+            max-height: 500px;
+            overflow: hidden auto;
+        }
         .second_card_rank{
             background-color: #69f941;
             i{
@@ -531,4 +586,7 @@
             background-color: #ec006a;
         }
     }
+}
+#map_frame_list{
+    max-height: calc(100% - 70px);
 }

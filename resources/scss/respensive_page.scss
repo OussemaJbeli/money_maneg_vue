@@ -104,6 +104,19 @@
         }
     }
     //////////////////////////////////popups
+    .region_big{
+        background-color: var(--bg1);
+        .region_frame{
+            display: flex;
+            justify-content: end;
+            .map{
+                .tunisia_map{
+                    width: 200%;
+                    height: 120%;
+                }
+            }
+        }
+    }
 }
 @media (max-width:1150px){
     //////////////////////////////////dashboard
@@ -203,7 +216,12 @@
     .region_big{
         .region_frame{
             .map{
-                left: 10px;
+                .tunisia_map{
+                    position: absolute;
+                    left: -50%;
+                    width: 200%;
+                    height: 120%;
+                }
             }
             .table{
                 table{
@@ -279,14 +297,8 @@
     .region_big{
         .region_frame{
             .map{
-                left: 0;
-                width: 250px;
-            }
-            .table{
-                table{
-                    td{
-                        font-size: 15px;
-                    }
+                .tunisia_map{
+                    width: 180%;
                 }
             }
         }
@@ -453,7 +465,9 @@
     .region_big{
         .region_frame{
             .map{
-                width: 200px;
+                .tunisia_map{
+                    width: 150%;
+                }
             }
         }
     }

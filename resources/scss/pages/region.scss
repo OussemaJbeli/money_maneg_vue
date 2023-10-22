@@ -4,15 +4,51 @@
         display: flex;
         justify-content: end;
         .map{
-            top: 20%;
-            left: 250px;
+            top: 10%;
+            left: 0px;
             position: fixed;
             width: 450px;
             height: 550px;
-            background-image: url(../../public/icon/tn-07.png);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: contain;
+            #info-box {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: 1;
+                background-color: #ffffff;
+                border: 2px solid var(--action_color);
+                border-radius: 5px;
+                padding: 5px;
+                font-family: arial;
+                padding: 10px;
+                p{
+                    color:  var(--action_color);
+                    font-weight: 700;
+                }
+            }
+            .tunisia_map{
+                width: 250%;
+                height: 120%;
+                .st0{
+                    fill:#808080;
+                    stroke:#FFFFFF;
+                    stroke-width:0.5;
+                    stroke-linecap:round;
+                    stroke-linejoin:round;
+                }
+                .st1{
+                    font-family:'Roboto-Regular';
+                }
+                .st2{
+                    font-size:14px;
+                }
+                path:hover, circle:hover {
+                    stroke: var(--action_color) !important;
+                    stroke-width:2px;
+                    stroke-linejoin: round;
+                    fill: var(--action_color) !important;
+                    cursor: pointer;
+                }
+            }
         }
         .table{
             i{
