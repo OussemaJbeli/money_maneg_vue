@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Companys;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Carrency;
@@ -10,6 +11,7 @@ use App\Models\Exchange_rate;
 use App\Models\Items;
 use App\Models\Region;
 use App\Models\Target_limit;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -287,6 +289,7 @@ class DashboardController extends Controller
             $EUR = number_format(($target_mereg[0]['EUR'] * 100)/$target_data['limitEUR'], 2);
         }
 
+
         return Inertia::render('Dashboard/index', [
             'today'=> Items::where('user_id', Auth::user()->id)
                 ->where('ticket_date', date('d-m-Y'))
@@ -390,7 +393,9 @@ class DashboardController extends Controller
                 'monthname'=>$target_date_monthname,
                 'rangday'=>$target_date_days,
                 'year'=>$target_date_year,
-            ]
+            ],
+
+            //list company
             
 
         ]);

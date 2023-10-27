@@ -23,8 +23,9 @@ class DatabaseSeeder extends Seeder
             'avatar'=>'icon/sid_bar/avatar/avatar1.png',
             'sid_img'=> 'icon/sid_bar/wallpapers/img_1.jpg',
             'filter'=>'#ffc502',
-            'main_currency' => 'TND'
+            'main_currency' => 'TND',
         ]);
+        
 
         $Téléphone_Tablettes = ['smartphone','tablet',"casque",'SIM','smartwatsh'];
         $Cuisine_Électroménagers = ['Small appliance','kitchin','Big appliance',];

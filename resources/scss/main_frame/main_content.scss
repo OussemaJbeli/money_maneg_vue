@@ -13,6 +13,17 @@
         align-items: center;
         justify-content: space-between;
         background-color: var(--bg2);
+        .company_buttons{
+            height: 35px;
+            width: 70px;
+            background-color: var(--action_color);
+            margin-left: 5px;
+            border: 0 solid transparent;
+            border-radius: 10px;
+            font-size: 15px;
+            color: #fff;
+            font-weight: 700;
+        }
         .title_session{
             margin: 0;
             display: flex;
