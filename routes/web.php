@@ -9,12 +9,8 @@ use App\Http\Controllers\Auth\CarrencyController;
 use App\Http\Controllers\Auth\ItemsController;
 use App\Http\Controllers\Auth\IconsController;
 use App\Http\Controllers\Auth\RegionController;
-use App\Http\Controllers\Auth\MemeberController;
-use App\Http\Controllers\Auth\CompanyController;
 use App\Http\Controllers\Auth\Member_walletController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 // ////////////////Mywallet_user_mode
 Route::get('/MyWallet', [Member_walletController::class, 'index'])
