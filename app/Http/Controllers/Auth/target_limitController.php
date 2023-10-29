@@ -8,6 +8,7 @@ use App\Models\Items;
 use App\Models\Target_limit;
 use App\Models\Exchange_rate;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;

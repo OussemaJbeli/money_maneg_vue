@@ -13,16 +13,26 @@
         align-items: center;
         justify-content: space-between;
         background-color: var(--bg2);
-        .company_buttons{
+        .Wallet_buttons{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             height: 35px;
-            width: 70px;
-            background-color: var(--action_color);
-            margin-left: 5px;
-            border: 0 solid transparent;
+            padding: 5px 10px;
+            border: 2.5px solid var(--action_color);
             border-radius: 10px;
             font-size: 15px;
             color: #fff;
-            font-weight: 700;
+            i{
+                margin-right: 5px;
+            }
+        }
+        .Wallet_buttons_inactive:hover{
+            color: var(--action_color);
+        }
+        .Wallet_buttons_active{
+            background-color: var(--action_color);
+            color: #fff;
         }
         .title_session{
             margin: 0;

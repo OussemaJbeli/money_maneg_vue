@@ -21,7 +21,6 @@ class ItemsController extends Controller
      */
     public function index()
     {
-
         return Inertia::render('Items/index', [
             'items_list' => Items::select('items.*', 'regions.*', 'carrencies.*', 'icons.*')
             ->join('regions', 'regions.id_region', '=', 'items.id_region')

@@ -7,19 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
-class Companys extends Model
+class Memeber_incame extends Model
 {
 
     use HasFactory;
     use SoftDeletes;
     use HasApiTokens;
 
-    protected $primaryKey = 'company_id';
+    protected $primaryKey = 'memeber_incame_id';
 
-
-    public function memeber()
+    public function user()
     {
-        return $this->hasMany(Memebers::class);
+        return $this->belongsTo(User::class);
     }
 
 }

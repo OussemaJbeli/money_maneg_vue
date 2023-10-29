@@ -21,6 +21,7 @@ class CarrencyController extends Controller
      */
     public function index()
     {   
+
         $date_update = Exchange_rate::select('updated_at')
             ->where('id', 1)
             ->first();

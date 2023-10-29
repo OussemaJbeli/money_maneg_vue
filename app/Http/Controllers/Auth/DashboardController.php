@@ -3,23 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Companys;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Models\Carrency;
-use App\Models\Exchange_rate;
 use App\Models\Items;
 use App\Models\Region;
 use App\Models\Target_limit;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use DateTime;
-use DateInterval;
-use PhpParser\Node\Stmt\Foreach_;
 
 class DashboardController extends Controller
 {
@@ -27,7 +19,8 @@ class DashboardController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   // Set the week to start on Sunday
+    {
+        // Set the week to start on Sunday
         Carbon::setWeekStartsAt(Carbon::MONDAY);
         Carbon::setWeekEndsAt(Carbon::SUNDAY);
 
@@ -395,11 +388,7 @@ class DashboardController extends Controller
                 'year'=>$target_date_year,
             ],
 
-            //list company
-            
-
         ]);
-        // return Inertia::render('Dashboard/App');
     }
 
     public function test()

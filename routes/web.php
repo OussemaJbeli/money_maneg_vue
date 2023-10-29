@@ -11,10 +11,15 @@ use App\Http\Controllers\Auth\IconsController;
 use App\Http\Controllers\Auth\RegionController;
 use App\Http\Controllers\Auth\MemeberController;
 use App\Http\Controllers\Auth\CompanyController;
-use App\Http\Controllers\Auth\ListBuyController;
+use App\Http\Controllers\Auth\Member_walletController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+// ////////////////Mywallet_user_mode
+Route::get('/MyWallet', [Member_walletController::class, 'index'])
+    ->name('MyWallet')
+    ->middleware('auth');
 
 
 ////////////////dashboard
@@ -124,35 +129,3 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/Reset_Data', [ProfileController::class, 'Reset_Data'])->name('profile.Reset_Data');
 
 });
-
-//company*********
-////////////////company
-Route::get('/Company', [CompanyController::class, 'index'])
-    ->name('Company')
-    ->middleware('auth');
-
-Route::post('/Company/Create', [CompanyController::class, 'create'])
-    ->name('Company.store')
-    ->middleware('auth');
-
-// Route::put('/Items/{item}/update', [CompanyController::class, 'update'])
-//     ->name('items.edit')
-//     ->middleware('auth');
-
-// Route::get('/Items/{item}/delete', [CompanyController::class, 'destroy'])
-//     ->name('items.destroy')
-//     ->middleware('auth');
-
-// Route::get('/Items/{tickets}/edit', [CompanyController::class, 'edit'])
-//     ->name('items.destroy')
-//     ->middleware('auth');
-
-////////////////Memeber
-Route::get('/Memeber', [MemeberController::class, 'index'])
-    ->name('Memeber')
-    ->middleware('auth');
-
-Route::post('/Memeber/Create', [MemeberController::class, 'create'])
-    ->name('Memeber.store')
-    ->middleware('auth');
-require __DIR__.'/auth.php';

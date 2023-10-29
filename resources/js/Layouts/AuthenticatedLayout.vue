@@ -412,47 +412,12 @@
                     </div>
                     <!-- **************profile*************** -->
                     <div class="side_but_secsion hidden sm:flex sm:items-center sm:ml-6">
-                        <button class="company_buttons" @click="company_add_form_open_fun()">create</button>
-                        <button class="company_buttons" @click="company_invit_form_open_fun()">join</button>
-                        <!-- Settings Dropdown -->
-                        <div id='company_secsion'>
-                                    <Dropdown align="right" width="48">
-                                        <template #trigger>
-                                            <span class="inline-flex rounded-md">
-                                                <button
-                                                    type="button"
-                                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                                >
-                                                    company
-                                                    <svg
-                                                        class="ml-2 -mr-0.5 h-4 w-4"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 20 20"
-                                                        fill="currentColor"
-                                                    >
-                                                        <path
-                                                            fill-rule="evenodd"
-                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                            clip-rule="evenodd"
-                                                        />
-                                                    </svg>
-                                                </button>
-                                            </span>
-                                        </template>
-                                        <template #content class="frame_company">
-                                            <div class="list_company">
-                                                <DropdownLink class="company_name  flex items-center flex-row" v-for="(list_company,index) in $page.props.auth.user_company[0]" :key="index" :href="route('logout')" method="post" as="button">
-                                                    <div class="bg-orange-600 w-6 h-6 mr-1 text-white text-lg flex justify-center items-center">
-                                                        {{ list_company.avatar }}
-                                                    </div>
-                                                    <p class="w-32">{{ list_company.name }}</p>
-                                                </DropdownLink>
-                                                <p v-if="$page.props.auth.user_company[0].length === 0" class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">create or join a company</p>
-                                            </div>
-                                        </template>
-                                    </Dropdown>
-                        </div>
                         <!-- profile -->
+                        <NavLinkCustom :href="route('MyWallet')" :active="route().current('MyWallet')" class="Wallet_buttons">
+                            <i class="fa-solid fa-wallet"></i>
+                            <p>My Wallet</p>
+                        </NavLinkCustom>
+                        <!-- :href="route('MyWallet.moneyMode')" -->
                         <div class="ml-3 relative">
                                     <Dropdown align="right" width="48">
                                         <template #trigger>
@@ -481,9 +446,7 @@
 
                                         <template #content>
                                             <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-                                            <DropdownLink :href="route('logout')" method="post" as="button">
-                                                Log Out
-                                            </DropdownLink>
+                                            <DropdownLink :href="route('logout')" method="post" as="button">Log Out</DropdownLink>
                                         </template>
                                     </Dropdown>
                         </div>
@@ -613,6 +576,7 @@ import { ref } from 'vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
+import NavLinkCustom from '@/Components/NavLinkCustom.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 import FlashMessages from "@/Components/FlashMessages.vue";
@@ -627,7 +591,7 @@ export default {
         FlashMessages,
     },
     props: {
-        Ticket: Object,
+
     },
     data() {
         return {
@@ -669,35 +633,6 @@ export default {
             item_form_add: this.$inertia.form({
                 categories: null,
                 item: null,
-            }),
-            //company part
-            types_company: [
-                'Companies Limited by Shares',
-                'Companies Limited by Guarantee',
-                'Unlimited Companies',
-                'One Person Companies (OPC)',
-                'Private Companies',
-                'Public Companies',
-                'Holding and Subsidiary Companies',
-                'Associate Companies',
-                'Companies in terms of Access to Capital',
-                'Government Companies',
-                'Foreign Companies',
-                'Charitable Companies',
-                'Dormant Companies',
-                'Nidhi Companies',
-                'Public Financial Institutions',
-                'Other...',
-            ],
-            company_add_form_open: false,
-            company_add_form: this.$inertia.form({
-                copmany_discription: null,
-                Company_type: null,
-                Company_Name: null,
-            }),
-            company_invit_form_open: false,
-            company_invit_form: this.$inertia.form({
-                invitation_code: null,
             }),
         }
     },
@@ -856,35 +791,6 @@ export default {
             this.search_run?
                 this.search_run=false:
                 this.search_run=true;
-        },
-        // company
-        company_invit_form_open_fun() {
-            this.company_invit_form_open ? 
-                this.company_invit_form_open=false : 
-                this.company_invit_form_open=true;
-        },
-        company_add_form_open_fun() {
-            this.company_add_form_open ? 
-                this.company_add_form_open=false : 
-                this.company_add_form_open=true;
-        },
-        add_company_root() {
-            this.company_add_form.post(`/Company/Create`, {
-                preserveScroll: true,
-                onSuccess: () => {
-                this.company_add_form_open = false;
-                this.company_add_form.reset();
-                },
-            });
-        },
-        invit_company_root() {
-            this.company_invit_form.post(`/Memeber/Create`, {
-                preserveScroll: true,
-                onSuccess: () => {
-                this.company_invit_form_open = false;
-                this.company_invit_form.reset();
-                },
-            });
         },
     },
     mounted() {

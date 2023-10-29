@@ -15,26 +15,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Http;
 
-class ListBuyController extends Controller
+class Member_walletController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Tickets/index', [
-            'tickets' => Items::where('user_id', Auth::user()->id)
-                ->select('ticket_date',
-                        'ticket_id', 
-                        DB::raw('SUM(item_quentity) as quentity'),
-                        DB::raw('ROUND(SUM(totalTND), 3) as TND'),
-                        DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
-                        DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
-                )
-                ->groupBy('ticket_date')
-                ->get(),
-        ]);
+        return Inertia::render('Wallet/index');
     }
 
     /**

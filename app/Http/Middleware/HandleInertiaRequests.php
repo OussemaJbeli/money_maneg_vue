@@ -51,7 +51,6 @@ class HandleInertiaRequests extends Middleware
                         'sid_img' => $request->user()->sid_img,
                         'filter' => $request->user()->filter,
                         'main_currency' => $request->user()->main_currency,
-                        'Post' => $request->user()->Post,
                     ] : null,
                     'recent_icon' => $request->user() ? [
                         Items::select('items.*','icons.*')
@@ -59,12 +58,6 @@ class HandleInertiaRequests extends Middleware
                         ->where('user_id', Auth::user()->id)
                         ->orderBy('created_at', 'desc')
                         ->take(5)
-                        ->get(),
-                    ] : null,
-                    'user_company' => $request->user() ? [
-                        Companys::select('companys.*')
-                        ->join('memebers', 'memebers.id_company', '=', 'companys.company_id')
-                        ->where('memebers.user_id',Auth::user()->id)
                         ->get(),
                     ] : null,
                     'carrency' => Carrency::select('id_carrency', 'currency')->get(),

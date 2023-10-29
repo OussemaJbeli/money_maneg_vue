@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('sid_img')->nullable();
             $table->string('filter')->nullable();
             $table->string('main_currency')->nullable();
-            $table->string('Post')->nullable();
+            $table->string('temporery_post')->nullable();
+            $table->string('temporery_company_name')->nullable();
+            $table->string('temporery_company_logo')->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps();
         });

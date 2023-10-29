@@ -22,7 +22,12 @@ class TicketsController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {        //inisial user
+        $user = User::find(Auth::user()->id);
+        $user->temporery_post = null;
+        $user->temporery_company_name = null;
+        $user->temporery_company_logo = null;
+        $user->save();
         return Inertia::render('Tickets/index', [
             'tickets' => Items::where('user_id', Auth::user()->id)
                 ->select('ticket_date',
