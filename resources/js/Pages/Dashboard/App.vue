@@ -1,7 +1,6 @@
 <template>
-  <div id="app">
-    <horizontal-bar-chart :data="chartData"></horizontal-bar-chart>
-  </div>
+
+
 </template>
 
 <script>

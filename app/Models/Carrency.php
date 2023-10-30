@@ -24,8 +24,4 @@ class Carrency extends Model
     {
         return $this->belongsTo(Items::class);
     }
-    public function list_buys()
-    {
-        return $this->belongsTo(List_buys::class);
-    }
 }

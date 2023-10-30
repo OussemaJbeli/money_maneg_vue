@@ -22,12 +22,7 @@ class TicketsController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {        //inisial user
-        $user = User::find(Auth::user()->id);
-        $user->temporery_post = null;
-        $user->temporery_company_name = null;
-        $user->temporery_company_logo = null;
-        $user->save();
+    {  
         return Inertia::render('Tickets/index', [
             'tickets' => Items::where('user_id', Auth::user()->id)
                 ->select('ticket_date',
@@ -38,6 +33,7 @@ class TicketsController extends Controller
                         DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
                 )
                 ->groupBy('ticket_date')
+                ->orderBy('created_at', 'desc')
                 ->get(),
         ]);
     }
@@ -81,6 +77,7 @@ class TicketsController extends Controller
             ->join('carrencies', 'carrencies.id_carrency', '=', 'items.id_currency')
             ->join('icons', 'icons.id_icons', '=', 'items.id_icon')
             ->where('items.ticket_id', $tickets)
+            ->orderBy('created_at', 'desc')
             ->get()
         ]);
     }

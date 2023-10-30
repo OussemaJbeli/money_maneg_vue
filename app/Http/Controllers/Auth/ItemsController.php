@@ -28,7 +28,8 @@ class ItemsController extends Controller
             ->join('icons', 'icons.id_icons', '=', 'items.id_icon')
             ->where('user_id', Auth::user()->id)
             ->get()
-            ->groupBy('ticket_id'),
+            ->groupBy('ticket_id')
+            ->orderBy('created_at', 'desc'),
         ]);
     }
 

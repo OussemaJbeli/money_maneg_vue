@@ -19,8 +19,11 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "canvasjs": "^1.8.3",
         "chart.js": "^4.4.0",
+        "chartkick": "^5.0.1",
         "vue-chartjs": "^5.2.0",
+        "vue-chartkick": "^1.1.0",
         "vue-google-charts": "^1.1.0",
         "vuejs-progress-bar": "^1.2.8"
     }

@@ -43,13 +43,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function memeber()
-    {
-        return $this->hasMany(Memebers::class);
-    }
     public function items()
     {
         return $this->hasMany(Items::class);
+    }
+    public function memeber_incame()
+    {
+        return $this->hasMany(Memeber_incame::class);
     }
     public function ticket()
     {

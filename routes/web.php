@@ -17,6 +17,14 @@ Route::get('/MyWallet', [Member_walletController::class, 'index'])
     ->name('MyWallet')
     ->middleware('auth');
 
+Route::post('/MyWallet/expenses', [Member_walletController::class, 'expenses'])
+    ->name('MyWallet.expenses')
+    ->middleware('auth');
+
+Route::post('/MyWallet/incame', [Member_walletController::class, 'incame'])
+    ->name('MyWallet.incame')
+    ->middleware('auth');
+
 
 ////////////////dashboard
 Route::get('dashboard', [DashboardController::class, 'index'])
@@ -125,3 +133,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/Reset_Data', [ProfileController::class, 'Reset_Data'])->name('profile.Reset_Data');
 
 });
+
+
+require __DIR__.'/auth.php';
