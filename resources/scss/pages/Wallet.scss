@@ -78,6 +78,19 @@
                     color:#fff;
                     font-size: 18px;
                 }
+                .shart{
+                    .apexcharts-legend-series{
+                        .apexcharts-legend-text {
+                            color: #FF0000; /* Override the color */
+                            font-size: 16px; /* Override the font size */
+                            font-weight: 700; /* Override the font weight */
+                            font-family: 'Times New Roman', Times, serif; /* Override the font family */
+                        }
+                    }
+                    text{
+                        fill: #fff;
+                    }
+                }
             }
         }
         .myWallet{
@@ -170,177 +183,133 @@
                 height: 40px;
             }
         }
-        .wallet_table{
-            border-collapse: collapse;
-            width: 100%;
-            i{
-                color: var(--action_color);
-            }
-            thead{
-                th{
-                    p{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        flex-direction: row;
-                        img{
-                            width: 30px;
-                            height: 30px;
-                        }
-                    }
-                }
-            }
-            .show_items{
-                th{
-                    font-size: 18px;
-                    border: 1px solid #ddd;
-                    padding: 8px;
-                    p{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        flex-direction: row;
-                        img{
-                            width: 30px;
-                            height: 30px;
-                        }
-                    }
-                }
-            }
-            tbody{
-                td{
-                    i{
-                        color: var(--action_color);
-                    }
-                }
-            }
-        }
     }
-}
-.limit_fram{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #00000085;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    padding: 30px;
-    .limit_panel{
+    .limit_frame{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #00000085;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border-style: solid;
-        border-radius: 10px;
-        border-color: var(--action_color);
-        background-color: var(--bg1);
-        overflow: hidden;
-        color: #fff;
-        .header{
-            position: relative;
-            width: 100%;
-            height: 50px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--action_color);
-            padding: 10px;
-            .logo{
-                font-size: 35px;
-                color: #fff;
-            }
-            .exite{
-                font-size: 35px;
-                color: #fff;
-                transition: .4s ease;
-            }
-            .exite:hover{
-                transform: scale(1.1);
-            }
-        }
-        .body_fram{
-            margin-top: 60px;
-            width: 100%;
-            padding: 0 20px;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        padding: 30px;
+        .limit_panel{
+            width: 350px;
             display: flex;
             flex-direction: column;
-            padding: 10px;
-            .limit_type{
-                padding: 10px;
+            justify-content: space-between;
+            border-style: solid;
+            border-radius: 10px;
+            border-color: var(--action_color);
+            background-color: var(--bg1);
+            overflow: hidden;
+            color: #fff;
+            .header{
+                position: relative;
                 width: 100%;
+                height: 50px;
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
-                color: #fff;
-                label{
-                    width: 90%;
-                    display: flex;
-                    flex-direction: column;
-                }
-                input{
-                    margin-top: 10px;
-                    width: 100%;
-                    height: 50px;
-                    outline: none;
-                    background-color: var(--bg2);
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                background-color: var(--action_color);
+                padding: 10px;
+                .logo{
+                    font-size: 35px;
                     color: #fff;
-                    padding: 0 10px;
-                    border-radius: 10px;
-                    border-color: var(--action_color);
                 }
-                .amont_part{
-                    width: 100%;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    label{
-                        width: 40%;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: start;
-                    }
-                    .carrency{
-                        width: 100%;
-                        height: 100%;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        .carrency_select{
-                            margin: 0 10px;
-                            width: 70%;
-                            height: 50px;
-                            outline: none;
-                            background-color: var(--bg2);
-                            color: #fff;
-                            padding: 0 10px;
-                            border-radius: 10px;
-                            border-color: var(--action_color);
-                        }
-                    }
+                .exite{
+                    font-size: 35px;
+                    color: #fff;
+                    transition: .4s ease;
                 }
-                p{
-                    margin: 20px 0;
+                .exite:hover{
+                    transform: scale(1.1);
                 }
             }
-            .save{
-                margin-top: 50px;
+            .body_fram{
+
                 width: 100%;
-                height: 100px;
+                padding: 0 20px;
                 display: flex;
-                justify-content: center;
-                align-items: center;
-                button{
-                    width: 150px;
-                    height: 50px;
-                    background-color: var(--action_color);
-                    border: 0 solid var(--action_color);
-                    border-radius: 10px;
-                    font-size: 20px;
+                flex-direction: column;
+                padding: 10px;
+                .limit_type{
+                    padding: 10px;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
                     color: #fff;
+                    label{
+                        padding-top: 20px;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    input{
+                        margin-top: 10px;
+                        width: 100%;
+                        height: 50px;
+                        outline: none;
+                        background-color: var(--bg2);
+                        color: #fff;
+                        padding: 0 10px;
+                        border-radius: 10px;
+                        border-color: var(--action_color);
+                    }
+                    .amont_part{
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        label{
+                            width: 40%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: start;
+                            justify-content: space-between;
+                        }
+                        .carrency{
+                            width: 100%;
+                            height: 50px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            .carrency_select{
+                                width: 100%;
+                                height: 100%;
+                                outline: none;
+                                background-color: var(--bg2);
+                                color: #fff;
+                                padding: 0 10px;
+                                border-radius: 10px;
+                                border-color: var(--action_color);
+                            }
+                        }
+                    }
+                    p{
+                        margin: 20px 0;
+                    }
+                }
+                .save{
+                    width: 100%;
+                    height: 100px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    button{
+                        width: 150px;
+                        height: 50px;
+                        background-color: var(--action_color);
+                        border: 0 solid var(--action_color);
+                        border-radius: 10px;
+                        font-size: 20px;
+                        color: #fff;
+                    }
                 }
             }
         }

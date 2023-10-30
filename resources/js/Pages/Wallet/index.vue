@@ -38,7 +38,7 @@
                     <div class="onthly_incame_expenses_chart">
                         <p>Monthly Summary</p>
                         <div class="shart">
-                            <!-- <area-chart ></area-chart> -->
+                            <VueApexCharts type="area" height="100%" :options="chartOptions" :series="series" :Labels="dataLabels"></VueApexCharts>
                         </div>
                     </div>
                 </div>
@@ -70,16 +70,15 @@
                 <p class="title">
                     <span>Historique Statistique</span>
                 </p>
-                <table class="w-full wallet_table">
+                <DataTable class="display">
                     <thead>
                         <tr class="text-center font-bold bg-gray-600">
-                        <th class="pb-4 pt-6 px-6">origin amount</th>
-                        <th class="pb-4 pt-6 px-6">
-                            <p>main amount (<img :src="'/icon/currency/'+$page.props.auth.user.main_currency+'.png'">)</p>
-                        </th>
-                        <th class="pb-4 pt-6 px-6">from</th>
-                        <th class="pb-4 pt-6 px-6">to</th>
-                        <th class="pb-4 pt-6 px-6">date</th>
+                            <th class="pb-4 pt-6 px-6">origin amount</th>
+                            <th class="pb-4 pt-6 px-6">main amount ({{$page.props.auth.user.main_currency}})</th>
+                            <th class="pb-4 pt-6 px-6">from</th>
+                            <th class="pb-4 pt-6 px-6">to</th>
+                            <th class="pb-4 pt-6 px-6">date</th>
+                            <th class="pb-4 pt-6 px-6">type</th>
                         </tr>
                     </thead>
                     <tbody class="text-right">
@@ -88,10 +87,10 @@
                             >
                                 <i v-if="historique.amount >= 0" class="fa-solid fa-circle-up" :style="{color:'green'}"></i>
                                 <i v-else class="fa-solid fa-circle-down" :style="{color:'red'}"></i>
-                                {{ historique.amount }}{{ historique.currency }}
+                                {{ historique.amount }} {{ historique.currency }}
                             </td>
                             <td class="pb-4 pt-6 px-6 border-t text-start text-white">
-                                {{ historique[$page.props.auth.user.main_currency] }}{{ $page.props.auth.user.main_currency }}
+                                {{ historique[$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}
                             </td>
                             <td class="pb-4 pt-6 px-6 border-t text-center text-white">
                                 {{ historique.from_name }}
@@ -102,16 +101,18 @@
                             <td class="pb-4 pt-6 px-6 border-t text-center text-white">
                                 {{ historique.format_created_at }}
                             </td>
+                            <td class="pb-4 pt-6 px-6 border-t text-center text-white flex flex-row items-center ">
+                                <img :src="'/icon/wallet/'+historique.type+'.png'" class="w-8 h-8 mr-2"> {{ historique.type }}
+                            </td>
                         </tr>
                         <tr v-if="historique_incame.length === 0">
                             <td class="px-6 py-4 border-t text-center" colspan="4"> Tickets impty </td>
                         </tr> 
                     </tbody>
-                </table>
+                </DataTable>
             </div>
-        </div>
             <!-- popup incame -->
-            <div class="limit_fram" v-if="incame_frame">
+            <div class="limit_frame" v-if="incame_frame">
                 <div class="limit_panel">
                     <div class="header">
                         <div class="logo"><i class="fa-solid fa-cart-plus"></i></div>
@@ -129,7 +130,6 @@
                                 <label for="">
                                     currency
                                     <div class="carrency">
-                                        <i class="fa-solid fa-coins"></i>
                                         <select 
                                             name="select carrency" 
                                             id="state" 
@@ -167,7 +167,7 @@
                 </div>
             </div>
             <!-- popup expenses -->
-            <div class="limit_fram" v-if="expenses_frame">
+            <div class="limit_frame" v-if="expenses_frame">
                 <div class="limit_panel">
                     <div class="header">
                         <div class="logo"><i class="fa-solid fa-cart-plus"></i></div>
@@ -222,28 +222,50 @@
                     </form>
                 </div>
             </div>
+        </div>
     </AuthenticatedLayout>
 </template>
 <script setup>
-// import AreaChart from '@/Components/sharts/shartWallet.vue';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head , Link} from '@inertiajs/vue3';
+    // import AreaChart from '@/Components/sharts/shartWallet.vue';
+    import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+    import { Head , Link} from '@inertiajs/vue3';
+
+    //chart
+    import VueApexCharts from "vue3-apexcharts";
+
+    //data table
+    import DataTable from 'datatables.net-vue3';
+    import DataTablesCore from 'datatables.net';
+
+    DataTable.use(DataTablesCore);
 </script>
 <script>
 export default {
 components: {
     Link,
     Head,
-    // AreaChart, 
+    DataTable, 
+    VueApexCharts
 },
 props: {
+    incame: Object,
+    expenses: Object,
+    dateChart: Object,
     total_incame: Object,
     total_expenses: Object,
     TOTAL: Object,
     historique_incame: Object,
 },
+stroke: {
+    curve: 'smooth',
+},
 data() {
     return {
+        shartData:null,
+        options : {
+            responsive: true,
+            select: true,
+        },
         incame_frame: false,
         incame_vars: this.$inertia.form({
             amount: null,
@@ -258,6 +280,37 @@ data() {
             from: this.$page.props.auth.user.name,
             to: null,
         }),
+        //chat
+        series: [{
+                name: 'incame',
+                data: this.incame,
+            }, 
+            {
+                name: 'expense',
+                data: this.expenses,
+            }],
+        chartOptions: {
+                chart: {
+                    type: 'area'
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth'
+                },
+                xaxis: {
+                    type: 'datetime',
+                    categories: this.dateChart
+                },
+                tooltip: {
+                    x: {
+                        format: 'dd/MM/yy'
+                    },
+                },
+                // colors: ['#68e366', '#FF5733'],
+                colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
+        },
     }
 },
 methods: {
@@ -296,3 +349,6 @@ computed: {
 }
 }
 </script>
+<style>
+@import 'datatables.net-dt';
+</style>

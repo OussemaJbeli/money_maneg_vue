@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class Member_walletController extends Controller
@@ -26,6 +27,7 @@ class Member_walletController extends Controller
      */
     public function index()
     {
+
         $total_expenses = Items::where('user_id', Auth::user()->id)
         ->select(
             DB::raw('ROUND(SUM(totalTND), 3) as TND'),
@@ -45,11 +47,6 @@ class Member_walletController extends Controller
         ->select('memeber_incames.*')
         ->orderBy('created_at', 'desc')
         ->get();
-        
-        // $historique_incame = Memeber_incame::where('id_user', Auth::user()->id)
-        // ->selectRaw('*, DATE_FORMAT(created_at, "%d/%m/%Y") as created_at')
-        // ->orderBy('created_at', 'desc')
-        // ->get();
 
         foreach ($historique_incame as $income) {
             $income->format_created_at = $income->created_at->format('d/m/y');
@@ -59,15 +56,49 @@ class Member_walletController extends Controller
         }
 
         $TOTAL=[
-            'TND' => ($total_incame[0]['TND'] - $total_expenses[0]['TND']),
-            'EUR' => ($total_incame[0]['EUR'] - $total_expenses[0]['EUR']),
-            'USD' => ($total_incame[0]['USD'] - $total_expenses[0]['USD'])
+            'TND' => round($total_incame[0]['TND'] - $total_expenses[0]['TND'],2),
+            'EUR' => round($total_incame[0]['EUR'] - $total_expenses[0]['EUR'],2),
+            'USD' => round($total_incame[0]['USD'] - $total_expenses[0]['USD'],2)
         ];
+
+
+        $incame = Memeber_incame::where('id_user', Auth::user()->id)
+        ->select(
+            DB::raw('SUM(CASE WHEN totalTND > 0 THEN totalTND ELSE 0 END) as positiveTND'),
+            DB::raw('SUM(CASE WHEN totalTND < 0 THEN -totalTND ELSE 0 END) as negativeTND'),
+            DB::raw('SUM(CASE WHEN totalEUR > 0 THEN totalEUR ELSE 0 END) as positiveEUR'),
+            DB::raw('SUM(CASE WHEN totalEUR < 0 THEN -totalEUR ELSE 0 END) as negativeEUR'),
+            DB::raw('SUM(CASE WHEN totalUSD > 0 THEN totalUSD ELSE 0 END) as positiveUSD'),
+            DB::raw('SUM(CASE WHEN totalUSD < 0 THEN -totalUSD ELSE 0 END) as negativeUSD'),
+            DB::raw('DATE(created_at) as date')
+        )
+        ->groupBy(DB::raw('DATE(created_at)'))
+        ->limit(7)
+        ->orderBy('created_at', 'asc')
+        ->get();
+    
+        $testmax = [];
+        foreach ($incame as $incames) {
+            $testmax[] = $incames->positiveTND;
+        }
+
+        $testmin = [];
+        foreach ($incame as $incames) {
+            $testmin[] = $incames->negativeTND;
+        }
+
+        $testdate = [];
+        foreach ($incame as $incames) {
+            $testdate[] = $incames->date;
+        }
 
         return Inertia::render('Wallet/index',[
             'TOTAL' => $TOTAL,
             'total_expenses' => $total_expenses,
             'total_incame'=> $total_incame,
+            'incame'=> $testmax,
+            'expenses'=> $testmin,
+            'dateChart'=> $testdate,
             'historique_incame'=> $historique_incame,
         ]);
     }
@@ -93,6 +124,7 @@ class Member_walletController extends Controller
         $Memeber->currency = $currency;
         $Memeber->from_name = $from;
         $Memeber->to_name = $to;
+        $Memeber->type = 'expenses';
 
         for($i=0;$i<3;$i++){
             switch ($extchange_currency[$i]['currencys']) {
@@ -135,6 +167,7 @@ class Member_walletController extends Controller
         $Memeber->currency = $currency;
         $Memeber->from_name = $from;
         $Memeber->to_name = $to;
+        $Memeber->type = 'income';
 
         for($i=0;$i<3;$i++){
             switch ($extchange_currency[$i]['currencys']) {

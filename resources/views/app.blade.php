@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {{-- canves --}}
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        {{-- chart --}}
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         {{-- logo --}}
         <link rel="icon" type="icon" href="/icon/logo_app/cash_icon-icons.com_51090.ico"> 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>

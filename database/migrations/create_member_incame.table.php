@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('totalEUR')->nullable();
             $table->string('from_name')->nullable();
             $table->string('to_name')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

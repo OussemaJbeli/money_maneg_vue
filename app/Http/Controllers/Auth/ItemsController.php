@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Carrency;
 use App\Models\Exchange_rate;
 use App\Models\Items;
+use App\Models\Memeber_incame;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -102,6 +103,31 @@ class ItemsController extends Controller
             }
         }
         $items->save();
+
+        $Memeber = new Memeber_incame();
+
+        $Memeber->id_user = Auth::user()->id;
+        $Memeber->amount = -$totalprice;
+        $Memeber->currency = $carrency;
+        $Memeber->from_name = 'you';
+        $Memeber->to_name = 'shop';
+        $Memeber->type = 'shop';
+
+        for($i=0;$i<3;$i++){
+            switch ($extchange_currency[$i]['currencys']) {
+                case 'TND':
+                    $Memeber->totalTND = -($extchange_currency[$i]['rate'] * $price) * $quentity;
+                    break;
+                case 'USD':
+                    $Memeber->totalUSD = -($extchange_currency[$i]['rate'] * $price) * $quentity;
+                    break;
+                case 'EUR':
+                    $Memeber->totalEUR = -($extchange_currency[$i]['rate'] * $price) * $quentity;
+                    break;
+            }
+        }
+
+        $Memeber->save();
 
         return Redirect::back()
         ->with('success', 'item stored successfuly');

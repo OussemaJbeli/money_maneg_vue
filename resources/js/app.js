@@ -2,8 +2,6 @@ import './bootstrap';
 import '../css/app.css';
 //
 import '../scss/app.scss';
-// //canvaschart
-// import CanvasJSStockChart from '@canvasjs/vue-stockcharts';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -20,7 +18,6 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)
-            // .use(CanvasJSStockChart)
             .use(ZiggyVue, Ziggy)
             .mount(el);
     },
@@ -28,4 +25,3 @@ createInertiaApp({
         color: "#003cff",
     },
 });
-
