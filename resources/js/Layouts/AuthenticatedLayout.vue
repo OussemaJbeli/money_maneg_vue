@@ -200,7 +200,7 @@
                                                                     :id="item.items+'.png'" 
                                                                     class="item_chek" 
                                                                     type="radio" 
-                                                                    :value="index1" 
+                                                                    :value="item.id_icon" 
                                                                     :name='"items"'
                                                                     v-model="ticket_form.item_name"
                                                                     :error="ticket_form.errors.item_name"

@@ -11,7 +11,6 @@
         {{-- success message --}}
         <page-component :success-message="{{ json_encode(session('success')) }}"></page-component>
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
         <link rel="stylesheet" href="{{ asset('fontawesome-free-6.4.0-web/css/all.min.css') }}">
         <!-- Scripts -->
         @routes

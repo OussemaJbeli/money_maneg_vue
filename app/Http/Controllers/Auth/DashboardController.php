@@ -393,7 +393,38 @@ class DashboardController extends Controller
 
     public function test()
     {
-        return Inertia::render('Dashboard/App');
+        // return Inertia::render('Dashboard/App');
+
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://weatherapi-com.p.rapidapi.com/current.json?q=37.04207217806636%2C%209.656604709870557",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: weatherapi-com.p.rapidapi.com",
+                "X-RapidAPI-Key: ea4f0c085amshccc8d2d34457e52p105bf0jsn1253fea980f9"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
+            print('<pre>');
+            print_r($response);
+            print('<pre>');
     }
 
     /**
