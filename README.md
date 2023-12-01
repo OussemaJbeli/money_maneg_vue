@@ -9,7 +9,7 @@
 
   1. Clone the repository
 
-     ```git clone https://github.com/OussemaJbeli/taleb.git```
+     ```git clone https://github.com/OussemaJbeli/money_maneg_vue.git```
 
   2. Install dependencies
 
