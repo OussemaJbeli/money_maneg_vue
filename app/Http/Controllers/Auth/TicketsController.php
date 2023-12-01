@@ -32,8 +32,8 @@ class TicketsController extends Controller
                         DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
                         DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
                 )
-                ->groupBy('ticket_date')
-                ->orderBy('created_at', 'desc')
+                ->groupBy('ticket_date','ticket_id')
+                ->orderBy(DB::raw('MAX(created_at)'), 'desc')
                 ->get(),
         ]);
     }

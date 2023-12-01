@@ -53,7 +53,7 @@ class HandleInertiaRequests extends Middleware
                         Items::select('items.*','icons.*')
                         ->join('icons', 'icons.id_icons', '=', 'items.id_icon')
                         ->where('user_id', Auth::user()->id)
-                        ->orderBy('created_at', 'desc')
+                        ->orderBy('items.created_at', 'desc')
                         ->take(5)
                         ->get(),
                     ] : null,

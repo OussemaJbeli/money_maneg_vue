@@ -10,8 +10,6 @@
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
         {{-- success message --}}
         <page-component :success-message="{{ json_encode(session('success')) }}"></page-component>
-        <!-- Fonts -->
-        <link rel="stylesheet" href="{{ asset('fontawesome-free-6.4.0-web/css/all.min.css') }}">
         <!-- Scripts -->
         @routes
         @vite(['resources/js/app.js',"resources/js/Pages/{$page['component']}.vue"])

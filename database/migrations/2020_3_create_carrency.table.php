@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('carrencies', function (Blueprint $table) {
-            $table->increments('id_carrency');
+            $table->id('id_carrency');
             $table->string('currency');
             $table->timestamps();
             $table->softDeletes();

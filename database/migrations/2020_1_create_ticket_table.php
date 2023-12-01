@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('icons', function (Blueprint $table) {
-            $table->increments('id_icons');
-            $table->string('categories');
-            $table->string('items');
-            $table->boolean('added')->default(false);
+        Schema::create('tickets', function (Blueprint $table) {
+            $table->id('ticket_id');
+            $table->string('ticket_date');
+            $table->unsignedBigInteger('user_id');
+                $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('icons');
+        Schema::dropIfExists('tickets');
     }
 };

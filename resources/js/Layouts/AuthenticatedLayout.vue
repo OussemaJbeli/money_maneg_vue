@@ -172,6 +172,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!--  -->
                                                 </div>
                                                 <div v-else data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
                                                     <div class="items_group" id="recently">

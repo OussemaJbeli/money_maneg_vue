@@ -11,6 +11,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
@@ -28,7 +29,7 @@ class ItemsController extends Controller
             ->join('carrencies', 'carrencies.id_carrency', '=', 'items.id_currency')
             ->join('icons', 'icons.id_icons', '=', 'items.id_icon')
             ->where('user_id', Auth::user()->id)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('items.created_at', 'desc')
             ->get()
             ->groupBy('ticket_id')
         ]);

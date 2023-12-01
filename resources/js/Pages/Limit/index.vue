@@ -47,18 +47,18 @@
                                         <i class="fa-solid fa-user"></i>
                                         your consom
                                     </p>
-                                    <span v-if="Target_limit.target_deference[0][$page.props.auth.user.main_currency]">{{ Target_limit.target_deference[0][$page.props.auth.user.main_currency]}} {{ $page.props.auth.user.main_currency }}</span>
+                                    <span v-if="Target_limit.target_mereg[0][$page.props.auth.user.main_currency]">{{ Target_limit.target_mereg[0][$page.props.auth.user.main_currency]}} {{ $page.props.auth.user.main_currency }}</span>
                                     <span v-else>0 {{ $page.props.auth.user.main_currency }}</span>
                                 </div>
                                 <div class="rest target_card">
                                     <p class="title_color"
-                                    :style="{ backgroundColor: ((Target_limit.target_data_avrig['avrig_perday'+$page.props.auth.user.main_currency] - today[0][$page.props.auth.user.main_currency]) > 0)? 'green' : 'red' }"
+                                    :style="{ backgroundColor: (((Target_limit.target_data['limit'+$page.props.auth.user.main_currency] - Target_limit.target_mereg[0][$page.props.auth.user.main_currency])) > 0)? 'green' : 'red' }"
                                     >
                                         <i class="fa-solid fa-chart-line"></i>
                                         rest of money
                                     </p>
-                                    <span v-if="Target_limit.target_deference[0][$page.props.auth.user.main_currency]">
-                                        {{ (Target_limit.target_data['limit'+$page.props.auth.user.main_currency] - Target_limit.target_deference[0][$page.props.auth.user.main_currency]).toFixed(1) }} {{ $page.props.auth.user.main_currency }}
+                                    <span v-if="Target_limit.target_mereg[0][$page.props.auth.user.main_currency]">
+                                        {{ (Target_limit.target_data['limit'+$page.props.auth.user.main_currency] - Target_limit.target_mereg[0][$page.props.auth.user.main_currency]).toFixed(1) }} {{ $page.props.auth.user.main_currency }}
                                     </span>
                                     <span v-else>{{ Target_limit.target_data['limit'+$page.props.auth.user.main_currency] }} {{ $page.props.auth.user.main_currency }}</span>
                                 </div>
@@ -116,7 +116,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-right">
-                        <tr v-for="(Target,index) in Target_limit.target_mereg" :key="index" class="hover:bg-gray-100">
+                        <tr v-for="(Target,index) in Target_limit.target_deference" :key="index" class="hover:bg-gray-100">
                             <td class="pb-4 pt-6 px-6 border-t text-center text-white">
                                 {{ Target.ticket_date }}
                             </td>

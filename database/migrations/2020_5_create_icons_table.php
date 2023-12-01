@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('regions', function (Blueprint $table) {
-            $table->increments('id_region');
-            $table->string('region')->nullable(false);
-            $table->string('state')->nullable(false);
+        Schema::create('icons', function (Blueprint $table) {
+            $table->id('id_icons');
+            $table->string('categories');
+            $table->string('items');
+            $table->boolean('added')->default(false);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('regions');
+        Schema::dropIfExists('icons');
     }
 };

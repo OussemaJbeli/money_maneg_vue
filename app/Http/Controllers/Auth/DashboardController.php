@@ -268,15 +268,17 @@ class DashboardController extends Controller
                     ->get();
             }
             else{
-                $target_mereg = Items::whereBetween('created_at', [$target_data['start_date'],$target_data['reset_date']])
-                    ->select(
-                        DB::raw('ROUND(SUM(totalTND), 3) as TND'),
-                        DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
-                        DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
-                        )
-                    ->where('items.user_id', Auth::user()->id)
-                    ->get();
+                $target_mereg = Items::whereMonth('created_at', $currentMonth->month)
+                ->whereYear('created_at', $currentMonth->year)
+                ->select(
+                    DB::raw('ROUND(SUM(totalTND), 3) as TND'),
+                    DB::raw('ROUND(SUM(totalEUR), 3) as EUR'),
+                    DB::raw('ROUND(SUM(totalUSD), 3) as USD'),
+                    )
+                ->where('items.user_id', Auth::user()->id)
+                ->get();
             }
+
             $TND = number_format(($target_mereg[0]['TND'] * 100)/$target_data['limitTND'], 2);
             $USD = number_format(($target_mereg[0]['USD'] * 100)/$target_data['limitUSD'], 2);
             $EUR = number_format(($target_mereg[0]['EUR'] * 100)/$target_data['limitEUR'], 2);

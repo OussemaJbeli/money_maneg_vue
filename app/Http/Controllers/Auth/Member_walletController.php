@@ -45,7 +45,7 @@ class Member_walletController extends Controller
 
         $historique_incame = Memeber_incame::where('id_user', Auth::user()->id)
         ->select('memeber_incames.*')
-        ->orderBy('created_at', 'desc')
+        ->orderByDesc(DB::raw('MAX(created_at)'))
         ->get();
 
         foreach ($historique_incame as $income) {
@@ -74,7 +74,7 @@ class Member_walletController extends Controller
         )
         ->groupBy(DB::raw('DATE(created_at)'))
         ->limit(7)
-        ->orderBy('created_at', 'asc')
+        ->orderBy(DB::raw('MIN(created_at)'), 'asc')
         ->get();
     
         $testmax = [];

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
                 $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             
-            $table->integer('id_currency');
-                $table->foreign('id_currency')->references('id_carrency')->on('carrencies');
+            $table->unsignedBigInteger('id_currency');
+                $table->foreign('id_currency')->references('id_carrency')->on('carrencies')->onDelete('cascade');;
             
             $table->integer('limit_type')->nullable();
             $table->date('start_date')->nullable();
