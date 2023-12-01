@@ -45,7 +45,7 @@ class Member_walletController extends Controller
 
         $historique_incame = Memeber_incame::where('id_user', Auth::user()->id)
         ->select('memeber_incames.*')
-        ->orderByDesc(DB::raw('MAX(created_at)'))
+        ->orderBy('created_at', 'desc')
         ->get();
 
         foreach ($historique_incame as $income) {

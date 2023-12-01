@@ -105,9 +105,6 @@
                                 <img :src="'/icon/wallet/'+historique.type+'.png'" class="w-8 h-8 mr-2"> {{ historique.type }}
                             </td>
                         </tr>
-                        <tr v-if="historique_incame.length === 0">
-                            <td class="px-6 py-4 border-t text-center" colspan="4"> Tickets impty </td>
-                        </tr> 
                     </tbody>
                 </DataTable>
             </div>
